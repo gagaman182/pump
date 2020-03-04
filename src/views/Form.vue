@@ -8,7 +8,7 @@
         <fish-form inline>
           <fish-col span="24" class="demo-col ">
             <fish-field label="ระบุเดือน" inline>
-              <fish-select v-model="month" hint='เลือก'>
+              <fish-select v-model="month" hint='..เดือน'>
                 <fish-option index="1" content="1 เดือน"></fish-option>
                 <fish-option index="3" content="3 เดือน"></fish-option>
               </fish-select>
@@ -66,7 +66,8 @@
         <fish-col span="12" >
           <fish-form inline>
             <fish-field label="วันที่" inline>
-               <fish-date-picker v-model="dateservice"  hint='เลือก' ></fish-date-picker>
+              <!-- format from moment js L = DD/MM/YYYY -->
+               <fish-date-picker v-model="dateservice"  hint='เลือก' format='L'></fish-date-picker> 
                
             </fish-field>
           </fish-form>
