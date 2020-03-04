@@ -1,32 +1,42 @@
+
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <fish-layout class="demo3" sider="l">
+    <nav slot="header">
+      <div class="logo"><h2>ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h2></div>
+    </nav>
+    <div slot="sider">
+      <fish-menu mode="inline" style="width: 200px;">
+        <fish-option index="0" content="Home"> <router-link to="/">Home</router-link> </fish-option>
+              <fish-option index="0" content="Form"><router-link to="/form">Form</router-link> </fish-option>
+       
+       
+      </fish-menu>
     </div>
-    <router-view />
-  </div>
+    <div slot="content"><router-view/></div>
+  </fish-layout>
 </template>
-
+<script>
+  export default {
+    name: 'pump'
+  }
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .fish.layout.demo3 > .header {
+    padding: 0;
+    background: #e0f0fa;
+  }
+  .fish.layout.demo3 .has-sider > .content {
+    margin: 20px;
+    padding: 0.7em 1em;
+  }
+  .fish.layout.demo3 .logo {
+    padding: 1em;
+  }
+  .logo {
+    padding: 0.7em .8em;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 </style>
+
+
