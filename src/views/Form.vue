@@ -6,16 +6,17 @@
       </fish-col>
     </fish-row>
     <fish-row>
-      <fish-col span="12">
+      
         <fish-col span="4">
-          <fish-dropdown align="bottom-right">
-            <fish-button slot="title">เลือกเดือน<i class="fa fa-angle-down" ></i></fish-button>
-            <fish-option index="1" content="1 เดือน" v-model="month"  ></fish-option>
-            <fish-option index="2" content="3 เดือน"></fish-option>
-          </fish-dropdown>   
-           {{month}}
-        </fish-col>
-      </fish-col>
+          เลือกช่วงเดือนที่จะตรวจเช็ค
+          <fish-select v-model="month">
+            <fish-option index="" content="ระบุเดือน" disabled></fish-option>
+            <fish-option index="1" content="1 เดือน"></fish-option>
+            <fish-option index="3" content="3 เดือน"></fish-option>
+          </fish-select>
+          {{month}}
+     </fish-col>
+    
       <fish-col span="12">
       </fish-col>
     </fish-row>
@@ -30,13 +31,12 @@
 
 <script>
   export default {
-   
     name: 'form',
-     data() {
+    data() {
       return {
-        month:'1'
-        }
-  }
+        month: ''
+      }
+    }
   }
 </script>
 
