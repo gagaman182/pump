@@ -1,31 +1,84 @@
 <template>
   <div>
-    <fish-row>
-      <fish-col span="24">
-        <h3>ใบตรวจเช็คบำรุงรักษา </h3>
-      </fish-col>
-    </fish-row>
-    <fish-row>
-      
-        <fish-col span="4">
-          เลือกช่วงเดือนที่จะตรวจเช็ค
-          <fish-select v-model="month">
-            <fish-option index="" content="ระบุเดือน" disabled></fish-option>
-            <fish-option index="1" content="1 เดือน"></fish-option>
-            <fish-option index="3" content="3 เดือน"></fish-option>
-          </fish-select>
-          {{month}}
-     </fish-col>
-    
-      <fish-col span="12">
-      </fish-col>
-    </fish-row>
-    <fish-row>
-      <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
-      <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
-      <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
-      <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
-    </fish-row>
+    <fish-card fluid>
+      <div slot="header">
+        <h3>ใบตรวจเช็คบำรุงรักษา</h3>
+      </div>
+      <fish-row>
+        <fish-form inline>
+          <fish-col span="24" class="demo-col ">
+            <fish-field label="ระบุเดือน" inline>
+              <fish-select v-model="month" hint='เลือก'>
+                <fish-option index="1" content="1 เดือน"></fish-option>
+                <fish-option index="3" content="3 เดือน"></fish-option>
+              </fish-select>
+            </fish-field>
+          </fish-col>
+        </fish-form>
+      </fish-row>
+      <fish-row>
+        <fish-col span="12" class="demo-col ">
+          <fish-form inline>
+            <fish-field label="สถานที่ " inline>
+              <h4> บ่อบำบัดน้ำเสีย </h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+        <fish-col span="6" class="demo-col ">
+          <fish-form inline>
+            <fish-field label="ยี่ห้อ" inline>
+              <h4>dd</h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+        <fish-col span="6" class="demo-col ">
+          <fish-form inline>
+            <fish-field label="ON" inline>
+              <h4>dd</h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+      </fish-row>
+      <fish-row>
+        <fish-col span="12" class="demo-col ">
+          <fish-form inline>
+            <fish-field label="หมายเลขเครื่อง " inline>
+              <h4> dd </h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+        <fish-col span="12" class="demo-col ">
+          <fish-form inline>
+            <fish-field label="ID" inline>
+              <h4>dd</h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+      </fish-row>
+      <fish-row>
+        <fish-col span="12">
+          <fish-form inline>
+            <fish-field label="จุดติดตั้ง " inline>
+              <h4> dd </h4>
+            </fish-field>
+          </fish-form>
+        </fish-col>
+        <fish-col span="12" >
+          <fish-form inline>
+            <fish-field label="วันที่" inline>
+               <fish-date-picker v-model="dateservice"  hint='เลือก' ></fish-date-picker>
+               
+            </fish-field>
+          </fish-form>
+        </fish-col>
+      </fish-row>
+      <fish-row>
+        <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
+        <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
+        <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
+        <fish-col span="6" class="demo-col demo-col2">col-6</fish-col>
+      </fish-row>
+    </fish-card>
   </div>
 </template>
 
@@ -34,7 +87,8 @@
     name: 'form',
     data() {
       return {
-        month: ''
+        month: '',
+        dateservice:''
       }
     }
   }
