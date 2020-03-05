@@ -2,7 +2,7 @@
 <template>
   <fish-layout class="demo3" sider="l">
     <nav slot="header">
-      <div class="logo"><h2>ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h2></div>
+      <div class="logo head"><h2 >ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h2></div>
     </nav>
     <div slot="sider">
       <fish-menu mode="inline" style="width: 200px;">
@@ -36,6 +36,10 @@
     padding: 0.7em .8em;
     font-weight: bold;
     font-size: 1.2rem;
+  }
+  .head {
+    font-family: 'Sriracha';
+     text-shadow: 4px 4px 4px #aaa;
   }
 </style>
 
