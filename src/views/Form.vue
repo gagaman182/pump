@@ -1,6 +1,6 @@
 <template>
   <div>
-     <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
+    <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
     <fish-card fluid color="blue">
       <div slot="header">
         <h3 class="head">ใบตรวจเช็คบำรุงรักษา</h3>
@@ -128,8 +128,8 @@
           <h5>สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ</h5>
         </fish-col>
         <fish-col span="4
-                    
-                    ">
+                            
+                            ">
           <fish-checkboxes v-model="seal_1">
             <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
           </fish-checkboxes>
@@ -185,7 +185,7 @@
         </fish-col>
         <fish-col span="6">
           <center>
-            <fish-input type="textarea" style="height: 80px; " v-model="seal_other" hint='ระบุ...'></fish-input>
+            <fish-input type="textarea" style="height: 80px; " v-model="condition_other" hint='ระบุ...'></fish-input>
           </center>
         </fish-col>
       </fish-row>
@@ -238,30 +238,30 @@
           <h5>ดูจุดแตกร้าว ซึกหรอ การกัดกรอน</h5>
         </fish-col>
         <fish-col span="4">
-          <fish-checkboxes v-model="propeller_1">
+          <fish-checkboxes v-model="snail_1">
             <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
           </fish-checkboxes>
-          <fish-checkboxes v-model="propeller_3">
+          <fish-checkboxes v-model="snail_3">
             <fish-checkbox index=" 3">แตกร้าว</fish-checkbox>
           </fish-checkboxes>
-          <fish-checkboxes v-model="propeller_5">
+          <fish-checkboxes v-model="snail_5">
             <fish-checkbox index=" 5">สึกหรอ</fish-checkbox>
           </fish-checkboxes>
         </fish-col>
         <fish-col span="3">
-          <fish-checkboxes v-model="propeller_2">
+          <fish-checkboxes v-model="snail_2">
             <fish-checkbox index=" 2">มีรอยร้าว</fish-checkbox>
           </fish-checkboxes>
-          <fish-checkboxes v-model="propeller_4">
+          <fish-checkboxes v-model="snail_4">
             <fish-checkbox index="4">มีการกัดกร่อน</fish-checkbox>
           </fish-checkboxes>
-          <fish-checkboxes v-model="propeller_6">
+          <fish-checkboxes v-model="snail_6">
             <fish-checkbox index=" 6">อุดตัน</fish-checkbox>
           </fish-checkboxes>
         </fish-col>
         <fish-col span="6">
           <center>
-            <fish-input type="textarea" style="height: 80px; " v-model="propeller_other" hint='ระบุ...'></fish-input>
+            <fish-input type="textarea" style="height: 80px; " v-model="snail_other" hint='ระบุ...'></fish-input>
           </center>
         </fish-col>
       </fish-row>
@@ -389,7 +389,7 @@
         </fish-col>
         <fish-col span="6">
           <center>
-            <fish-input type="textarea" style="height: 80px; " v-model="clean_other" hint='ระบุ...'></fish-input>
+            <fish-input type="textarea" style="height: 80px; " v-model="system_other" hint='ระบุ...'></fish-input>
           </center>
         </fish-col>
       </fish-row>
@@ -433,7 +433,7 @@
         </fish-col>
         <fish-col span="6">
           <center>
-            <fish-input type="textarea" style="height: 80px;  " v-model="clean_other" hint='ระบุ...'></fish-input>
+            <fish-input type="textarea" style="height: 80px;  " v-model="sump_other" hint='ระบุ...'></fish-input>
           </center>
         </fish-col>
       </fish-row>
@@ -441,59 +441,92 @@
     </fish-card>
     <br>
     <fish-row>
+      <fish-col span="2">
+        <fish-button type="primary">   <vue-fontawesome icon="save" size="2" ></vue-fontawesome> บันทึก</fish-button>
+      </fish-col>
+      <fish-col span="2">
+        <fish-button type="negative">  <vue-fontawesome icon="eraser" size="2" ></vue-fontawesome> ยกเลิก</fish-button>
+      </fish-col>
+    </fish-row>
+    <br>
+    <fish-row>
       <fish-col span="24">
         <fish-cards cols="two">
           <fish-card color="red">
             <div slot="header"><strong class="headsmall">ผู้ปฏิบัติงาน</strong></div>
-            <fish-row >
-              <fish-col span="12">
+            <fish-row>
+              <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model = "woker" hint='ชื่อ-นามสกุล'></fish-input>
+                <fish-input size='large' v-model="woker" hint='ชื่อ-นามสกุล'></fish-input>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <h4>ตรวจสอบแล้ว</h4>
+                  <fish-switch v-model="woker_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </center>
               </fish-col>
               <fish-col span="12">
                 <h4>หมายเหตุ</h4>
-                 <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ...'></fish-input>
+                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ...'></fish-input>
               </fish-col>
             </fish-row>
           </fish-card>
-              <fish-card color="red">
+          <fish-card color="red">
             <div slot="header"><strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong></div>
-            <fish-row >
-              <fish-col span="12">
+            <fish-row>
+              <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model = "boss_pump" hint='ชื่อ-นามสกุล'></fish-input>
+                <fish-input size='large' v-model="boss_pump" hint='ชื่อ-นามสกุล'></fish-input>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <h4>ตรวจสอบแล้ว</h4>
+                  <fish-switch v-model="boss_pump_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </center>
               </fish-col>
               <fish-col span="12">
                 <h4>หมายเหตุ</h4>
-                 <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ...'></fish-input>
+                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ...'></fish-input>
               </fish-col>
             </fish-row>
           </fish-card>
         </fish-cards>
-            <fish-cards cols="two">
+        <fish-cards cols="two">
           <fish-card color="green">
             <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-            <fish-row >
-              <fish-col span="12">
+            <fish-row>
+              <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model = "inspector" hint='ชื่อ-นามสกุล'></fish-input>
+                <fish-input size='large' v-model="inspector" hint='ชื่อ-นามสกุล'></fish-input>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <h4>ตรวจสอบแล้ว</h4>
+                  <fish-switch v-model="inspector_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </center>
               </fish-col>
               <fish-col span="12">
                 <h4>หมายเหตุ</h4>
-                 <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="inspector_other" hint='ระบุ...'></fish-input>
+                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="inspector_other" hint='ระบุ...'></fish-input>
               </fish-col>
             </fish-row>
           </fish-card>
-              <fish-card color="green">
+          <fish-card color="green">
             <div slot="header"><strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong></div>
-            <fish-row >
-              <fish-col span="12">
+            <fish-row>
+              <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model = "manage" hint='ชื่อ-นามสกุล'></fish-input>
+                <fish-input size='large' v-model="manage" hint='ชื่อ-นามสกุล'></fish-input>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <h4>ตรวจสอบแล้ว</h4>
+                  <fish-switch v-model="manage_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </center>
               </fish-col>
               <fish-col span="12">
                 <h4>หมายเหตุ</h4>
-                 <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="manage_other" hint='ระบุ...'></fish-input>
+                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="manage_other" hint='ระบุ...'></fish-input>
               </fish-col>
             </fish-row>
           </fish-card>
@@ -562,14 +595,18 @@
         sump_7: '',
         sump_8: '',
         sump_other: '',
-        woker:'',
-        woker_other:'',
-        boss_pump:'',
-        boss_pump_other:'',
-        inspector:'',
-        inspector_other:'',
-        manage:'',
-        manage_other:''
+        woker: '',
+        woker_approve: '',
+        woker_other: '',
+        boss_pump: '',
+        boss_pump_approve: '',
+        boss_pump_other: '',
+        inspector: '',
+        inspector_approve: '',
+        inspector_other: '',
+        manage: '',
+        manage_approve: 0,
+        manage_other: '',
       }
     }
   }
