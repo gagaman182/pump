@@ -2,10 +2,10 @@
   <div>
     <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
     <fish-card fluid color="blue">
+      <div slot="header">
+        <h3 class="head">ใบตรวจเช็คบำรุงรักษา</h3>
+      </div>
       <fish-form ref="form">
-        <div slot="header">
-          <h3 class="head">ใบตรวจเช็คบำรุงรักษา</h3>
-        </div>
         <fish-row>
           <fish-form inline>
             <fish-col span="24" class="demo-col ">
@@ -22,7 +22,7 @@
           <fish-col span="12" class="demo-col ">
             <fish-form inline>
               <fish-field label="สถานที่: " inline>
-                <h4> บ่อบำบัดน้ำเสีย </h4>
+                <h4> บ่อบำบัดน้ำเสีย</h4>
               </fish-field>
             </fish-form>
           </fish-col>
@@ -44,8 +44,10 @@
         <fish-row>
           <fish-col span="12" class="demo-col ">
             <fish-form inline>
-              <fish-field label="หมายเลขเครื่อง:" inline>
-                <h4> dd </h4>
+              <fish-field label="หมายเลขเครื่อง" name="pump" :rules="[{required: true,message: 'วันที่เป็นค่าว่าง'}]" inline>
+                <fish-select v-model="pump" :search="searchChangeHandler">
+                  <fish-option :index="item.id" :content="item.name" v-for="item in pumps" :key="item.id"></fish-option>
+                </fish-select>
               </fish-field>
             </fish-form>
           </fish-col>
@@ -67,7 +69,7 @@
           </fish-col>
           <fish-col span="12">
             <fish-form ref="form" inline>
-              <fish-field label="วันที่" name="dateservice" :rules="[{required: true,message: 'วันที่เป็นค่าว่าง'}]" inline>
+              <fish-field label="วันที่" name="dateservice" :rules="[{required: true,message: 'ช่วงเดือนเป็นค่าว่าง'}]" inline>
                 <!-- format from moment js L = DD/MM/YYYY -->
                 <fish-date-picker v-model="dateservice" hint='ระบุวันที่' format='L'></fish-date-picker>
               </fish-field>
@@ -101,15 +103,15 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="wire_3">
-              <fish-checkbox index=" 3">สายรั่ว</fish-checkbox>
+              <fish-checkbox index="1">สายรั่ว</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="wire_2">
-              <fish-checkbox index=" 2"> สายขาด</fish-checkbox>
+              <fish-checkbox index="1"> สายขาด</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="wire_4">
-              <fish-checkbox index="4">เปลี่ยน</fish-checkbox>
+              <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -129,21 +131,21 @@
             <h5>สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ</h5>
           </fish-col>
           <fish-col span="4
-                              
-                              ">
+                                        
+                                        ">
             <fish-checkboxes v-model="seal_1">
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="seal_3">
-              <fish-checkbox index=" 3">ชำรุด</fish-checkbox>
+              <fish-checkbox index="1">ชำรุด</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="seal_2">
-              <fish-checkbox index=" 2"> มีรอยรั่วซึม</fish-checkbox>
+              <fish-checkbox index="1"> มีรอยรั่วซึม</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="seal_4">
-              <fish-checkbox index="4">ส่งซ่อมบริษัท</fish-checkbox>
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -167,21 +169,21 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="condition_3">
-              <fish-checkbox index=" 3">แตกร้าว</fish-checkbox>
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="condition_5">
-              <fish-checkbox index=" 5">ทาสีใหม่</fish-checkbox>
+              <fish-checkbox index="1">ทาสีใหม่</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="condition_2">
-              <fish-checkbox index=" 2/สกรู"> เปลี่ยนน๊อต/สกรู</fish-checkbox>
+              <fish-checkbox index="1"> เปลี่ยนน๊อต/สกรู</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="condition_4">
-              <fish-checkbox index="4">มีการกัดกร่อน</fish-checkbox>
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="condition_6">
-              <fish-checkbox index=" 6">ส่งซ่อมบริษัท</fish-checkbox>
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -205,21 +207,21 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="propeller_3">
-              <fish-checkbox index=" 3">แตกร้าว</fish-checkbox>
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="propeller_5">
-              <fish-checkbox index=" 5">สึกหรอ</fish-checkbox>
+              <fish-checkbox index="1">สึกหรอ</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="propeller_2">
-              <fish-checkbox index=" 2"> สันสะเทือน/เสียงดัง</fish-checkbox>
+              <fish-checkbox index="1"> สันสะเทือน/เสียงดัง</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="propeller_4">
-              <fish-checkbox index="4">มีการกัดกร่อน</fish-checkbox>
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="propeller_6">
-              <fish-checkbox index=" 6">ส่งซ่อมบริษัท</fish-checkbox>
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -243,21 +245,21 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="snail_3">
-              <fish-checkbox index=" 3">แตกร้าว</fish-checkbox>
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="snail_5">
-              <fish-checkbox index=" 5">สึกหรอ</fish-checkbox>
+              <fish-checkbox index="1">สึกหรอ</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="snail_2">
-              <fish-checkbox index=" 2">มีรอยร้าว</fish-checkbox>
+              <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="snail_4">
-              <fish-checkbox index="4">มีการกัดกร่อน</fish-checkbox>
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="snail_6">
-              <fish-checkbox index=" 6">อุดตัน</fish-checkbox>
+              <fish-checkbox index="1">อุดตัน</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -281,18 +283,18 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="oil_3">
-              <fish-checkbox index=" 3">เติม</fish-checkbox>
+              <fish-checkbox index="1">เติม</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="oil_5">
-              <fish-checkbox index=" 5">เปลี่ยน</fish-checkbox>
+              <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="oil_2">
-              <fish-checkbox index=" 2">ต่ำกว่าระดับ</fish-checkbox>
+              <fish-checkbox index="1">ต่ำกว่าระดับ</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="oil_4">
-              <fish-checkbox index="4">สีดำ/ค้น</fish-checkbox>
+              <fish-checkbox index="1">สีดำ/ค้น</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -318,7 +320,7 @@
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="jarabi_2">
-              <fish-checkbox index=" 2">อัดจารบี</fish-checkbox>
+              <fish-checkbox index="1">อัดจารบี</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -342,15 +344,15 @@
               <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="clean_3">
-              <fish-checkbox index=" 3">ใช้โบว์เวอร์เปา</fish-checkbox>
+              <fish-checkbox index="1">ใช้โบว์เวอร์เปา</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="clean_2">
-              <fish-checkbox index=" 2">ใช้ปั้มแรงดัน</fish-checkbox>
+              <fish-checkbox index="1">ใช้ปั้มแรงดัน</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="clean_4">
-              <fish-checkbox index="4">ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
+              <fish-checkbox index="1">ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -374,18 +376,18 @@
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="system_3">
-              <fish-checkbox index=" 3">เปลี่ยนอุปกรณ์</fish-checkbox>
+              <fish-checkbox index="1">เปลี่ยนอุปกรณ์</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="system_5">
-              <fish-checkbox index=" 5">ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม</fish-checkbox>
+              <fish-checkbox index="1">ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="system_2">
-              <fish-checkbox index=" 2">ตรวจเช็คไฟโชว์</fish-checkbox>
+              <fish-checkbox index="1">ตรวจเช็คไฟโชว์</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="system_4">
-              <fish-checkbox index="4">ใช้โบว์เป้าทำความสะอาด</fish-checkbox>
+              <fish-checkbox index="1">ใช้โบว์เป้าทำความสะอาด</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
@@ -409,33 +411,56 @@
               <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_3">
-              <fish-checkbox index=" 3">ตักเอาขยะออก</fish-checkbox>
+              <fish-checkbox index="1">ตักเอาขยะออก</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_5">
-              <fish-checkbox index=" 5">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
+              <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_7">
-              <fish-checkbox index=" 7">ใช้ปั้มแรงดันฉีด</fish-checkbox>
+              <fish-checkbox index="1">ใช้ปั้มแรงดันฉีด</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="3">
             <fish-checkboxes v-model="sump_2">
-              <fish-checkbox index=" 2">แจ้งหัวหน้า</fish-checkbox>
+              <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_4">
-              <fish-checkbox index="4">ดูดเลนด้วยไดโว่</fish-checkbox>
+              <fish-checkbox index="1">ดูดเลนด้วยไดโว่</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_6">
-              <fish-checkbox index="6">ทำการซ่อมแซม</fish-checkbox>
+              <fish-checkbox index="1">ทำการซ่อมแซม</fish-checkbox>
             </fish-checkboxes>
             <fish-checkboxes v-model="sump_8">
-              <fish-checkbox index="8">แจ้งบริษัท</fish-checkbox>
+              <fish-checkbox index="1">แจ้งบริษัท</fish-checkbox>
             </fish-checkboxes>
           </fish-col>
           <fish-col span="6">
             <center>
               <fish-input type="textarea" style="height: 80px;  " v-model="sump_other" hint='ระบุ...'></fish-input>
             </center>
+          </fish-col>
+        </fish-row>
+        <br>
+        <hr>
+        <fish-row>
+          <fish-col span="24">
+            <fish-card color="blue" fluid>
+              <div slot="header"><strong class="headsmall">ผู้ปฏิบัติงาน</strong></div>
+              <fish-row >
+                <fish-col span="8">
+                  <h4>ชื่อ-นามสกุล</h4>
+                  <fish-input size='large' v-model="woker" hint='ชื่อ-นามสกุล' disabled></fish-input>
+                </fish-col>
+                <fish-col span="6">
+                  <h4>สรุปผลการตรวจเช็ค</h4>
+                  <fish-switch v-model="woker_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </fish-col>
+                <fish-col span="8">
+                  <h4>หมายเหตุ</h4>
+                  <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ...' ></fish-input>
+                </fish-col>
+              </fish-row>
+            </fish-card>
           </fish-col>
         </fish-row>
         <br>
@@ -450,59 +475,41 @@
               <vue-fontawesome icon="eraser" size="2"></vue-fontawesome> ยกเลิก</fish-button>
           </fish-col>
         </fish-row>
-       
       </fish-form>
     </fish-card>
-     <br>
+    <br>
     <fish-row>
       <fish-col span="24">
-        <fish-cards cols="two">
-          <fish-card color="red">
-            <div slot="header"><strong class="headsmall">ผู้ปฏิบัติงาน</strong></div>
-            <fish-row>
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model="woker" hint='ชื่อ-นามสกุล'></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch v-model="woker_approve" :yesOrNo="[1, 0]"></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ...'></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-          <fish-card color="red">
-            <div slot="header"><strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong></div>
-            <fish-row>
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model="boss_pump" hint='ชื่อ-นามสกุล'></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch v-model="boss_pump_approve" :yesOrNo="[1, 0]"></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ...'></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-        </fish-cards>
+            <fish-card color="blue" fluid>
+                 <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
+        <fish-card color="red" fluid>
+          <div slot="header"><strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong></div>
+          <fish-row >
+            <fish-col span="6">
+              <h4>ชื่อ-นามสกุล</h4>
+              <fish-input size='large' v-model="boss_pump" hint='ชื่อ-นามสกุล' disabled></fish-input>
+            </fish-col>
+            <fish-col span="6">
+              <center>
+                <h4>ตรวจสอบแล้ว</h4>
+                <fish-switch v-model="boss_pump_approve" :yesOrNo="[1, 0]"></fish-switch>
+              </center>
+            </fish-col>
+            <fish-col span="12">
+              <h4>หมายเหตุ</h4>
+              <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ...'></fish-input>
+            </fish-col>
+          </fish-row>
+        </fish-card>
+        <br>
+        
         <fish-cards cols="two">
           <fish-card color="green">
             <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-            <fish-row>
+            <fish-row >
               <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model="inspector" hint='ชื่อ-นามสกุล'></fish-input>
+                <fish-input size='large' v-model="inspector" hint='ชื่อ-นามสกุล' disabled></fish-input>
               </fish-col>
               <fish-col span="6">
                 <center>
@@ -518,7 +525,7 @@
           </fish-card>
           <fish-card color="green">
             <div slot="header"><strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong></div>
-            <fish-row>
+            <fish-row >
               <fish-col span="6">
                 <h4>ชื่อ-นามสกุล</h4>
                 <fish-input size='large' v-model="manage" hint='ชื่อ-นามสกุล'></fish-input>
@@ -536,17 +543,30 @@
             </fish-row>
           </fish-card>
         </fish-cards>
+         <br>
+         <fish-row>
+          <fish-col span="2">
+            <fish-button type="primary" @click="submitHandler">
+              <vue-fontawesome icon="save" size="2"></vue-fontawesome> บันทึก</fish-button>
+          </fish-col>
+         
+        </fish-row>
+            </fish-card >
+       
       </fish-col>
     </fish-row>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'form',
     data() {
       return {
         month: '',
+        pumps: '',
+        pump: '',
         dateservice: '',
         wire_1: '',
         wire_2: '',
@@ -620,7 +640,12 @@
           console.log(valid)
         })
       }
-    }
+    },
+    mounted() {
+      axios
+        .get('http://192.168.5.187/0161/pump/pump/pump.php')
+        .then(response => (this.pumps = response.data))
+    },
   }
 </script>
 
