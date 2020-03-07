@@ -13,6 +13,7 @@
       </fish-menu>
     </div>
     <div slot="content"><router-view/></div>
+     <div slot="footer">copyright@2020 กลุ่มงานเวชกรรมสังคม โรงพยาบาลหาดใหญ่</div>
   </fish-layout>
 </template>
 <script>
@@ -41,6 +42,7 @@
     font-family: 'Sriracha';
      text-shadow: 4px 4px 4px #aaa;
   }
+  
 </style>
 
 

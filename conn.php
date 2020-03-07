@@ -1,9 +1,16 @@
 <?php
 
-$servername = "192.168.4.3";
+// hospital
+// $servername = "192.168.4.3";
+// $username = "root";
+// $password = "1234";
+// $dbname = "pump";
+// home
+$servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $dbname = "pump";
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

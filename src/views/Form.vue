@@ -1,16 +1,22 @@
+/* eslint-disable */ 
 <template>
-  <div>
+<div>
     <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
     <fish-card fluid color="blue">
       <div slot="header">
-        <h3 class="head">ใบตรวจเช็คบำรุงรักษา</h3>
+        <h3 class="head"><vue-fontawesome icon="copy" size="2"></vue-fontawesome>ใบตรวจเช็คบำรุงรักษา</h3>
       </div>
       <fish-form ref="form">
         <fish-row>
           <fish-form inline>
-            <fish-col span="24" class="demo-col ">
-              <fish-field label="ระบุเดือน" name="month" :rules="[{required: true,message: 'วันที่เป็นค่าว่าง'}]" inline>
-                <fish-select v-model="month" hint='..เดือน'>
+            <fish-col span="24"  class="demo-col">
+              <fish-field
+                label="ระบุเดือน"
+                name="month"
+                :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
+                inline
+              >
+                <fish-select v-model="month" hint='เดือน'>
                   <fish-option index="1" content="1 เดือน"></fish-option>
                   <fish-option index="3" content="3 เดือน"></fish-option>
                 </fish-select>
@@ -18,56 +24,64 @@
             </fish-col>
           </fish-form>
         </fish-row>
-        <fish-row>
-          <fish-col span="12" class="demo-col ">
+    <fish-row>
+          <fish-col span="12" class="demo-col">
             <fish-form inline>
               <fish-field label="สถานที่: " inline>
-                <h4> บ่อบำบัดน้ำเสีย</h4>
+               <fish-input disabled hint="บ่อบำบัดน้ำเสีย"></fish-input>
               </fish-field>
             </fish-form>
           </fish-col>
-          <fish-col span="6" class="demo-col ">
+          <fish-col span="6" class="demo-col">
             <fish-form inline>
-              <fish-field label="ยี่ห้อ:" inline>
-                <h4>dd</h4>
+              
+                <fish-field label="ยี่ห้อ" name="pump_brand" :rules="[{required: true,message: 'ยี่ห้อเป็นค่าว่าง'}]" inline>
+                <fish-select v-model="pump_brand" :search="searchChangeHandler">
+                  <fish-option :index="item.id" :content="item.name" v-for="item in pumps_brands" :key="item.id"></fish-option>
+                </fish-select>
               </fish-field>
             </fish-form>
           </fish-col>
-          <fish-col span="6" class="demo-col ">
+          <fish-col span="6" class="demo-col">
             <fish-form inline>
-              <fish-field label="ON:" inline>
-                <h4>dd</h4>
+              <fish-field label="ON" name="on" :rules="[{required: true,message: 'on เป็นค่าว่าง'}]" inline>
+                <fish-select v-model="on" hint='ON'>
+                  <fish-option index="1" content="1"></fish-option>
+                  <fish-option index="2" content="2"></fish-option>
+                </fish-select>
               </fish-field>
             </fish-form>
           </fish-col>
         </fish-row>
+       
         <fish-row>
-          <fish-col span="12" class="demo-col ">
+          <fish-col span="12" class="demo-col">
             <fish-form inline>
-              <fish-field label="หมายเลขเครื่อง" name="pump" :rules="[{required: true,message: 'วันที่เป็นค่าว่าง'}]" inline>
+              <fish-field label="หมายเลขเครื่อง / รุ่น" name="pump" :rules="[{required: true,message: 'หมายเลขเครื่อง / รุ่น เป็นค่าว่าง'}]" inline>
                 <fish-select v-model="pump" :search="searchChangeHandler">
                   <fish-option :index="item.id" :content="item.name" v-for="item in pumps" :key="item.id"></fish-option>
                 </fish-select>
               </fish-field>
             </fish-form>
           </fish-col>
-          <fish-col span="12" class="demo-col ">
+          <fish-col span="12" class="demo-col">
             <fish-form inline>
-              <fish-field label="ID:" inline>
-                <h4>dd</h4>
+              <fish-field label="ID:" name="id" :rules="[{required: true,message: 'id เป็นค่าว่าง'}]" inline>
+                 <fish-input v-model="id" hint="id"></fish-input>
               </fish-field>
             </fish-form>
           </fish-col>
         </fish-row>
+     
         <fish-row>
-          <fish-col span="12" class="demo-col ">
+          <fish-col span="12" class="demo-col">
             <fish-form inline>
-              <fish-field label="จุดติดตั้ง:" inline>
-                <h4> dd </h4>
+              <fish-field label="จุดติดตั้ง:" :rules="[{required: true,message: 'รุ่นเป็นค่าว่าง'}]" inline>
+                <h4>dd</h4>
               </fish-field>
             </fish-form>
           </fish-col>
-          <fish-col span="12">
+          <fish-col span="12" class="demo-col">
             <fish-form ref="form" inline>
               <fish-field label="วันที่" name="dateservice" :rules="[{required: true,message: 'ช่วงเดือนเป็นค่าว่าง'}]" inline>
                 <!-- format from moment js L = DD/MM/YYYY -->
@@ -76,6 +90,7 @@
             </fish-form>
           </fish-col>
         </fish-row>
+     
         <fish-row class="headsmall">
           <fish-col span="5" class="demo-col demo-col2">
             <h4>รายการ</h4>
@@ -116,7 +131,12 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="wire_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="wire_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -130,9 +150,7 @@
           <fish-col span="6">
             <h5>สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ</h5>
           </fish-col>
-          <fish-col span="4
-                                        
-                                        ">
+          <fish-col span="4">
             <fish-checkboxes v-model="seal_1">
               <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
             </fish-checkboxes>
@@ -150,7 +168,12 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="seal_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="seal_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -188,7 +211,12 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="condition_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="condition_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -226,7 +254,12 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="propeller_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="propeller_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -264,12 +297,17 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="snail_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="snail_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
-        <br>
-        <hr>
+       // eslint-disable-next-line <br>
+        // eslint-disable-next-line<hr>
         <!-- แถว6-->
         <fish-row>
           <fish-col span="5">
@@ -299,7 +337,12 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="oid_other" hint='ระบุ...'></fish-input>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="oid_other"
+                hint="ระบุ"
+              ></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -325,7 +368,7 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="jarabi_other" hint='ระบุ...'></fish-input>
+              <fish-input type="textarea" style="height: 80px; " v-model="jarabi_other" hint='ระบุ'></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -357,7 +400,7 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="clean_other" hint='ระบุ...'></fish-input>
+              <fish-input type="textarea" style="height: 80px; " v-model="clean_other" hint='ระบุ'></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -392,7 +435,7 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px; " v-model="system_other" hint='ระบุ...'></fish-input>
+              <fish-input type="textarea" style="height: 80px; " v-model="system_other" hint='ระบุ'></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -436,7 +479,7 @@
           </fish-col>
           <fish-col span="6">
             <center>
-              <fish-input type="textarea" style="height: 80px;  " v-model="sump_other" hint='ระบุ...'></fish-input>
+              <fish-input type="textarea" style="height: 80px;  " v-model="sump_other" hint='ระบุ'></fish-input>
             </center>
           </fish-col>
         </fish-row>
@@ -446,7 +489,7 @@
           <fish-col span="24">
             <fish-card color="blue" fluid>
               <div slot="header"><strong class="headsmall">ผู้ปฏิบัติงาน</strong></div>
-              <fish-row >
+              <fish-row>
                 <fish-col span="8">
                   <h4>ชื่อ-นามสกุล</h4>
                   <fish-input size='large' v-model="woker" hint='ชื่อ-นามสกุล' disabled></fish-input>
@@ -457,7 +500,7 @@
                 </fish-col>
                 <fish-col span="8">
                   <h4>หมายเหตุ</h4>
-                  <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ...' ></fish-input>
+                  <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="woker_other" hint='ระบุ'></fish-input>
                 </fish-col>
               </fish-row>
             </fish-card>
@@ -468,11 +511,11 @@
         <fish-row>
           <fish-col span="2">
             <fish-button type="primary" @click="submitHandler">
-              <vue-fontawesome icon="save" size="2"></vue-fontawesome> บันทึก</fish-button>
+              <vue-fontawesome icon="save" size="2"></vue-fontawesome>บันทึก</fish-button>
           </fish-col>
           <fish-col span="2">
             <fish-button type="negative">
-              <vue-fontawesome icon="eraser" size="2"></vue-fontawesome> ยกเลิก</fish-button>
+              <vue-fontawesome icon="eraser" size="2"></vue-fontawesome>ยกเลิก</fish-button>
           </fish-col>
         </fish-row>
       </fish-form>
@@ -480,79 +523,76 @@
     <br>
     <fish-row>
       <fish-col span="24">
-            <fish-card color="blue" fluid>
-                 <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-        <fish-card color="red" fluid>
-          <div slot="header"><strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong></div>
-          <fish-row >
-            <fish-col span="6">
-              <h4>ชื่อ-นามสกุล</h4>
-              <fish-input size='large' v-model="boss_pump" hint='ชื่อ-นามสกุล' disabled></fish-input>
-            </fish-col>
-            <fish-col span="6">
-              <center>
-                <h4>ตรวจสอบแล้ว</h4>
-                <fish-switch v-model="boss_pump_approve" :yesOrNo="[1, 0]"></fish-switch>
-              </center>
-            </fish-col>
-            <fish-col span="12">
-              <h4>หมายเหตุ</h4>
-              <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ...'></fish-input>
+        <fish-card color="blue" fluid>
+          <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
+          <fish-card color="red" fluid>
+            <div slot="header"><strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong></div>
+            <fish-row>
+              <fish-col span="6">
+                <h4>ชื่อ-นามสกุล</h4>
+                <fish-input size='large' v-model="boss_pump" hint='ชื่อ-นามสกุล' disabled></fish-input>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <h4>ตรวจสอบแล้ว</h4>
+                  <fish-switch v-model="boss_pump_approve" :yesOrNo="[1, 0]"></fish-switch>
+                </center>
+              </fish-col>
+              <fish-col span="12">
+                <h4>หมายเหตุ</h4>
+                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="boss_pump_other" hint='ระบุ'></fish-input>
+              </fish-col>
+            </fish-row>
+          </fish-card>
+          <br>
+          <fish-cards cols="two">
+            <fish-card color="green">
+              <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
+              <fish-row>
+                <fish-col span="6">
+                  <h4>ชื่อ-นามสกุล</h4>
+                  <fish-input size='large' v-model="inspector" hint='ชื่อ-นามสกุล' disabled></fish-input>
+                </fish-col>
+                <fish-col span="6">
+                  <center>
+                    <h4>ตรวจสอบแล้ว</h4>
+                    <fish-switch v-model="inspector_approve" :yesOrNo="[1, 0]"></fish-switch>
+                  </center>
+                </fish-col>
+                <fish-col span="12">
+                  <h4>หมายเหตุ</h4>
+                  <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="inspector_other" hint='ระบุ'></fish-input>
+                </fish-col>
+              </fish-row>
+            </fish-card>
+            <fish-card color="green">
+              <div slot="header"><strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong></div>
+              <fish-row>
+                <fish-col span="6">
+                  <h4>ชื่อ-นามสกุล</h4>
+                  <fish-input size='large' v-model="manage" hint='ชื่อ-นามสกุล'></fish-input>
+                </fish-col>
+                <fish-col span="6">
+                  <center>
+                    <h4>ตรวจสอบแล้ว</h4>
+                    <fish-switch v-model="manage_approve" :yesOrNo="[1, 0]"></fish-switch>
+                  </center>
+                </fish-col>
+                <fish-col span="12">
+                  <h4>หมายเหตุ</h4>
+                  <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="manage_other" hint='ระบุ'></fish-input>
+                </fish-col>
+              </fish-row>
+            </fish-card>
+          </fish-cards>
+          <br>
+          <fish-row>
+            <fish-col span="2">
+              <fish-button type="positive" @click="submitHandler">
+                <vue-fontawesome icon="save" size="2"></vue-fontawesome> บันทึก</fish-button>
             </fish-col>
           </fish-row>
         </fish-card>
-        <br>
-        
-        <fish-cards cols="two">
-          <fish-card color="green">
-            <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-            <fish-row >
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model="inspector" hint='ชื่อ-นามสกุล' disabled></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch v-model="inspector_approve" :yesOrNo="[1, 0]"></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="inspector_other" hint='ระบุ...'></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-          <fish-card color="green">
-            <div slot="header"><strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong></div>
-            <fish-row >
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input size='large' v-model="manage" hint='ชื่อ-นามสกุล'></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch v-model="manage_approve" :yesOrNo="[1, 0]"></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input size='large' type="textarea" style="height: 80px;  width: 100%; " v-model="manage_other" hint='ระบุ...'></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-        </fish-cards>
-         <br>
-         <fish-row>
-          <fish-col span="2">
-            <fish-button type="primary" @click="submitHandler">
-              <vue-fontawesome icon="save" size="2"></vue-fontawesome> บันทึก</fish-button>
-          </fish-col>
-         
-        </fish-row>
-            </fish-card >
-       
       </fish-col>
     </fish-row>
   </div>
@@ -564,74 +604,78 @@
     name: 'form',
     data() {
       return {
-        month: '',
-        pumps: '',
-        pump: '',
-        dateservice: '',
-        wire_1: '',
-        wire_2: '',
-        wire_3: '',
-        wire_4: '',
-        wire_other: '',
-        seal_1: '',
-        seal_2: '',
-        seal_3: '',
-        seal_4: '',
-        seal_other: '',
-        condition_1: '',
-        condition_2: '',
-        condition_3: '',
-        condition_4: '',
-        condition_5: '',
-        condition_6: '',
-        condition_other: '',
-        propeller_1: '',
-        propeller_2: '',
-        propeller_3: '',
-        propeller_4: '',
-        propeller_5: '',
-        propeller_6: '',
-        propeller_other: '',
-        snail_1: '',
-        snail_2: '',
-        snail_3: '',
-        snail_4: '',
-        snail_5: '',
-        snail_6: '',
-        snail_other: '',
-        oil_1: '',
-        oil_2: '',
-        oil_3: '',
-        oil_4: '',
-        oil_5: '',
-        oil_other: '',
-        system_1: '',
-        system_2: '',
-        system_3: '',
+        month:'',
+        on:'',
+        pumps:'',
+        pump:'',
+        pumps_brands:'',
+        pump_brand:'',
+        id:'',
+        dateservice:'',
+        wire_1:'',
+        wire_2:'',
+        wire_3:'',
+        wire_4:'',
+        wire_other:'',
+        seal_1:'',
+        seal_2:'',
+        seal_3:'',
+        seal_4:'',
+        seal_other:'',
+        condition_1:'',
+        condition_2:'',
+        condition_3:'',
+        condition_4:'',
+        condition_5:'',
+        condition_6:'',
+        condition_other:'',
+        propeller_1:'',
+        propeller_2:'',
+        propeller_3:'',
+        propeller_4:'',
+        propeller_5:'',
+        propeller_6:'',
+        propeller_other:'',
+        snail_1:'',
+        snail_2:'',
+        snail_3:'',
+        snail_4:'',
+        snail_5:'',
+        snail_6:'',
+        snail_other:'',
+        oil_1:'',
+        oil_2:'',
+        oil_3:'',
+        oil_4:'',
+        oil_5:'',
+        oil_other:'',
+        system_1:'',
+        system_2:'',
+        system_3:'',
         system_4: '',
-        system_5: '',
-        system_other: '',
-        sump_1: '',
-        sump_2: '',
-        sump_3: '',
-        sump_4: '',
-        sump_5: '',
-        sump_6: '',
-        sump_7: '',
-        sump_8: '',
-        sump_other: '',
-        woker: '',
-        woker_approve: '',
-        woker_other: '',
-        boss_pump: '',
-        boss_pump_approve: '',
-        boss_pump_other: '',
-        inspector: '',
-        inspector_approve: '',
-        inspector_other: '',
-        manage: '',
-        manage_approve: 0,
-        manage_other: '',
+        system_5:'',
+        system_other:'',
+        sump_1:'',
+        sump_2:'',
+        sump_3:'',
+        sump_4:'',
+        sump_5:'',
+        sump_6:'',
+        sump_7:'',
+        sump_8:'',
+        sump_other:'',
+        woker:'',
+        woker_approve:'',
+        woker_other:'',
+        boss_pump:'',
+        boss_pump_approve:'',
+        boss_pump_other:'',
+        inspector:'',
+        inspector_approve:'',
+        inspector_other:'',
+        manage:'',
+        manage_approve:0,
+        manage_other:'',
       }
     },
     methods: {
@@ -642,29 +686,38 @@
       }
     },
     mounted() {
+
+      // รุ่น
       axios
-        .get('http://192.168.5.187/0161/pump/pump/pump.php')
+        // .get('http://192.168.5.187/0161/pump/pump/pump.php')
+        .get('http://localhost/pump/pump/pump.php')
         .then(response => (this.pumps = response.data))
+
+        // ยี่ห้อ
+         axios
+        // .get('http://192.168.5.187/0161/pump/pump/pump_brand.php')
+        .get('http://localhost/pump/pump/pump_brand.php')
+        .then(response => (this.pumps_brands = response.data))
     },
   }
 </script>
 
 <style>
-  .demo-col {
-    background: #e0f0fa;
-    padding: 10px 0;
-    text-align: center;
-    margin-bottom: 5px;
-  }
-  .demo-col2 {
-    background: #7dbcea;
-  }
+.demo-col {
+background:#e0f0fa;
+padding:10px 0;
+text-align:center;
+margin-bottom:5px;
+}
+.demo-col2 {
+background:#7dbcea;
+}
   .head {
-    font-family: 'Sriracha';
-    text-shadow: 4px 4px 4px #aaa;
-  }
-  .headsmall {
-    font-family: 'Sriracha';
-    text-shadow: 2px 2px 2px #aaa;
-  }
+font-family:'Sriracha';
+text-shadow: 4px 4px 4px #aaa;
+}
+.headsmall {
+font-family:'Sriracha';
+text-shadow:2px 2px 2px #aaa;
+}
 </style>
