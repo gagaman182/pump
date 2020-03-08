@@ -13,7 +13,7 @@
           <fish-col span="6" class="demo-col">
             <fish-form inline>
               <fish-field
-                label="ระบุเดือน"
+                label="ทุก..เดือน  ต่อ 1 บ่อ / 1ปี"
                 name="month"
                 :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
                 inline
