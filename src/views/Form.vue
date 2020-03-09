@@ -18,7 +18,7 @@
                 :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
                 inline
               >
-                <fish-select v-model="month" hint="เดือน" @change="monthchange">
+                <fish-select v-model="month" hint="เดือน" @change="pumpchange">
                   <fish-option index="1" content="1 เดือน"></fish-option>
                   <fish-option index="3" content="3 เดือน"></fish-option>
                 </fish-select>
@@ -131,674 +131,664 @@
             </fish-form>
           </fish-col>
         </fish-row>
-         <fish-row class="headsmall">
-              <fish-col span="5" class="demo-col demo-col2">
-                <h4>รายการ</h4>
-              </fish-col>
-              <fish-col span="6" class="demo-col demo-col2">
-                <h4>แนวทางการตรวจเช็ค</h4>
-              </fish-col>
-              <fish-col span="7" class="demo-col demo-col2">
-                <h4>สถานะ</h4>
-              </fish-col>
-              <fish-col span="6" class="demo-col demo-col2">
-                <h4>หมายเหตุ</h4>
-              </fish-col>
-            </fish-row>
-            <!-- แถว1 -->
-            <fish-row v-show="p1_show">
-              <fish-col span="4">
-                <fish-form inline>
-                  <h5>
-                    <vue-fontawesome icon="arrow-right"></vue-fontawesome>
-                    ชุดสายไฟเครื่องปั้ม
-                  </h5>
-                </fish-form>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูสภาพของสาย
-                  จุดจับยึด
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="wire_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="wire_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">สายรั่ว</fish-checkbox>
-                </fish-checkboxes>
-                 <fish-divider />
-                <fish-checkboxes v-model="wire_5">
-                  <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="wire_2">
-                  <fish-checkbox index="1"> สายขาด</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="wire_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="wire_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p1_show" />
-             <!-- แถว2 -->
-            <fish-row v-show="p2_show">
-              <fish-col span="4">
-                <fish-form inline>
-                  <h5>
-                    <vue-fontawesome icon="arrow-right"></vue-fontawesome>
-                    ตรวจสอบการ ทำงานของเครื่อง
-                  </h5>
-                </fish-form>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูปริมาณน้ำที่ออกจากท่อ  เมื่อเครื่องทำงาน
-                
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="service_1">
-                  <fish-checkbox index="1">ปกติ / พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="service_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">ปานกลาง</fish-checkbox>
-                </fish-checkboxes>
-                 <fish-divider />
-                <fish-checkboxes v-model="service_5">
-                  <fish-checkbox index="1">น้อย</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="service_2">
-                  <fish-checkbox index="1"> ไม่ออก/มีเสียงดัง</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="service_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">ทำการซ่อม</fish-checkbox>
-                </fish-checkboxes>
-                  <fish-divider />
-                <fish-checkboxes v-model="service_6">
-                  <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="service_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p2_show" />
-            <!-- แถว3 -->
-            <fish-row v-show="p3_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ซีลเครื่องปั้ม
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="seal_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="seal_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">ชำรุด</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="seal_2">
-                  <fish-checkbox index="1"> มีรอยรั่วซึม</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="seal_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="seal_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p3_show" />
-            <!-- แถว4 -->
-            <fish-row v-show="p4_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >สภาพโดยรวม ของเครื่อง
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูสี จุดแตกร้าว
-                  การกัดกรอน น๊อต/สกรู การสั่นสะเทือน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="condition_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="condition_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">แตกร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="condition_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">ทาสีใหม่</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="condition_2">
-                  <fish-checkbox index="1"> เปลี่ยนน๊อต/สกรู</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="condition_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="condition_6">
-                  <fish-divider />
-                  <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="condition_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p4_show" />
-            <!-- แถว5 -->
-            <fish-row v-show="p5_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ชุดใบพัดปั้ม
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  ดูจุดแตกร้าว ซึกหรอ การหมุน การสั่นสะเทือน เสียงดัง การกัดกรอน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="propeller_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="propeller_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">แตกร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="propeller_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">สึกหรอ</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="propeller_2">
-                  <fish-checkbox index="1"> สันสะเทือน/เสียงดัง</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="propeller_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="propeller_6">
-                  <fish-divider />
-                  <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="propeller_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p5_show" />
-            <!-- แถว6-->
-            <fish-row v-show="p6_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >หอยโข่งปั้ม
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูจุดแตกร้าว
-                  ซึกหรอ การกัดกรอน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="snail_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="snail_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">แตกร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="snail_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">สึกหรอ</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="snail_2">
-                  <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="snail_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="snail_6">
-                  <fish-divider />
-                  <fish-checkbox index="1">อุดตัน</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="snail_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p6_show" />
-            <!-- แถว7-->
-            <fish-row v-show="p7_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ระดับน้ำมันเครื่อง
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  ดูระดับน้ำมันเครื่อง สีของน้ำมัน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="oil_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="oil_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">เติม</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="oil_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="oil_2">
-                  <fish-checkbox index="1">ต่ำกว่าระดับ</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="oil_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">สีดำ/ค้น</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="oid_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p7_show" />
-            <!-- แถว8-->
-            <fish-row v-show="p8_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >อัดจาระบี
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  อัดจารบีตามจุดต่างๆ
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="jarabi_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="jarabi_2">
-                  <fish-checkbox index="1">อัดจารบี</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="jarabi_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p8_show" />
-            <!-- แถว9-->
-            <fish-row v-show="p9_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ทำความสะอาด
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูคราบสกปรก
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="clean_1">
-                  <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="clean_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">ใช้โบว์เวอร์เปา</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="clean_2">
-                  <fish-checkbox index="1">ใช้ปั้มแรงดัน</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="clean_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="clean_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p9_show" />
-            <!-- แถว10-->
-            <fish-row v-show="p10_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ชุดแขนของเครื่อง กวาดตะกอน
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  ดูการหมุนของแขนกวาดตะกอน น๊อต/สกรู การสั่นสะเทือน เสียงดัง
-                  การกัดกร่อน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="arm_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="arm_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">ชำรุด</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="arm_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">ทาสีใหม่</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="arm_2">
-                  <fish-checkbox index="1">เปลี่ยนน๊อต/สกรู</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="arm_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">สึกหรอ/เป็นสนิม</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="arm_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p10_show" />
-            <!-- แถว11-->
-            <fish-row v-show="p11_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ตรวจเช็คระบบ ควบคุมปั้ม
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome>
-                  ตรวจเช็คอุปกรณ์/ทำความสะอาด
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="system_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="system_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">เปลี่ยนอุปกรณ์</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="system_5">
-                  <fish-divider />
-                  <fish-checkbox index="1"
-                    >ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม</fish-checkbox
-                  >
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="system_2">
-                  <fish-checkbox index="1">ตรวจเช็คไฟโชว์</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="system_4">
-                  <fish-divider />
-                  <fish-checkbox index="1"
-                    >ใช้โบว์เป้าทำความสะอาด</fish-checkbox
-                  >
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px; "
-                    v-model="system_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p11_show" />
-            <!-- แถว12-->
-            <fish-row v-show="p12_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ตรวจสอบบ่อ
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ความสกปรก ขยะ
-                  รอยร้าวของบ่อ สภาพโดยรวม
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="sump_1">
-                  <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">ตักเอาขยะออก</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_7">
-                  <fish-divider />
-                  <fish-checkbox index="1">ใช้ปั้มแรงดันฉีด</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="sump_2">
-                  <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">ดูดเลนด้วยไดโว่</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_6">
-                  <fish-divider />
-                  <fish-checkbox index="1">ทำการซ่อมแซม</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="sump_8">
-                  <fish-divider />
-                  <fish-checkbox index="1">แจ้งบริษัท</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px;  "
-                    v-model="sump_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <fish-divider v-show="p12_show" />
-            <!-- แถว13-->
-            <fish-row v-show="p13_show">
-              <fish-col span="4">
-                <h5>
-                  <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ตรวจเช็คถังคลอรีน จุดต่อสาย
-                </h5>
-              </fish-col>
-              <fish-col span="7">
-                <h5>
-                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูรอยแตก
-                  สภาพของถัง จุดต่อของสายคลอรีน
-                </h5>
-              </fish-col>
-              <fish-col span="4">
-                <fish-checkboxes v-model="chlorine_1">
-                  <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="chlorine_3">
-                  <fish-divider />
-                  <fish-checkbox index="1">แตกร้าว</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="chlorine_5">
-                  <fish-divider />
-                  <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="3">
-                <fish-checkboxes v-model="chlorine_2">
-                  <fish-checkbox index="1">เปลี่ยนถัง</fish-checkbox>
-                </fish-checkboxes>
-                <fish-checkboxes v-model="chlorine_4">
-                  <fish-divider />
-                  <fish-checkbox index="1">เปลี่ยนสายคลอรีน</fish-checkbox>
-                </fish-checkboxes>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <fish-input
-                    type="textarea"
-                    style="height: 80px;  "
-                    v-model="chlorine_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </center>
-              </fish-col>
-            </fish-row>
-            <br />
-            <fish-divider v-show="p13_show" />
-        
-      
+        <fish-row class="headsmall">
+          <fish-col span="5" class="demo-col demo-col2">
+            <h4>รายการ</h4>
+          </fish-col>
+          <fish-col span="6" class="demo-col demo-col2">
+            <h4>แนวทางการตรวจเช็ค</h4>
+          </fish-col>
+          <fish-col span="7" class="demo-col demo-col2">
+            <h4>สถานะ</h4>
+          </fish-col>
+          <fish-col span="6" class="demo-col demo-col2">
+            <h4>หมายเหตุ</h4>
+          </fish-col>
+        </fish-row>
+        <!-- แถว1 -->
+        <fish-row v-show="p1_show">
+          <fish-col span="4">
+            <fish-form inline>
+              <h5>
+                <vue-fontawesome icon="arrow-right"></vue-fontawesome>
+                ชุดสายไฟเครื่องปั้ม
+              </h5>
+            </fish-form>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome> ดูสภาพของสาย
+              จุดจับยึด
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="wire_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="wire_3">
+              <fish-divider />
+              <fish-checkbox index="1">สายรั่ว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-divider />
+            <fish-checkboxes v-model="wire_5">
+              <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="wire_2">
+              <fish-checkbox index="1"> สายขาด</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="wire_4">
+              <fish-divider />
+              <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="wire_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p1_show" />
+        <!-- แถว2 -->
+        <fish-row v-show="p2_show">
+          <fish-col span="4">
+            <fish-form inline>
+              <h5>
+                <vue-fontawesome icon="arrow-right"></vue-fontawesome>
+                ตรวจสอบการ ทำงานของเครื่อง
+              </h5>
+            </fish-form>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              ดูปริมาณน้ำที่ออกจากท่อ เมื่อเครื่องทำงาน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="service_1">
+              <fish-checkbox index="1">ปกติ / พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="service_3">
+              <fish-divider />
+              <fish-checkbox index="1">ปานกลาง</fish-checkbox>
+            </fish-checkboxes>
+            <fish-divider />
+            <fish-checkboxes v-model="service_5">
+              <fish-checkbox index="1">น้อย</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="service_2">
+              <fish-checkbox index="1"> ไม่ออก/มีเสียงดัง</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="service_4">
+              <fish-divider />
+              <fish-checkbox index="1">ทำการซ่อม</fish-checkbox>
+            </fish-checkboxes>
+            <fish-divider />
+            <fish-checkboxes v-model="service_6">
+              <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="service_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p2_show" />
+        <!-- แถว3 -->
+        <fish-row v-show="p3_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome
+              >ซีลเครื่องปั้ม
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="seal_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="seal_3">
+              <fish-divider />
+              <fish-checkbox index="1">ชำรุด</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="seal_2">
+              <fish-checkbox index="1"> มีรอยรั่วซึม</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="seal_4">
+              <fish-divider />
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="seal_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p3_show" />
+        <!-- แถว4 -->
+        <fish-row v-show="p4_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>สภาพโดยรวม
+              ของเครื่อง
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome> ดูสี จุดแตกร้าว
+              การกัดกรอน น๊อต/สกรู การสั่นสะเทือน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="condition_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="condition_3">
+              <fish-divider />
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="condition_5">
+              <fish-divider />
+              <fish-checkbox index="1">ทาสีใหม่</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="condition_2">
+              <fish-checkbox index="1"> เปลี่ยนน๊อต/สกรู</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="condition_4">
+              <fish-divider />
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="condition_6">
+              <fish-divider />
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="condition_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p4_show" />
+        <!-- แถว5 -->
+        <fish-row v-show="p5_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>ชุดใบพัดปั้ม
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              ดูจุดแตกร้าว ซึกหรอ การหมุน การสั่นสะเทือน เสียงดัง การกัดกรอน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="propeller_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="propeller_3">
+              <fish-divider />
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="propeller_5">
+              <fish-divider />
+              <fish-checkbox index="1">สึกหรอ</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="propeller_2">
+              <fish-checkbox index="1"> สันสะเทือน/เสียงดัง</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="propeller_4">
+              <fish-divider />
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="propeller_6">
+              <fish-divider />
+              <fish-checkbox index="1">ส่งซ่อมบริษัท</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="propeller_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p5_show" />
+        <!-- แถว6-->
+        <fish-row v-show="p6_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>หอยโข่งปั้ม
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome> ดูจุดแตกร้าว ซึกหรอ
+              การกัดกรอน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="snail_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="snail_3">
+              <fish-divider />
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="snail_5">
+              <fish-divider />
+              <fish-checkbox index="1">สึกหรอ</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="snail_2">
+              <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="snail_4">
+              <fish-divider />
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="snail_6">
+              <fish-divider />
+              <fish-checkbox index="1">อุดตัน</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="snail_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p6_show" />
+        <!-- แถว7-->
+        <fish-row v-show="p7_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome
+              >ระดับน้ำมันเครื่อง
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              ดูระดับน้ำมันเครื่อง สีของน้ำมัน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="oil_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="oil_3">
+              <fish-divider />
+              <fish-checkbox index="1">เติม</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="oil_5">
+              <fish-divider />
+              <fish-checkbox index="1">เปลี่ยน</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="oil_2">
+              <fish-checkbox index="1">ต่ำกว่าระดับ</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="oil_4">
+              <fish-divider />
+              <fish-checkbox index="1">สีดำ/ค้น</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="oil_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p7_show" />
+        <!-- แถว8-->
+        <fish-row v-show="p8_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>อัดจาระบี
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              อัดจารบีตามจุดต่างๆ
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="jarabi_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="jarabi_2">
+              <fish-checkbox index="1">อัดจารบี</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="jarabi_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p8_show" />
+        <!-- แถว9-->
+        <fish-row v-show="p9_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>ทำความสะอาด
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5><vue-fontawesome icon="bug"></vue-fontawesome> ดูคราบสกปรก</h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="clean_1">
+              <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="clean_3">
+              <fish-divider />
+              <fish-checkbox index="1">ใช้โบว์เวอร์เปา</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="clean_2">
+              <fish-checkbox index="1">ใช้ปั้มแรงดัน</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="clean_4">
+              <fish-divider />
+              <fish-checkbox index="1">ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="clean_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p9_show" />
+        <!-- แถว10-->
+        <fish-row v-show="p10_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome
+              >ชุดแขนของเครื่อง กวาดตะกอน
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              ดูการหมุนของแขนกวาดตะกอน น๊อต/สกรู การสั่นสะเทือน เสียงดัง
+              การกัดกร่อน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="arm_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="arm_3">
+              <fish-divider />
+              <fish-checkbox index="1">ชำรุด</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="arm_5">
+              <fish-divider />
+              <fish-checkbox index="1">ทาสีใหม่</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="arm_2">
+              <fish-checkbox index="1">เปลี่ยนน๊อต/สกรู</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="arm_4">
+              <fish-divider />
+              <fish-checkbox index="1">สึกหรอ/เป็นสนิม</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="arm_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p10_show" />
+        <!-- แถว11-->
+        <fish-row v-show="p11_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>ตรวจเช็คระบบ
+              ควบคุมปั้ม
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome>
+              ตรวจเช็คอุปกรณ์/ทำความสะอาด
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="system_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="system_3">
+              <fish-divider />
+              <fish-checkbox index="1">เปลี่ยนอุปกรณ์</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="system_5">
+              <fish-divider />
+              <fish-checkbox index="1"
+                >ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม</fish-checkbox
+              >
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="system_2">
+              <fish-checkbox index="1">ตรวจเช็คไฟโชว์</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="system_4">
+              <fish-divider />
+              <fish-checkbox index="1">ใช้โบว์เป้าทำความสะอาด</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px; "
+                v-model="system_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p11_show" />
+        <!-- แถว12-->
+        <fish-row v-show="p12_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome>ตรวจสอบบ่อ
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome> ความสกปรก ขยะ
+              รอยร้าวของบ่อ สภาพโดยรวม
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="sump_1">
+              <fish-checkbox index="1">มีรอยร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_3">
+              <fish-divider />
+              <fish-checkbox index="1">ตักเอาขยะออก</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_5">
+              <fish-divider />
+              <fish-checkbox index="1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_7">
+              <fish-divider />
+              <fish-checkbox index="1">ใช้ปั้มแรงดันฉีด</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="sump_2">
+              <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_4">
+              <fish-divider />
+              <fish-checkbox index="1">ดูดเลนด้วยไดโว่</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_6">
+              <fish-divider />
+              <fish-checkbox index="1">ทำการซ่อมแซม</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="sump_8">
+              <fish-divider />
+              <fish-checkbox index="1">แจ้งบริษัท</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px;  "
+                v-model="sump_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <fish-divider v-show="p12_show" />
+        <!-- แถว13-->
+        <fish-row v-show="p13_show">
+          <fish-col span="4">
+            <h5>
+              <vue-fontawesome icon="arrow-right"></vue-fontawesome
+              >ตรวจเช็คถังคลอรีน จุดต่อสาย
+            </h5>
+          </fish-col>
+          <fish-col span="7">
+            <h5>
+              <vue-fontawesome icon="bug"></vue-fontawesome> ดูรอยแตก สภาพของถัง
+              จุดต่อของสายคลอรีน
+            </h5>
+          </fish-col>
+          <fish-col span="4">
+            <fish-checkboxes v-model="chlorine_1">
+              <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="chlorine_3">
+              <fish-divider />
+              <fish-checkbox index="1">แตกร้าว</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="chlorine_5">
+              <fish-divider />
+              <fish-checkbox index="1">มีการกัดกร่อน</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="3">
+            <fish-checkboxes v-model="chlorine_2">
+              <fish-checkbox index="1">เปลี่ยนถัง</fish-checkbox>
+            </fish-checkboxes>
+            <fish-checkboxes v-model="chlorine_4">
+              <fish-divider />
+              <fish-checkbox index="1">เปลี่ยนสายคลอรีน</fish-checkbox>
+            </fish-checkboxes>
+          </fish-col>
+          <fish-col span="6">
+            <center>
+              <fish-input
+                type="textarea"
+                style="height: 80px;  "
+                v-model="chlorine_other"
+                hint="ระบุ"
+              ></fish-input>
+            </center>
+          </fish-col>
+        </fish-row>
+        <br />
+        <fish-divider v-show="p13_show" />
+
         <fish-row>
           <fish-col span="24">
             <fish-card color="blue" fluid>
@@ -846,7 +836,7 @@
             >
           </fish-col>
           <fish-col span="2">
-            <fish-button type="negative">
+            <fish-button type="negative" @click="clear">
               <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
               >ยกเลิก</fish-button
             >
@@ -987,8 +977,8 @@ export default {
   name: "form",
   data() {
     return {
-       api_path:'http://192.168.5.187/0161/pump/pump/api/',
-      //api_path:'http://localhost/pump/pump/api/',
+      // api_path: "http://192.168.5.187/0161/pump/pump/api/",
+      api_path:'http://localhost/pump/pump/api/',
       tab: "",
       p1_show: true,
       p2_show: true,
@@ -1058,6 +1048,14 @@ export default {
       oil_4: "",
       oil_5: "",
       oil_other: "",
+      jarabi_1:"",
+      jarabi_2:"",
+      jarabi_other:"",
+      clean_1:"",
+      clean_2:"",
+      clean_3:"",
+      clean_4:"",
+      clean_other:"",
       arm_1: "",
       arm_2: "",
       arm_3: "",
@@ -1110,122 +1108,177 @@ export default {
         }
       });
     },
+     clear() {
+        this.month = ''
+        this.pump = ''
+        this.on = ''
+        this.pump_brand = ''
+        this.pump =''
+        this.id = '';
+        this.install_point = '';
+        this.dateservice = '';
+      this.wire_1 = '';
+      this.wire_2 = '';
+      this.wire_3 = '';
+      this.wire_4 = '';
+      this.wire_5 = '';
+      this.wire_other= '';
+      this.service_1= '';
+      this.service_2= '';
+      this.service_3= '';
+      this.service_4= '';
+      this.service_5= '';
+      this.service_6= '';
+      this.service_other= '';
+      this.seal_1= '';
+      this.seal_2= '';
+      this.seal_3= '';
+      this.seal_4= '';
+      this.seal_other= '';
+      this.condition_1= '';
+      this.condition_2= '';
+      this.condition_3= '';
+      this.condition_4= '';
+      this.condition_5= '';
+      this.condition_6= '';
+      this.condition_other= '';
+      this.propeller_1= '';
+      this.propeller_2= '';
+      this.propeller_3= '';
+      this.propeller_4= '';
+      this.propeller_5= '';
+      this.propeller_6= '';
+      this.propeller_other= '';
+      this.snail_1= '';
+      this.snail_2= '';
+      this.snail_3= '';
+      this.snail_4= '';
+      this.snail_5= '';
+      this.snail_6= '';
+      this.snail_other= '';
+      this.oil_1= '';
+      this.oil_2= '';
+      this.oil_3= '';
+      this.oil_4= '';
+      this.oil_5= '';
+      this.oil_other= '';
+      this.jarabi_1= '';
+      this.jarabi_2= '';
+      this.jarabi_other='';
+      this.clean_1= '';
+      this.clean_2= '';
+      this.clean_3= '';
+      this.clean_4= '';
+      this.clean_other= '';
+      this.arm_1= '';
+      this.arm_2= '';
+      this.arm_3= '';
+      this.arm_4= '';
+      this.arm_5= '';
+      this.arm_other= '';
+      this.system_1= '';
+      this.system_2= '';
+      this.system_3= '';
+      this.system_4= '';
+      this.system_5= '';
+      this.system_other= '';
+      this.sump_1= '';
+      this.sump_2= '';
+      this.sump_3= '';
+      this.sump_4= '';
+      this.sump_5= '';
+      this.sump_6= '';
+      this.sump_7= '';
+      this.sump_8= '';
+      this.sump_other= '';
+      this.chlorine_1= '';
+      this.chlorine_2= '';
+      this.chlorine_3= '';
+      this.chlorine_4= '';
+      this.chlorine_5= '';
+      this.chlorine_other= '';
 
-    
-   
+        this.p1_show = true;
+        this.p2_show = true;
+        this.p3_show = true;
+        this.p4_show = true;
+        this.p5_show = true;
+        this.p6_show = true;
+        this.p7_show = true;
+        this.p8_show = true;
+        this.p9_show = true;
+        this.p10_show = true;
+        this.p11_show = true;
+        this.p12_show = true;
+        this.p13_show = true;
+
+
+
+        this.$message.warning('ข้อมูลถูกยกเลิกแล้ว', 5000);
+    },
+
     //เลิอกหมายเลขเครื่อง / รุ่น
     pumpchange() {
-      if (this.pump == "1" && this.month == "3") {
-        
+      if (this.pump == "1" && this.month == "3" ) {
         this.p2_show = false;
-       
-        
-       
-        
         this.p8_show = false;
-       
         this.p10_show = false;
-       
         this.p13_show = false;
       } else if (this.pump == "2" && this.month == "3") {
-      
         this.p2_show = false;
-      
-        
         this.p5_show = false;
         this.p6_show = false;
-       
         this.p8_show = false;
-        
         this.p10_show = false;
-      
         this.p13_show = false;
       } else if (this.pump == "3" && this.month == "3") {
-      
         this.p2_show = false;
-       
         this.p8_show = false;
-      
         this.p10_show = false;
-       
         this.p13_show = false;
       } else if (this.pump == "4" && this.month == "3") {
-     
         this.p2_show = false;
-       
-      
         this.p5_show = false;
         this.p6_show = false;
-      
         this.p8_show = false;
-       
         this.p10_show = false;
-      
-     
         this.p13_show = false;
       } else if (this.pump == "5" && this.month == "3") {
-      
         this.p2_show = false;
-   
-      
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
         this.p8_show = false;
-     
         this.p10_show = false;
-      
         this.p12_show = false;
-    
       } else if (this.pump == "6" && this.month == "3") {
-     
         this.p2_show = false;
-     
-     
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
         this.p8_show = false;
-     
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      
       } else if (this.pump == "7" && this.month == "3") {
-   
         this.p2_show = false;
-      
-     
         this.p10_show = false;
-       
         this.p13_show = false;
       } else if (this.pump == "8" && this.month == "3") {
-      
         this.p2_show = false;
         this.p3_show = false;
-     
         this.p5_show = false;
         this.p6_show = false;
-     
-      
-    
         this.p13_show = false;
       } else if (this.pump == "9" && this.month == "3") {
-     
         this.p2_show = false;
         this.p3_show = false;
-   
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
-    
         this.p10_show = false;
-   
         this.p13_show = false;
-      } else if(this.pump == "1" && this.month == "1"){
-      
-       
-        
+      } else if (this.pump == "1" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1234,14 +1287,8 @@ export default {
         this.p8_show = false;
         this.p9_show = false;
         this.p10_show = false;
-       
         this.p13_show = false;
-        
-        
-      }else if (this.pump == "2" && this.month == "1") {
-         
-       
-       
+      } else if (this.pump == "2" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1250,11 +1297,8 @@ export default {
         this.p8_show = false;
         this.p9_show = false;
         this.p10_show = false;
-        
         this.p13_show = false;
       } else if (this.pump == "3" && this.month == "1") {
-          
-       
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1263,11 +1307,8 @@ export default {
         this.p8_show = false;
         this.p9_show = false;
         this.p10_show = false;
-       
         this.p13_show = false;
       } else if (this.pump == "4" && this.month == "1") {
-          
-        
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1276,41 +1317,25 @@ export default {
         this.p8_show = false;
         this.p9_show = false;
         this.p10_show = false;
-        
         this.p13_show = false;
       } else if (this.pump == "5" && this.month == "1") {
-          
-      
         this.p2_show = false;
-       
-       
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
         this.p8_show = false;
-      
         this.p10_show = false;
-       
         this.p12_show = false;
-        
       } else if (this.pump == "6" && this.month == "1") {
-          
-       
         this.p2_show = false;
-       
-       
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
         this.p8_show = false;
-        
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-        
       } else if (this.pump == "7" && this.month == "1") {
-         
-        
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1319,35 +1344,22 @@ export default {
         this.p8_show = false;
         this.p9_show = false;
         this.p10_show = false;
-       
         this.p13_show = false;
       } else if (this.pump == "8" && this.month == "1") {
-         
-        
         this.p2_show = false;
         this.p3_show = false;
-        
         this.p5_show = false;
         this.p6_show = false;
-        
-       
-       
         this.p13_show = false;
       } else if (this.pump == "9" && this.month == "1") {
-        
-       
         this.p2_show = false;
         this.p3_show = false;
-        
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
-       
-        
         this.p10_show = false;
-       
         this.p13_show = false;
-      }else {
+      } else {
         this.p1_show = true;
         this.p2_show = true;
         this.p3_show = true;
@@ -1367,18 +1379,18 @@ export default {
   mounted() {
     // รุ่น
     axios
-  
+
       .get(this.api_path + "pump.php")
       .then(response => (this.pumps = response.data));
     // ยี่ห้อ
     axios
-     
+
       .get(this.api_path + "pump_brand.php")
       .then(response => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
 
-      .get(this.api_path + "hinstall_point.php")
+      .get(this.api_path + "install_point.php")
       .then(response => (this.install_points = response.data));
   }
 };
