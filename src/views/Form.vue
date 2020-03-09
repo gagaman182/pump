@@ -131,15 +131,7 @@
             </fish-form>
           </fish-col>
         </fish-row>
-        <fish-tabs
-          type="card"
-          value="1"
-          v-model="tab"
-          @tab-change="tabChangeHandler"
-        >
-          <fish-tab-pane label="1 เดือน" index="1"></fish-tab-pane>
-          <fish-tab-pane label="3 เดือน" index="3">
-            <fish-row class="headsmall">
+         <fish-row class="headsmall">
               <fish-col span="5" class="demo-col demo-col2">
                 <h4>รายการ</h4>
               </fish-col>
@@ -177,6 +169,10 @@
                   <fish-divider />
                   <fish-checkbox index="1">สายรั่ว</fish-checkbox>
                 </fish-checkboxes>
+                 <fish-divider />
+                <fish-checkboxes v-model="wire_5">
+                  <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
+                </fish-checkboxes>
               </fish-col>
               <fish-col span="3">
                 <fish-checkboxes v-model="wire_2">
@@ -200,8 +196,63 @@
             </fish-row>
             <br />
             <fish-divider v-show="p1_show" />
-            <!-- แถว2 -->
+             <!-- แถว2 -->
             <fish-row v-show="p2_show">
+              <fish-col span="4">
+                <fish-form inline>
+                  <h5>
+                    <vue-fontawesome icon="arrow-right"></vue-fontawesome>
+                    ตรวจสอบการ ทำงานของเครื่อง
+                  </h5>
+                </fish-form>
+              </fish-col>
+              <fish-col span="7">
+                <h5>
+                  <vue-fontawesome icon="bug"></vue-fontawesome> ดูปริมาณน้ำที่ออกจากท่อ  เมื่อเครื่องทำงาน
+                
+                </h5>
+              </fish-col>
+              <fish-col span="4">
+                <fish-checkboxes v-model="service_1">
+                  <fish-checkbox index="1">ปกติ / พร้อมใช้</fish-checkbox>
+                </fish-checkboxes>
+                <fish-checkboxes v-model="service_3">
+                  <fish-divider />
+                  <fish-checkbox index="1">ปานกลาง</fish-checkbox>
+                </fish-checkboxes>
+                 <fish-divider />
+                <fish-checkboxes v-model="service_5">
+                  <fish-checkbox index="1">น้อย</fish-checkbox>
+                </fish-checkboxes>
+              </fish-col>
+              <fish-col span="3">
+                <fish-checkboxes v-model="service_2">
+                  <fish-checkbox index="1"> ไม่ออก/มีเสียงดัง</fish-checkbox>
+                </fish-checkboxes>
+                <fish-checkboxes v-model="service_4">
+                  <fish-divider />
+                  <fish-checkbox index="1">ทำการซ่อม</fish-checkbox>
+                </fish-checkboxes>
+                  <fish-divider />
+                <fish-checkboxes v-model="service_6">
+                  <fish-checkbox index="1">แจ้งหัวหน้า</fish-checkbox>
+                </fish-checkboxes>
+              </fish-col>
+              <fish-col span="6">
+                <center>
+                  <fish-input
+                    type="textarea"
+                    style="height: 80px; "
+                    v-model="service_other"
+                    hint="ระบุ"
+                  ></fish-input>
+                </center>
+              </fish-col>
+            </fish-row>
+            <br />
+            <fish-divider v-show="p2_show" />
+            <!-- แถว3 -->
+            <fish-row v-show="p3_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -244,9 +295,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p2_show" />
-            <!-- แถว3 -->
-            <fish-row v-show="p3_show">
+            <fish-divider v-show="p3_show" />
+            <!-- แถว4 -->
+            <fish-row v-show="p4_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -297,9 +348,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p3_show" />
-            <!-- แถว4 -->
-            <fish-row v-show="p4_show">
+            <fish-divider v-show="p4_show" />
+            <!-- แถว5 -->
+            <fish-row v-show="p5_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -350,9 +401,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p4_show" />
-            <!-- แถว5-->
-            <fish-row v-show="p5_show">
+            <fish-divider v-show="p5_show" />
+            <!-- แถว6-->
+            <fish-row v-show="p6_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -403,9 +454,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p5_show" />
-            <!-- แถว6-->
-            <fish-row v-show="p6_show">
+            <fish-divider v-show="p6_show" />
+            <!-- แถว7-->
+            <fish-row v-show="p7_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -452,9 +503,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p6_show" />
-            <!-- แถว7-->
-            <fish-row v-show="p7_show">
+            <fish-divider v-show="p7_show" />
+            <!-- แถว8-->
+            <fish-row v-show="p8_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -489,9 +540,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p7_show" />
-            <!-- แถว8-->
-            <fish-row v-show="p8_show">
+            <fish-divider v-show="p8_show" />
+            <!-- แถว9-->
+            <fish-row v-show="p9_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -533,9 +584,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p8_show" />
-            <!-- แถว9-->
-            <fish-row v-show="p9_show">
+            <fish-divider v-show="p9_show" />
+            <!-- แถว10-->
+            <fish-row v-show="p10_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -583,9 +634,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p9_show" />
-            <!-- แถว10-->
-            <fish-row v-show="p10_show">
+            <fish-divider v-show="p10_show" />
+            <!-- แถว11-->
+            <fish-row v-show="p11_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -636,9 +687,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p10_show" />
-            <!-- แถว11-->
-            <fish-row v-show="p11_show">
+            <fish-divider v-show="p11_show" />
+            <!-- แถว12-->
+            <fish-row v-show="p12_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
@@ -696,13 +747,13 @@
                 </center>
               </fish-col>
             </fish-row>
-            <fish-divider v-show="p11_show" />
-            <!-- แถว12-->
-            <fish-row v-show="p12_show">
+            <fish-divider v-show="p12_show" />
+            <!-- แถว13-->
+            <fish-row v-show="p13_show">
               <fish-col span="4">
                 <h5>
                   <vue-fontawesome icon="arrow-right"></vue-fontawesome
-                  >ตรวจเช็คถังคลอรีน
+                  >ตรวจเช็คถังคลอรีน จุดต่อสาย
                 </h5>
               </fish-col>
               <fish-col span="7">
@@ -745,9 +796,9 @@
               </fish-col>
             </fish-row>
             <br />
-            <fish-divider v-show="p12_show" />
-          </fish-tab-pane>
-        </fish-tabs>
+            <fish-divider v-show="p13_show" />
+        
+      
         <fish-row>
           <fish-col span="24">
             <fish-card color="blue" fluid>
@@ -936,6 +987,8 @@ export default {
   name: "form",
   data() {
     return {
+       api_path:'http://192.168.5.187/0161/pump/pump/api/',
+      //api_path:'http://localhost/pump/pump/api/',
       tab: "",
       p1_show: true,
       p2_show: true,
@@ -964,7 +1017,15 @@ export default {
       wire_2: "",
       wire_3: "",
       wire_4: "",
+      wire_5: "",
       wire_other: "",
+      service_1: "",
+      service_2: "",
+      service_3: "",
+      service_4: "",
+      service_5: "",
+      service_6: "",
+      service_other: "",
       seal_1: "",
       seal_2: "",
       seal_3: "",
@@ -1049,73 +1110,244 @@ export default {
         }
       });
     },
-    //เลิอกเดิอนแล้ว tab เปลี่ยนตาม
-    monthchange() {
-      if (this.month == null) {
-        this.tab = "1";
-      } else {
-        this.tab = this.month;
-      }
-    },
+
+    
+   
     //เลิอกหมายเลขเครื่อง / รุ่น
     pumpchange() {
       if (this.pump == "1" && this.month == "3") {
-        this.p7_show = false;
-        this.p9_show = false;
-        this.p12_show = false;
+        
+        this.p2_show = false;
+       
+        
+       
+        
+        this.p8_show = false;
+       
+        this.p10_show = false;
+       
+        this.p13_show = false;
       } else if (this.pump == "2" && this.month == "3") {
-        this.p4_show = false;
+      
+        this.p2_show = false;
+      
+        
         this.p5_show = false;
-        this.p7_show = false;
-        this.p9_show = false;
-        this.p12_show = false;
+        this.p6_show = false;
+       
+        this.p8_show = false;
+        
+        this.p10_show = false;
+      
+        this.p13_show = false;
       } else if (this.pump == "3" && this.month == "3") {
-        this.p7_show = false;
-        this.p9_show = false;
-        this.p12_show = false;
+      
+        this.p2_show = false;
+       
+        this.p8_show = false;
+      
+        this.p10_show = false;
+       
+        this.p13_show = false;
       } else if (this.pump == "4" && this.month == "3") {
-        this.p4_show = false;
+     
+        this.p2_show = false;
+       
+      
         this.p5_show = false;
-        this.p7_show = false;
-        this.p9_show = false;
-        this.p12_show = false;
+        this.p6_show = false;
+      
+        this.p8_show = false;
+       
+        this.p10_show = false;
+      
+     
+        this.p13_show = false;
       } else if (this.pump == "5" && this.month == "3") {
-        this.p4_show = false;
-        this.p5_show = false;
-        this.p7_show = false;
-        this.p9_show = false;
-        this.p12_show = false;
-      } else if (this.pump == "5" && this.month == "3") {
-        this.p4_show = false;
+      
+        this.p2_show = false;
+   
+      
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
-        this.p9_show = false;
-        this.p11_show = false;
+        this.p8_show = false;
+     
+        this.p10_show = false;
+      
+        this.p12_show = false;
+    
       } else if (this.pump == "6" && this.month == "3") {
-        this.p4_show = false;
+     
+        this.p2_show = false;
+     
+     
         this.p5_show = false;
         this.p6_show = false;
         this.p7_show = false;
-        this.p9_show = false;
+        this.p8_show = false;
+     
         this.p10_show = false;
         this.p11_show = false;
+        this.p12_show = false;
+      
       } else if (this.pump == "7" && this.month == "3") {
-        this.p9_show = false;
-        this.p12_show = false;
+   
+        this.p2_show = false;
+      
+     
+        this.p10_show = false;
+       
+        this.p13_show = false;
       } else if (this.pump == "8" && this.month == "3") {
+      
         this.p2_show = false;
-        this.p4_show = false;
+        this.p3_show = false;
+     
         this.p5_show = false;
-        this.p12_show = false;
+        this.p6_show = false;
+     
+      
+    
+        this.p13_show = false;
       } else if (this.pump == "9" && this.month == "3") {
+     
         this.p2_show = false;
+        this.p3_show = false;
+   
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+    
+        this.p10_show = false;
+   
+        this.p13_show = false;
+      } else if(this.pump == "1" && this.month == "1"){
+      
+       
+        
+        this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
         this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
         this.p9_show = false;
+        this.p10_show = false;
+       
+        this.p13_show = false;
+        
+        
+      }else if (this.pump == "2" && this.month == "1") {
+         
+       
+       
+        this.p3_show = false;
+        this.p4_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+        this.p9_show = false;
+        this.p10_show = false;
+        
+        this.p13_show = false;
+      } else if (this.pump == "3" && this.month == "1") {
+          
+       
+        this.p3_show = false;
+        this.p4_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+        this.p9_show = false;
+        this.p10_show = false;
+       
+        this.p13_show = false;
+      } else if (this.pump == "4" && this.month == "1") {
+          
+        
+        this.p3_show = false;
+        this.p4_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+        this.p9_show = false;
+        this.p10_show = false;
+        
+        this.p13_show = false;
+      } else if (this.pump == "5" && this.month == "1") {
+          
+      
+        this.p2_show = false;
+       
+       
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+      
+        this.p10_show = false;
+       
         this.p12_show = false;
-      } else {
+        
+      } else if (this.pump == "6" && this.month == "1") {
+          
+       
+        this.p2_show = false;
+       
+       
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+        
+        this.p10_show = false;
+        this.p11_show = false;
+        this.p12_show = false;
+        
+      } else if (this.pump == "7" && this.month == "1") {
+         
+        
+        this.p3_show = false;
+        this.p4_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+        this.p8_show = false;
+        this.p9_show = false;
+        this.p10_show = false;
+       
+        this.p13_show = false;
+      } else if (this.pump == "8" && this.month == "1") {
+         
+        
+        this.p2_show = false;
+        this.p3_show = false;
+        
+        this.p5_show = false;
+        this.p6_show = false;
+        
+       
+       
+        this.p13_show = false;
+      } else if (this.pump == "9" && this.month == "1") {
+        
+       
+        this.p2_show = false;
+        this.p3_show = false;
+        
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p7_show = false;
+       
+        
+        this.p10_show = false;
+       
+        this.p13_show = false;
+      }else {
         this.p1_show = true;
         this.p2_show = true;
         this.p3_show = true;
@@ -1128,24 +1360,25 @@ export default {
         this.p10_show = true;
         this.p11_show = true;
         this.p12_show = true;
+        this.p13_show = true;
       }
     }
   },
   mounted() {
     // รุ่น
     axios
-      // .get('http://192.168.5.187/0161/pump/pump/api/pump.php')
-      .get("http://localhost/pump/pump/api/pump.php")
+  
+      .get(this.api_path + "pump.php")
       .then(response => (this.pumps = response.data));
     // ยี่ห้อ
     axios
-      // .get('http://192.168.5.187/0161/pump/pump/api/pump_brand.php')
-      .get("http://localhost/pump/pump/api/pump_brand.php")
+     
+      .get(this.api_path + "pump_brand.php")
       .then(response => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
-      // .get('http://192.168.5.187/0161/pump/pump/api/install_point.php')
-      .get("http://localhost/pump/pump/api/install_point.php")
+
+      .get(this.api_path + "hinstall_point.php")
       .then(response => (this.install_points = response.data));
   }
 };
