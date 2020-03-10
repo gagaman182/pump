@@ -994,11 +994,11 @@ export default {
       p12_show: true,
       no: false,
       month: "",
+      pumps_brands: "",
+      pump_brand: "",
       on: "",
       pumps: "",
       pump: "",
-      pumps_brands: "",
-      pump_brand: "",
       id: "",
       install_points: "",
       install_point: "",
@@ -1093,18 +1093,41 @@ export default {
       inspector_approve: "",
       inspector_other: "",
       manage: "",
-      manage_approve: 0,
-      manage_other: ""
+      manage_approve: "",
+      manage_other: "",
+      ok:""
     };
   },
   methods: {
+    //บันทึกฟอร์มเช็ค
     submitHandler() {
       this.$refs.form.validate(valid => {
         // console.log(valid);
         if (valid === false) {
           this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
-          this.$message.success("สำเร็จ:ข้อมูลถูกบันทึกเรียบร้อย", 5000);
+         
+            axios
+            .get(this.api_path + 'form_pump_save.php', {
+                params: {
+              month:this.month,
+              pump_brand:this.pump_brand,
+              on_number:this.on,
+              pump:this.pump,
+              id:this.id,
+              install_point:this.install_point,
+              dateservice:this.dateservice
+                }
+              })
+              .then(response => {
+
+                this.ok = response.data
+                alert(this.ok)
+                this.$message.success("สำเร็จ:ข้อมูลถูกบันทึกเรียบร้อย", 5000);
+                this.clear()
+              })
+
+         
         }
       });
     },
@@ -1214,7 +1237,7 @@ export default {
 
 
 
-        this.$message.warning('ข้อมูลถูกยกเลิกแล้ว', 5000);
+        this.$message.warning('ระบบเคลียร์หน้าจอแล้ว', 5000);
     },
 
     //เลิอกหมายเลขเครื่อง / รุ่น
