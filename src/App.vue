@@ -8,10 +8,10 @@
     <div slot="sider">
       <fish-menu mode="inline" style="width: 200px;">
         <fish-option index="0" content="Home">
-          <router-link to="/">หน้าหลัก</router-link>
+          <h3><router-link to="/">หน้าหลัก</router-link></h3>
         </fish-option>
-        <fish-option index="0" content="Form"
-          ><router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link>
+        <fish-option index="0" content="Form">
+          <h3><router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link></h3>
         </fish-option>
       </fish-menu>
     </div>
