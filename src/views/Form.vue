@@ -1426,6 +1426,8 @@ export default {
       });
     },
     clear() {
+      //เลื่อนไปหน้าจอ
+      window.scrollTo(0,0);
       this.month = "";
       this.pump = "";
       this.on = "";
