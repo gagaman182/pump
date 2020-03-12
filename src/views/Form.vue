@@ -10,46 +10,46 @@
       </div>
       <fish-form ref="form">
         <fish-row>
-          <fish-col span="6" class="demo-col">
+          <fish-col span="7" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field
-                  label="ทุก..เดือน  ต่อ 1 บ่อ / 1ปี"
+                  label="ระบุช่วงเดือนบำรุงรักษา"
                   name="month"
                   :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
                   inline
                 >
                   <fish-select
                     v-model="month"
-                    hint="เดือน"
+                    hint="เลือกเดือน"
                     @change="pumpchange"
                   >
                     <fish-option index="1" content="1 เดือน"></fish-option>
                     <fish-option index="3" content="3 เดือน"></fish-option>
                   </fish-select>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
-          <fish-col span="6" class="demo-col">
+          <fish-col span="5" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field label="สถานที่: " inline>
                   <fish-input disabled hint="บ่อบำบัดน้ำเสีย"></fish-input>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field
                   label="ยี่ห้อ"
                   name="pump_brand"
-                  :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
+                 :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
                   inline
                 >
-                  <fish-select v-model="pump_brand">
+                  <fish-select v-model="pump_brand"  hint="เลือกยี่ห้อ">
                     <fish-option
                       :index="item.id"
                       :content="item.name"
@@ -58,38 +58,38 @@
                     ></fish-option>
                   </fish-select>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field label="ON" name="on" inline>
                   <fish-select v-model="on" hint="ON">
                     <fish-option index="1" content="1"></fish-option>
                     <fish-option index="2" content="2"></fish-option>
                   </fish-select>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
         </fish-row>
         <fish-row>
-          <fish-col span="6" class="demo-col">
+          <fish-col span="7" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field
                   label="หมายเลขเครื่อง / รุ่น"
                   name="pump"
-                  :rules="[
+                 :rules="[
                     {
                       required: true,
-                      message: 'หมายเลขเครื่อง / รุ่น เป็นค่าว่าง'
+                      message: 'รุ่นเป็นค่าว่าง'
                     }
                   ]"
                   inline
                 >
-                  <fish-select v-model="pump" @change="pumpchange">
+                  <fish-select v-model="pump" @change="pumpchange"  hint="เลือกรุ่น">
                     <fish-option
                       :index="item.id"
                       :content="item.name"
@@ -98,21 +98,21 @@
                     ></fish-option>
                   </fish-select>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
-          <fish-col span="6" class="demo-col">
+          <fish-col span="5" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field label="ID:" name="id" inline>
                   <fish-input v-model="id" hint="id"></fish-input>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              <h4>
+              
                 <fish-field
                   label="จุดติดตั้ง"
                   name="install_point"
@@ -121,7 +121,7 @@
                   ]"
                   inline
                 >
-                  <fish-select v-model="install_point">
+                  <fish-select v-model="install_point"    hint="เลือกจุดติดตั้ง">
                     <fish-option
                       :index="item.id"
                       :content="item.name"
@@ -130,12 +130,12 @@
                     ></fish-option>
                   </fish-select>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form ref="form" inline>
-              <h4>
+              
                 <fish-field
                   label="วันที่"
                   name="dateservice"
@@ -151,7 +151,7 @@
                     format="L"
                   ></fish-date-picker>
                 </fish-field>
-              </h4>
+              
             </fish-form>
           </fish-col>
         </fish-row>
@@ -200,7 +200,7 @@
               >สถานะ</fish-tag
             >
             <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkboxes v-model="wire_1">{{wire_1}}
+              <fish-checkboxes v-model="wire_1">
                 <fish-checkbox index="1">พร้อมใช้</fish-checkbox>
               </fish-checkboxes>
               <fish-checkboxes v-model="wire_3">
@@ -1268,8 +1268,8 @@ export default {
   name: "form",
   data() {
     return {
-      //api_path: "http://192.168.5.187/0161/pump/pump/api/",
-      api_path: "http://localhost/pump/pump/api/",
+      api_path: "http://192.168.5.187/0161/pump/pump/api/",
+      //api_path: "http://localhost/pump/pump/api/",
       tab: "",
       p1_show: true,
       p2_show: true,
