@@ -1,6 +1,16 @@
 <template>
   <div>
     <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
+     <fish-row >
+          <fish-col span="24">
+           <fish-steps size="big">
+            <fish-step title="ใบตรวจเช็ค" active description="วิธีการเลือกแบบฟอร์ม"></fish-step>
+            <fish-step title="เลือกเดือน" active description="ระบุช่วงเดือนที่จะตรวจเช็ค" ></fish-step>
+            <fish-step title="เลือกเครื่อง/รุ่น" active description="ระบุหมายเลขเครื่อง / รุ่น"></fish-step>
+            <fish-step title="เสร็จสิ้น" active description="ฟอร์มจะแสดงตามช่วงเดือนและเครื่องที่เลือก"></fish-step>
+          </fish-steps>
+          </fish-col>
+        </fish-row>
     <fish-card fluid color="blue">
       <div slot="header">
         <h3 class="head">
@@ -8,6 +18,7 @@
           >ใบตรวจเช็คบำรุงรักษา
         </h3>
       </div>
+       
       <fish-form ref="form">
         <fish-row>
           <fish-col span="7" class="demo-col">
