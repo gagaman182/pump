@@ -17,13 +17,32 @@ $wire_3= implode($_GET["wire_3"]);
 $wire_4= implode($_GET["wire_4"]);
 $wire_5= implode($_GET["wire_5"]);
 $wire_other= $_GET["wire_other"];
-	
+$service_1= implode($_GET["service_1"]);
+$service_2= implode($_GET["service_2"]);	
+$service_3= implode($_GET["service_3"]);	
+$service_4= implode($_GET["service_4"]);	
+$service_5= implode($_GET["service_5"]);	
+$service_6= implode($_GET["service_6"]);	
+$service_other= $_GET["service_other"];
+$seal_1= implode($_GET["seal_1"]);	
+$seal_2= implode($_GET["seal_2"]);	
+$seal_3= implode($_GET["seal_3"]);	
+$seal_4= implode($_GET["seal_4"]);	
+$seal_other= $_GET["seal_other"];
+$condition_1= implode($_GET["condition_1"]);	
+$condition_2= implode($_GET["condition_2"]);
+$condition_3= implode($_GET["condition_3"]);
+$condition_4= implode($_GET["condition_4"]);
+$condition_5= implode($_GET["condition_5"]);
+$condition_6= implode($_GET["condition_6"]);
+$condition_other= $_GET["condition_other"];
 
 	
 
 
 
-        $strvisit  = "  INSERT INTO p_visit(month,pump_brand,on_number,pump,id,install_point,dateservice,wire_1,wire_2,wire_3,wire_4,wire_5,wire_other) 
+        $strvisit  = "  INSERT INTO p_visit(month,pump_brand,on_number,pump,id,install_point,dateservice,wire_1,wire_2,wire_3,wire_4,wire_5,wire_other,
+        service_1,service_2,service_3,service_4,service_5,service_6,service_other,seal_1,seal_2,seal_3,seal_4,seal_other,condition_1,condition_2,condition_3) 
        VALUES('".$month."','".$pump_brand."','".$on_number."','".$pump."','".$id."','".$install_point."','".$dateservice."',
        '".$wire_1."','".$wire_2."','".$wire_3."','".$wire_4."','".$wire_5."','".$wire_other."')";
         if ($conn->query($strvisit) === TRUE) {

@@ -1,16 +1,32 @@
 <template>
   <div>
     <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
-     <fish-row >
-          <fish-col span="24">
-           <fish-steps size="big">
-            <fish-step title="ใบตรวจเช็ค" active description="วิธีการเลือกแบบฟอร์ม"></fish-step>
-            <fish-step title="เลือกเดือน" active description="ระบุช่วงเดือนที่จะตรวจเช็ค" ></fish-step>
-            <fish-step title="เลือกเครื่อง/รุ่น" active description="ระบุหมายเลขเครื่อง / รุ่น"></fish-step>
-            <fish-step title="เสร็จสิ้น" active description="ฟอร์มจะแสดงตามช่วงเดือนและเครื่องที่เลือก"></fish-step>
-          </fish-steps>
-          </fish-col>
-        </fish-row>
+    <fish-row>
+      <fish-col span="24">
+        <fish-steps size="big">
+          <fish-step
+            title="ใบตรวจเช็ค"
+            active
+            description="วิธีการเลือกแบบฟอร์ม"
+          ></fish-step>
+          <fish-step
+            title="เลือกเดือน"
+            active
+            description="ระบุช่วงเดือนที่จะตรวจเช็ค"
+          ></fish-step>
+          <fish-step
+            title="เลือกเครื่อง/รุ่น"
+            active
+            description="ระบุหมายเลขเครื่อง / รุ่น"
+          ></fish-step>
+          <fish-step
+            title="เสร็จสิ้น"
+            active
+            description="ฟอร์มจะแสดงตามช่วงเดือนและเครื่องที่เลือก"
+          ></fish-step>
+        </fish-steps>
+      </fish-col>
+    </fish-row>
     <fish-card fluid color="blue">
       <div slot="header">
         <h3 class="head">
@@ -18,151 +34,135 @@
           >ใบตรวจเช็คบำรุงรักษา
         </h3>
       </div>
-       
+
       <fish-form ref="form">
         <fish-row>
           <fish-col span="7" class="demo-col">
             <fish-form inline>
-              
-                <fish-field
-                  label="ระบุช่วงเดือนบำรุงรักษา"
-                  name="month"
-                  :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
-                  inline
+              <fish-field
+                label="ระบุช่วงเดือนบำรุงรักษา"
+                name="month"
+                :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
+                inline
+              >
+                <fish-select
+                  v-model="month"
+                  hint="เลือกเดือน"
+                  @change="pumpchange"
                 >
-                  <fish-select
-                    v-model="month"
-                    hint="เลือกเดือน"
-                    @change="pumpchange"
-                  >
-                    <fish-option index="1" content="1 เดือน"></fish-option>
-                    <fish-option index="3" content="3 เดือน"></fish-option>
-                  </fish-select>
-                </fish-field>
-              
+                  <fish-option index="1" content="1 เดือน"></fish-option>
+                  <fish-option index="3" content="3 เดือน"></fish-option>
+                </fish-select>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="5" class="demo-col">
             <fish-form inline>
-              
-                <fish-field label="สถานที่: " inline>
-                  <fish-input disabled hint="บ่อบำบัดน้ำเสีย"></fish-input>
-                </fish-field>
-              
+              <fish-field label="สถานที่: " inline>
+                <fish-input disabled hint="บ่อบำบัดน้ำเสีย"></fish-input>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              
-                <fish-field
-                  label="ยี่ห้อ"
-                  name="pump_brand"
-                 :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
-                  inline
-                >
-                  <fish-select v-model="pump_brand"  hint="เลือกยี่ห้อ">
-                    <fish-option
-                      :index="item.id"
-                      :content="item.name"
-                      v-for="item in pumps_brands"
-                      :key="item.id"
-                    ></fish-option>
-                  </fish-select>
-                </fish-field>
-              
+              <fish-field
+                label="ยี่ห้อ"
+                name="pump_brand"
+                :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
+                inline
+              >
+                <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
+                  <fish-option
+                    :index="item.id"
+                    :content="item.name"
+                    v-for="item in pumps_brands"
+                    :key="item.id"
+                  ></fish-option>
+                </fish-select>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              
-                <fish-field label="ON" name="on" inline>
-                  <fish-select v-model="on" hint="ON">
-                    <fish-option index="1" content="1"></fish-option>
-                    <fish-option index="2" content="2"></fish-option>
-                  </fish-select>
-                </fish-field>
-              
+              <fish-field label="ON" name="on" inline>
+                <fish-select v-model="on" hint="ON">
+                  <fish-option index="1" content="1"></fish-option>
+                  <fish-option index="2" content="2"></fish-option>
+                </fish-select>
+              </fish-field>
             </fish-form>
           </fish-col>
         </fish-row>
         <fish-row>
           <fish-col span="7" class="demo-col">
             <fish-form inline>
-              
-                <fish-field
-                  label="หมายเลขเครื่อง / รุ่น"
-                  name="pump"
-                 :rules="[
-                    {
-                      required: true,
-                      message: 'รุ่นเป็นค่าว่าง'
-                    }
-                  ]"
-                  inline
+              <fish-field
+                label="หมายเลขเครื่อง / รุ่น"
+                name="pump"
+                :rules="[
+                  {
+                    required: true,
+                    message: 'รุ่นเป็นค่าว่าง'
+                  }
+                ]"
+                inline
+              >
+                <fish-select
+                  v-model="pump"
+                  @change="pumpchange"
+                  hint="เลือกรุ่น"
                 >
-                  <fish-select v-model="pump" @change="pumpchange"  hint="เลือกรุ่น">
-                    <fish-option
-                      :index="item.id"
-                      :content="item.name"
-                      v-for="item in pumps"
-                      :key="item.id"
-                    ></fish-option>
-                  </fish-select>
-                </fish-field>
-              
+                  <fish-option
+                    :index="item.id"
+                    :content="item.name"
+                    v-for="item in pumps"
+                    :key="item.id"
+                  ></fish-option>
+                </fish-select>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="5" class="demo-col">
             <fish-form inline>
-              
-                <fish-field label="ID:" name="id" inline>
-                  <fish-input v-model="id" hint="id"></fish-input>
-                </fish-field>
-              
+              <fish-field label="ID:" name="id" inline>
+                <fish-input v-model="id" hint="id"></fish-input>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form inline>
-              
-                <fish-field
-                  label="จุดติดตั้ง"
-                  name="install_point"
-                  :rules="[
-                    { required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }
-                  ]"
-                  inline
-                >
-                  <fish-select v-model="install_point"    hint="เลือกจุดติดตั้ง">
-                    <fish-option
-                      :index="item.id"
-                      :content="item.name"
-                      v-for="item in install_points"
-                      :key="item.id"
-                    ></fish-option>
-                  </fish-select>
-                </fish-field>
-              
+              <fish-field
+                label="จุดติดตั้ง"
+                name="install_point"
+                :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
+                inline
+              >
+                <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
+                  <fish-option
+                    :index="item.id"
+                    :content="item.name"
+                    v-for="item in install_points"
+                    :key="item.id"
+                  ></fish-option>
+                </fish-select>
+              </fish-field>
             </fish-form>
           </fish-col>
           <fish-col span="6" class="demo-col">
             <fish-form ref="form" inline>
-              
-                <fish-field
-                  label="วันที่"
-                  name="dateservice"
-                  :rules="[
-                    { required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }
-                  ]"
-                  inline
-                >
-                  <!-- format from moment js L = DD/MM/YYYY -->
-                  <fish-date-picker
-                    v-model="dateservice"
-                    hint="ระบุวันที่"
-                    format="L"
-                  ></fish-date-picker>
-                </fish-field>
-              
+              <fish-field
+                label="วันที่"
+                name="dateservice"
+                :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
+                inline
+              >
+                <!-- format from moment js L = DD/MM/YYYY -->
+                <fish-date-picker
+                  v-model="dateservice"
+                  hint="ระบุวันที่"
+                  format="L"
+                ></fish-date-picker>
+              </fish-field>
             </fish-form>
           </fish-col>
         </fish-row>
@@ -1306,7 +1306,7 @@ export default {
       install_points: "",
       install_point: "",
       dateservice: "",
-      wire_1:  [],
+      wire_1: [],
       wire_2: "",
       wire_3: "",
       wire_4: "",
@@ -1424,7 +1424,28 @@ export default {
                 wire_3: this.wire_3,
                 wire_4: this.wire_4,
                 wire_5: this.wire_5,
-                wire_other:this.wire_other
+                wire_other: this.wire_other,
+                service_1:this.service_1,
+                service_2:this.service_2,
+                service_3:this.service_3,
+                service_4:this.service_4,
+                service_5:this.service_5,
+                service_6:this.service_6,
+                service_other:this.service_other,
+                seal_1:this.seal_1,
+                seal_2:this.seal_2,
+                seal_3:this.seal_3,
+                seal_4:this.seal_4,
+                seal_other:this.seal_other,
+                condition_1:this.condition_1,
+                condition_2:this.condition_2,
+                condition_3:this.condition_3,
+                condition_4:this.condition_4,
+                condition_5:this.condition_5,
+                condition_6:this.condition_6,
+                condition_other:this.condition_other
+
+
               }
             })
             .then(response => {
@@ -1438,7 +1459,7 @@ export default {
     },
     clear() {
       //เลื่อนไปหน้าจอ
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.month = "";
       this.pump = "";
       this.on = "";

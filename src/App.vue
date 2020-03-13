@@ -1,9 +1,23 @@
 <template>
   <fish-layout class="demo3" sider="l">
     <nav slot="header">
-      <div class="logo head">
-        <h2>ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h2>
-      </div>
+       <div class="logo head">
+       <fish-row>
+          <fish-col span="2" offset="0.5">
+        
+         <fish-image :url="require('./assets/logo_hos.png')"  style="height: 100px;"></fish-image>
+        </fish-col >
+        <fish-col span="20"> 
+          <h1>ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h1>
+           <h1>โรงพยาบาลหาดใหญ่</h1>
+          </fish-col>
+         </fish-row>
+       </div>
+
+         
+
+       
+    
     </nav>
     <div slot="sider">
       <fish-menu mode="inline" style="width: 200px;">
@@ -17,6 +31,7 @@
     </div>
     <div slot="content"><router-view /></div>
     <div slot="footer">
+     
       copyright@2020 กลุ่มงานเวชกรรมสังคม โรงพยาบาลหาดใหญ่
     </div>
   </fish-layout>
