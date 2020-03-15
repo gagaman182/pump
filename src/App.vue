@@ -1,15 +1,15 @@
 <template>
   <fish-layout class="demo3" sider="l">
     <nav slot="header">
-       <div class="logo head">
+       <div class="logo ">
        <fish-row>
           <fish-col span="2" offset="0.5">
         
          <fish-image :url="require('./assets/logo_hos.png')"  style="height: 100px;"></fish-image>
         </fish-col >
         <fish-col span="20"> 
-          <h1>ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h1>
-           <h1>โรงพยาบาลหาดใหญ่</h1>
+          <h1 class="head">ระบบตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย</h1>
+           <h1 class="rainbow-text">โรงพยาบาลหาดใหญ่</h1>
           </fish-col>
          </fish-row>
        </div>
@@ -32,7 +32,7 @@
     <div slot="content"><router-view /></div>
     <div slot="footer">
      
-      copyright@2020 กลุ่มงานเวชกรรมสังคม โรงพยาบาลหาดใหญ่
+      copyright@2020 กลุ่มงานเวชกรรมสังคม โรงพยาบาลหาดใหญ่     
     </div>
   </fish-layout>
 </template>
@@ -62,4 +62,11 @@ export default {
   font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
 }
+.rainbow-text {
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+}
+
 </style>
