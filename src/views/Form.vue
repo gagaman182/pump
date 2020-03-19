@@ -169,6 +169,7 @@
         <fish-row class="headsmall">
           <fish-col span="5" class="demo-col demo-col2">
             <h4>รายการ</h4>
+            <!-- <pre>{{ok}}</pre> -->
           </fish-col>
           <fish-col span="6" class="demo-col demo-col2">
             <h4>แนวทางการตรวจเช็ค</h4>
@@ -1451,7 +1452,9 @@ export default {
             .then(response => {
               this.ok = response.data;
 
-              this.$message.success("สำเร็จ:" + this.ok[0].message, 5000);
+              // this.$message.success("สำเร็จ:" + this.ok[0].message, 5000);
+               this.$message.success("สำเร็จ:" + 'เพิ่มข้อมูลสำเร็จ', 5000);
+              
               this.clear();
             });
         }
