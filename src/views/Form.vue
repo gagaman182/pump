@@ -59,7 +59,11 @@
           <fish-col span="5" class="demo-col">
             <fish-form inline>
               <fish-field label="สถานที่: " inline>
-                <fish-input disabled hint="บ่อบำบัดน้ำเสีย"></fish-input>
+                <fish-input
+                  disabled
+                  hint="บ่อบำบัดน้ำเสีย"
+                  v-model="place"
+                ></fish-input>
               </fish-field>
             </fish-form>
           </fish-col>
@@ -1299,6 +1303,7 @@ export default {
       p13_show: true,
       no: false,
       month: '',
+      place: 'บ่อบำบัดน้ำเสีย',
       pumps_brands: '',
       pump_brand: '',
       on: '',
@@ -1415,6 +1420,7 @@ export default {
             .get(`${apiPath.getBaseUrl()}form_pump_save.php`, {
               params: {
                 month: this.month,
+                place: this.place,
                 pump_brand: this.pump_brand,
                 on_number: this.on,
                 pump: this.pump,
