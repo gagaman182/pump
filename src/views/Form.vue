@@ -1,6 +1,10 @@
 <template>
   <div>
-    <vue-scroll-progress-bar @complete="handleComplete" height="1rem" />
+    <vue-scroll-progress-bar
+      @complete="handleComplete"
+      height="1rem"
+      backgroundColor="navy"
+    />
     <fish-row>
       <fish-col span="24">
         <fish-steps size="big">
@@ -27,7 +31,7 @@
         </fish-steps>
       </fish-col>
     </fish-row>
-    <fish-card fluid color="blue">
+    <fish-card fluid color="teal">
       <div slot="header">
         <h3 class="head">
           <vue-fontawesome icon="copy" size="2"></vue-fontawesome
@@ -42,7 +46,7 @@
               <fish-field
                 label="ระบุช่วงเดือนบำรุงรักษา"
                 name="month"
-                :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
+                :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
                 inline
               >
                 <fish-select
@@ -72,7 +76,7 @@
               <fish-field
                 label="ยี่ห้อ"
                 name="pump_brand"
-                :rules="[{required: true, message: 'ยี่ห้อเป็นค่าว่าง'}]"
+                :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
                 inline
               >
                 <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
@@ -138,7 +142,7 @@
               <fish-field
                 label="จุดติดตั้ง"
                 name="install_point"
-                :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+                :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
                 inline
               >
                 <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
@@ -157,7 +161,7 @@
               <fish-field
                 label="วันที่"
                 name="dateservice"
-                :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+                :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
                 inline
               >
                 <!-- format from moment js L = DD/MM/YYYY -->
@@ -1096,7 +1100,7 @@
 
         <fish-row>
           <fish-col span="24">
-            <fish-card color="blue" fluid>
+            <fish-card color="teal" fluid>
               <div slot="header">
                 <strong class="headsmall">ผู้ปฏิบัติงาน</strong>
               </div>
@@ -1135,13 +1139,13 @@
         <fish-divider v-show="p12_show" />
         <fish-row>
           <fish-col span="2">
-            <fish-button type="primary" @click="submitHandler">
+            <fish-button type="basic" @click="submitHandler">
               <vue-fontawesome icon="save" size="2"></vue-fontawesome
               >บันทึก</fish-button
             >
           </fish-col>
           <fish-col span="2">
-            <fish-button type="negative" @click="clear">
+            <fish-button type="basic" @click="clear">
               <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
               >ยกเลิก</fish-button
             >
@@ -1152,9 +1156,9 @@
     <br />
     <fish-row>
       <fish-col span="24">
-        <fish-card color="blue" fluid>
+        <fish-card color="teal" fluid>
           <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-          <fish-card color="red" fluid>
+          <fish-card color="orange" fluid>
             <div slot="header">
               <strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong>
             </div>
@@ -1192,7 +1196,7 @@
           <br />
 
           <fish-cards cols="two">
-            <fish-card color="green">
+            <fish-card color="orange">
               <div slot="header">
                 <strong class="headsmall">ผู้ตรวจสอบ</strong>
               </div>
@@ -1227,7 +1231,7 @@
                 </fish-col>
               </fish-row>
             </fish-card>
-            <fish-card color="green">
+            <fish-card color="orange">
               <div slot="header">
                 <strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong>
               </div>
@@ -1265,7 +1269,7 @@
           <br />
           <fish-row>
             <fish-col span="2">
-              <fish-button type="positive" @click="submitHandler">
+              <fish-button type="basic" @click="submitHandler">
                 <vue-fontawesome icon="save" size="2"></vue-fontawesome>
                 บันทึก</fish-button
               >
@@ -1278,16 +1282,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-import {APIPath} from '../../service/APIPath';
+import axios from "axios";
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 export default {
-  name: 'form',
+  name: "form",
   data() {
     return {
       // api_path: 'http://192.168.5.187/0161/pump/pump/api/',
       //api_path: "http://localhost/pump/pump/api/",
-      tab: '',
+      tab: "",
       p1_show: true,
       p2_show: true,
       p3_show: true,
@@ -1302,119 +1306,119 @@ export default {
       p12_show: true,
       p13_show: true,
       no: false,
-      month: '',
-      place: 'บ่อบำบัดน้ำเสีย',
-      pumps_brands: '',
-      pump_brand: '',
-      on: '',
-      pumps: '',
-      pump: '',
-      id: '',
-      install_points: '',
-      install_point: '',
-      dateservice: '',
+      month: "",
+      place: "บ่อบำบัดน้ำเสีย",
+      pumps_brands: "",
+      pump_brand: "",
+      on: "",
+      pumps: "",
+      pump: "",
+      id: "",
+      install_points: "",
+      install_point: "",
+      dateservice: "",
       wire_1: [],
-      wire_2: '',
-      wire_3: '',
-      wire_4: '',
-      wire_5: '',
-      wire_other: '',
-      service_1: '',
-      service_2: '',
-      service_3: '',
-      service_4: '',
-      service_5: '',
-      service_6: '',
-      service_other: '',
-      seal_1: '',
-      seal_2: '',
-      seal_3: '',
-      seal_4: '',
-      seal_other: '',
-      condition_1: '',
-      condition_2: '',
-      condition_3: '',
-      condition_4: '',
-      condition_5: '',
-      condition_6: '',
-      condition_other: '',
-      propeller_1: '',
-      propeller_2: '',
-      propeller_3: '',
-      propeller_4: '',
-      propeller_5: '',
-      propeller_6: '',
-      propeller_other: '',
-      snail_1: '',
-      snail_2: '',
-      snail_3: '',
-      snail_4: '',
-      snail_5: '',
-      snail_6: '',
-      snail_other: '',
-      oil_1: '',
-      oil_2: '',
-      oil_3: '',
-      oil_4: '',
-      oil_5: '',
-      oil_other: '',
-      jarabi_1: '',
-      jarabi_2: '',
-      jarabi_other: '',
-      clean_1: '',
-      clean_2: '',
-      clean_3: '',
-      clean_4: '',
-      clean_other: '',
-      arm_1: '',
-      arm_2: '',
-      arm_3: '',
-      arm_4: '',
-      arm_5: '',
-      arm_other: '',
-      system_1: '',
-      system_2: '',
-      system_3: '',
-      system_4: '',
-      system_5: '',
-      system_other: '',
-      sump_1: '',
-      sump_2: '',
-      sump_3: '',
-      sump_4: '',
-      sump_5: '',
-      sump_6: '',
-      sump_7: '',
-      sump_8: '',
-      sump_other: '',
-      chlorine_1: '',
-      chlorine_2: '',
-      chlorine_3: '',
-      chlorine_4: '',
-      chlorine_5: '',
-      chlorine_other: '',
-      woker: '',
-      woker_approve: '',
-      woker_other: '',
-      boss_pump: '',
-      boss_pump_approve: '',
-      boss_pump_other: '',
-      inspector: '',
-      inspector_approve: '',
-      inspector_other: '',
-      manage: '',
-      manage_approve: '',
-      manage_other: '',
-      ok: '',
+      wire_2: "",
+      wire_3: "",
+      wire_4: "",
+      wire_5: "",
+      wire_other: "",
+      service_1: "",
+      service_2: "",
+      service_3: "",
+      service_4: "",
+      service_5: "",
+      service_6: "",
+      service_other: "",
+      seal_1: "",
+      seal_2: "",
+      seal_3: "",
+      seal_4: "",
+      seal_other: "",
+      condition_1: "",
+      condition_2: "",
+      condition_3: "",
+      condition_4: "",
+      condition_5: "",
+      condition_6: "",
+      condition_other: "",
+      propeller_1: "",
+      propeller_2: "",
+      propeller_3: "",
+      propeller_4: "",
+      propeller_5: "",
+      propeller_6: "",
+      propeller_other: "",
+      snail_1: "",
+      snail_2: "",
+      snail_3: "",
+      snail_4: "",
+      snail_5: "",
+      snail_6: "",
+      snail_other: "",
+      oil_1: "",
+      oil_2: "",
+      oil_3: "",
+      oil_4: "",
+      oil_5: "",
+      oil_other: "",
+      jarabi_1: "",
+      jarabi_2: "",
+      jarabi_other: "",
+      clean_1: "",
+      clean_2: "",
+      clean_3: "",
+      clean_4: "",
+      clean_other: "",
+      arm_1: "",
+      arm_2: "",
+      arm_3: "",
+      arm_4: "",
+      arm_5: "",
+      arm_other: "",
+      system_1: "",
+      system_2: "",
+      system_3: "",
+      system_4: "",
+      system_5: "",
+      system_other: "",
+      sump_1: "",
+      sump_2: "",
+      sump_3: "",
+      sump_4: "",
+      sump_5: "",
+      sump_6: "",
+      sump_7: "",
+      sump_8: "",
+      sump_other: "",
+      chlorine_1: "",
+      chlorine_2: "",
+      chlorine_3: "",
+      chlorine_4: "",
+      chlorine_5: "",
+      chlorine_other: "",
+      woker: "",
+      woker_approve: "",
+      woker_other: "",
+      boss_pump: "",
+      boss_pump_approve: "",
+      boss_pump_other: "",
+      inspector: "",
+      inspector_approve: "",
+      inspector_other: "",
+      manage: "",
+      manage_approve: "",
+      manage_other: "",
+      ok: "",
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
           axios
             .get(`${apiPath.getBaseUrl()}form_pump_save.php`, {
@@ -1512,11 +1516,11 @@ export default {
                 woker_other: this.woker_other,
               },
             })
-            .then(response => {
+            .then((response) => {
               this.ok = response.data;
 
               //this.$message.success('สำเร็จ:' + this.ok[0].message, 5000);
-              this.$message.success('สำเร็จ:' + 'เพิ่มข้อมูลสำเร็จ', 5000);
+              this.$message.success("สำเร็จ:" + "เพิ่มข้อมูลสำเร็จ", 5000);
 
               this.clear();
             });
@@ -1526,97 +1530,97 @@ export default {
     clear() {
       //เลื่อนไปหน้าจอ
       window.scrollTo(0, 0);
-      this.month = '';
-      this.pump = '';
-      this.on = '';
-      this.pump_brand = '';
-      this.pump = '';
-      this.id = '';
-      this.install_point = '';
-      this.dateservice = '';
-      this.wire_1 = '';
-      this.wire_2 = '';
-      this.wire_3 = '';
-      this.wire_4 = '';
-      this.wire_5 = '';
-      this.wire_other = '';
-      this.service_1 = '';
-      this.service_2 = '';
-      this.service_3 = '';
-      this.service_4 = '';
-      this.service_5 = '';
-      this.service_6 = '';
-      this.service_other = '';
-      this.seal_1 = '';
-      this.seal_2 = '';
-      this.seal_3 = '';
-      this.seal_4 = '';
-      this.seal_other = '';
-      this.condition_1 = '';
-      this.condition_2 = '';
-      this.condition_3 = '';
-      this.condition_4 = '';
-      this.condition_5 = '';
-      this.condition_6 = '';
-      this.condition_other = '';
-      this.propeller_1 = '';
-      this.propeller_2 = '';
-      this.propeller_3 = '';
-      this.propeller_4 = '';
-      this.propeller_5 = '';
-      this.propeller_6 = '';
-      this.propeller_other = '';
-      this.snail_1 = '';
-      this.snail_2 = '';
-      this.snail_3 = '';
-      this.snail_4 = '';
-      this.snail_5 = '';
-      this.snail_6 = '';
-      this.snail_other = '';
-      this.oil_1 = '';
-      this.oil_2 = '';
-      this.oil_3 = '';
-      this.oil_4 = '';
-      this.oil_5 = '';
-      this.oil_other = '';
-      this.jarabi_1 = '';
-      this.jarabi_2 = '';
-      this.jarabi_other = '';
-      this.clean_1 = '';
-      this.clean_2 = '';
-      this.clean_3 = '';
-      this.clean_4 = '';
-      this.clean_other = '';
-      this.arm_1 = '';
-      this.arm_2 = '';
-      this.arm_3 = '';
-      this.arm_4 = '';
-      this.arm_5 = '';
-      this.arm_other = '';
-      this.system_1 = '';
-      this.system_2 = '';
-      this.system_3 = '';
-      this.system_4 = '';
-      this.system_5 = '';
-      this.system_other = '';
-      this.sump_1 = '';
-      this.sump_2 = '';
-      this.sump_3 = '';
-      this.sump_4 = '';
-      this.sump_5 = '';
-      this.sump_6 = '';
-      this.sump_7 = '';
-      this.sump_8 = '';
-      this.sump_other = '';
-      this.chlorine_1 = '';
-      this.chlorine_2 = '';
-      this.chlorine_3 = '';
-      this.chlorine_4 = '';
-      this.chlorine_5 = '';
-      this.chlorine_other = '';
-      this.woker = '';
-      this.woker_approve = '';
-      this.woker_other = '';
+      this.month = "";
+      this.pump = "";
+      this.on = "";
+      this.pump_brand = "";
+      this.pump = "";
+      this.id = "";
+      this.install_point = "";
+      this.dateservice = "";
+      this.wire_1 = "";
+      this.wire_2 = "";
+      this.wire_3 = "";
+      this.wire_4 = "";
+      this.wire_5 = "";
+      this.wire_other = "";
+      this.service_1 = "";
+      this.service_2 = "";
+      this.service_3 = "";
+      this.service_4 = "";
+      this.service_5 = "";
+      this.service_6 = "";
+      this.service_other = "";
+      this.seal_1 = "";
+      this.seal_2 = "";
+      this.seal_3 = "";
+      this.seal_4 = "";
+      this.seal_other = "";
+      this.condition_1 = "";
+      this.condition_2 = "";
+      this.condition_3 = "";
+      this.condition_4 = "";
+      this.condition_5 = "";
+      this.condition_6 = "";
+      this.condition_other = "";
+      this.propeller_1 = "";
+      this.propeller_2 = "";
+      this.propeller_3 = "";
+      this.propeller_4 = "";
+      this.propeller_5 = "";
+      this.propeller_6 = "";
+      this.propeller_other = "";
+      this.snail_1 = "";
+      this.snail_2 = "";
+      this.snail_3 = "";
+      this.snail_4 = "";
+      this.snail_5 = "";
+      this.snail_6 = "";
+      this.snail_other = "";
+      this.oil_1 = "";
+      this.oil_2 = "";
+      this.oil_3 = "";
+      this.oil_4 = "";
+      this.oil_5 = "";
+      this.oil_other = "";
+      this.jarabi_1 = "";
+      this.jarabi_2 = "";
+      this.jarabi_other = "";
+      this.clean_1 = "";
+      this.clean_2 = "";
+      this.clean_3 = "";
+      this.clean_4 = "";
+      this.clean_other = "";
+      this.arm_1 = "";
+      this.arm_2 = "";
+      this.arm_3 = "";
+      this.arm_4 = "";
+      this.arm_5 = "";
+      this.arm_other = "";
+      this.system_1 = "";
+      this.system_2 = "";
+      this.system_3 = "";
+      this.system_4 = "";
+      this.system_5 = "";
+      this.system_other = "";
+      this.sump_1 = "";
+      this.sump_2 = "";
+      this.sump_3 = "";
+      this.sump_4 = "";
+      this.sump_5 = "";
+      this.sump_6 = "";
+      this.sump_7 = "";
+      this.sump_8 = "";
+      this.sump_other = "";
+      this.chlorine_1 = "";
+      this.chlorine_2 = "";
+      this.chlorine_3 = "";
+      this.chlorine_4 = "";
+      this.chlorine_5 = "";
+      this.chlorine_other = "";
+      this.woker = "";
+      this.woker_approve = "";
+      this.woker_other = "";
 
       this.p1_show = true;
       this.p2_show = true;
@@ -1632,36 +1636,36 @@ export default {
       this.p12_show = true;
       this.p13_show = true;
 
-      this.$message.warning('ระบบเคลียร์หน้าจอแล้ว', 5000);
+      this.$message.warning("ระบบเคลียร์หน้าจอแล้ว", 5000);
     },
 
     //เลิอกหมายเลขเครื่อง / รุ่น
     pumpchange() {
-      if (this.pump == '1' && this.month == '3') {
+      if (this.pump == "1" && this.month == "3") {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '3') {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '3') {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '3') {
+      } else if (this.pump == "2" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '3') {
+      } else if (this.pump == "3" && this.month == "3") {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "4" && this.month == "3") {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "5" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1669,7 +1673,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '3') {
+      } else if (this.pump == "6" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1678,25 +1682,25 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '3') {
+      } else if (this.pump == "7" && this.month == "3") {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '3') {
-        this.p2_show = false;
-        this.p3_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '3') {
+      } else if (this.pump == "8" && this.month == "3") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "9" && this.month == "3") {
+        this.p2_show = false;
+        this.p3_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
         this.p7_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '1' && this.month == '1') {
+      } else if (this.pump == "1" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1706,7 +1710,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '1') {
+      } else if (this.pump == "2" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1716,7 +1720,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '1') {
+      } else if (this.pump == "3" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1726,7 +1730,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '1') {
+      } else if (this.pump == "4" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1736,7 +1740,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '1') {
+      } else if (this.pump == "5" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1744,7 +1748,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '1') {
+      } else if (this.pump == "6" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1753,7 +1757,7 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '1') {
+      } else if (this.pump == "7" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1763,13 +1767,13 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '1') {
+      } else if (this.pump == "8" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '1') {
+      } else if (this.pump == "9" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
@@ -1796,42 +1800,41 @@ export default {
   },
   mounted() {
     // alert(apiPath.getBaseUrl());
-    console.log('tag', '');
+    console.log("tag", "");
     // รุ่น
     axios
 
       .get(`${apiPath.getBaseUrl()}pump.php`)
-      .then(response => (this.pumps = response.data));
+      .then((response) => (this.pumps = response.data));
     // ยี่ห้อ
     axios
 
       .get(`${apiPath.getBaseUrl()}pump_brand.php`)
-      .then(response => (this.pumps_brands = response.data));
+      .then((response) => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
 
       .get(`${apiPath.getBaseUrl()}install_point.php`)
-      .then(response => (this.install_points = response.data));
+      .then((response) => (this.install_points = response.data));
   },
 };
 </script>
 
 <style>
 .demo-col {
-  background: #e0f0fa;
   padding: 10px 0;
   text-align: center;
   margin-bottom: 5px;
 }
 .demo-col2 {
-  background: #7dbcea;
+  background: MEDIUMAQUAMARINE;
 }
 .head {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
 }
 .headsmall {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 2px 2px 2px #aaa;
 }
 </style>

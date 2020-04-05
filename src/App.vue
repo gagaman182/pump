@@ -39,10 +39,10 @@
 </template>
 <script>
 export default {
-  name: 'pump',
+  name: "pump",
 };
 </script>
-<style>
+<style scoped>
 .fish.layout.demo3 > .header {
   padding: 0;
   background: #e0f0fa;
@@ -60,8 +60,10 @@ export default {
   font-size: 1.2rem;
 }
 .head {
-  font-family: 'Sriracha';
+  color: navy;
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
+  font-size: 40px;
 }
 .rainbow-text {
   background-image: linear-gradient(
@@ -76,6 +78,6 @@ export default {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 50px;
+  font-size: 42px;
 }
 </style>
