@@ -80,20 +80,21 @@
               ><strong>รายการตรวจเช็ค</strong>
             </div>
             <fish-row>
-              <fish-col span="6" class="demo-col"><h3>รายการ</h3></fish-col>
+              <fish-col span="6" class="demo-col"><h4>รายการ</h4></fish-col>
               <fish-col span="6" class="demo-col"
-                ><h3>แนวทางการตรวจเช็ค</h3></fish-col
+                ><h4>แนวทางการตรวจเช็ค</h4></fish-col
               >
-              <fish-col span="6" class="demo-col"><h3>สถานะ</h3></fish-col>
-              <fish-col span="6" class="demo-col"><h3>หมายเหตุ</h3></fish-col>
+              <fish-col span="6" class="demo-col"><h4>สถานะ</h4></fish-col>
+              <fish-col span="6" class="demo-col"><h4>หมายเหตุ</h4></fish-col>
             </fish-row>
-
+            <fish-divider fitted></fish-divider>
             <!-- 1 ชุดสายไฟเครื่องปั้ม  -->
-
             <Wire :pumpall="idcheck" v-show="p1_show" />
+            <fish-divider fitted></fish-divider>
 
-            <pre>{{ tableloadpump_detail }}</pre>
-            <pre>{{ tableloadpump_detail[0].wire_2 }}</pre>
+            <!-- 2 ตรวจสอบการ ทำงานของเครื่อง  -->
+            <Service :pumpall="idcheck" v-show="p2_show" />
+            <fish-divider fitted></fish-divider>
           </fish-card>
         </fish-col>
       </fish-row>
@@ -108,12 +109,14 @@ import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 
 import Wire from "@/components/Wire.vue";
+import Service from "@/components/Service.vue";
 
 export default {
   name: "Home",
   components: {
     datatable: DataTable,
     Wire,
+    Service,
   },
   data() {
     return {

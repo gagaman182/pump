@@ -2,7 +2,7 @@
   <div class="Wire">
     <fish-row>
       <fish-col span="6" class="demo-col"> ชุดสายไฟเครื่องปั้ม</fish-col>
-      <fish-col span="6" class="demo-col">แนวทางการตรวจเช็ค</fish-col>
+      <fish-col span="6" class="demo-col">ดูสภาพของสายจุดจับยึด</fish-col>
       <fish-col span="6" class="demo-col">
         <fish-checkboxes v-model="pumpall[0].wire_1">
           <fish-checkbox index="1" disabled>พร้อมใช้</fish-checkbox>
@@ -21,8 +21,13 @@
         </fish-checkboxes>
       </fish-col>
       <fish-col span="6" class="demo-col">
-        {{ pumpall[0].wire_other }}</fish-col
-      >
+        <fish-input
+          type="textarea"
+          style="height:100%; width:100%;"
+          v-model="pumpall[0].wire_other"
+          disabled
+        ></fish-input>
+      </fish-col>
     </fish-row>
   </div>
 </template>
