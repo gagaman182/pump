@@ -37,6 +37,7 @@
           <vue-fontawesome icon="copy" size="2"></vue-fontawesome
           >ใบตรวจเช็คบำรุงรักษา
         </h3>
+        <pre>{{ pump_detail }}</pre>
       </div>
 
       <fish-form ref="form">
@@ -67,13 +68,21 @@
             name="pump_brand"
             :rules="[{required: true, message: 'ยี่ห้อเป็นค่าว่าง'}]"
           >
-            <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
+            <!-- <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
               <fish-option
                 :index="item.id"
                 :content="item.name"
                 v-for="item in pumps_brands"
                 :key="item.id"
               ></fish-option>
+            </fish-select> -->
+            <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
+              <fish-option index="1" content="PXPUMPS"></fish-option>
+              <fish-option index="2" content="OXIDZER AERATOR"></fish-option>
+              <fish-option index="3" content="ปั้มจ่ายคลอรีน"></fish-option>
+              <fish-option index="4" content="SANSO"></fish-option>
+              <fish-option index="5" content="SITI"></fish-option>
+              <fish-option index="6" content="เครื่องดักขยะหยาบ"></fish-option>
             </fish-select>
           </fish-field>
 
@@ -97,13 +106,39 @@
               },
             ]"
           >
-            <fish-select v-model="pump" @change="pumpchange" hint="เลือกรุ่น">
+            <!-- <fish-select v-model="pump" @change="pumpchange" hint="เลือกรุ่น">
               <fish-option
                 :index="item.id"
                 :content="item.name"
                 v-for="item in pumps"
                 :key="item.id"
               ></fish-option>
+            </fish-select> -->
+            <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
+              <fish-option
+                index="1"
+                content="ปั้มสูบน้ำเสีย รุ่น PX-1-80-4200"
+              ></fish-option>
+              <fish-option
+                index="2"
+                content="เครื่องเติมอากาศ รุ่น KA-100"
+              ></fish-option>
+              <fish-option
+                index="3"
+                content="ปั้มสูบน้ำเสีย รุ่น K - 102"
+              ></fish-option>
+              <fish-option
+                index="4"
+                content="เครื่องเติมอากาศ รุ่น KA-106"
+              ></fish-option>
+              <fish-option
+                index="5"
+                content="ปั้มจ่ายคลอรีน BT5A0232NPB"
+              ></fish-option>
+              <fish-option index="6" content="ปั้มดูดคลอรีน"></fish-option>
+              <fish-option index="7" content="K-80"></fish-option>
+              <fish-option index="8" content="เครื่องกวาดตะกอน"></fish-option>
+              <fish-option index="9" content="เครื่องดักขยะหยาบ"></fish-option>
             </fish-select>
           </fish-field>
 
@@ -117,13 +152,24 @@
             name="install_point"
             :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
           >
-            <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
+            <!-- <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
               <fish-option
                 :index="item.id"
                 :content="item.name"
                 v-for="item in install_points"
                 :key="item.id"
               ></fish-option>
+            </fish-select> -->
+            <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
+              <fish-option index="1" content="บ่อรวมน้ำเสีย"></fish-option>
+              <fish-option index="2" content="บ่อปรับสภาพน้ำเสีย"></fish-option>
+              <fish-option index="3" content="บ่อเติมอากาศ"></fish-option>
+              <fish-option index="4" content="จุดเติมคลอรีน"></fish-option>
+              <fish-option
+                index="5"
+                content="บ่อสูบตะกอนย้อนกลับ"
+              ></fish-option>
+              <fish-option index="6" content="บ่อตกตะกอน"></fish-option>
             </fish-select>
           </fish-field>
 
@@ -1378,6 +1424,9 @@ export default {
       manage_approve: '',
       manage_other: '',
       ok: '',
+      pump_detail: '',
+      num: this.$route.params.id,
+      pumps_edit: [],
     };
   },
   methods: {
@@ -1766,10 +1815,117 @@ export default {
         this.p13_show = true;
       }
     },
+    //ดูรายละเอียดใบเช็ค
+    getpump(num) {
+      axios
+
+        .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
+          params: {num: num},
+        })
+        .then((response) => {
+          this.pump_detail = response.data;
+          this.getpump_detail(this.pump_detail);
+        });
+    },
+    //เอาค่าจาก database มาใส่ใน form
+    getpump_detail() {
+      this.month = this.pump_detail[0].month;
+      this.pump_brand = this.pump_detail[0].p_pump_brand_id;
+      this.on = this.pump_detail[0].on_number;
+      this.pump = this.pump_detail[0].p_pump_id;
+      this.id = this.pump_detail[0].id;
+      this.install_point = this.pump_detail[0].install_point_id;
+      this.dateservice = this.pump_detail[0].dateservice;
+      this.wire_1 = this.pump_detail[0].wire_1;
+      this.wire_2 = this.pump_detail[0].wire_2;
+      this.wire_3 = this.pump_detail[0].wire_3;
+      this.wire_4 = this.pump_detail[0].wire_4;
+      this.wire_5 = this.pump_detail[0].wire_5;
+      this.wire_other = this.pump_detail[0].wire_other;
+      this.service_1 = this.pump_detail[0].service_1;
+      this.service_2 = this.pump_detail[0].service_2;
+      this.service_3 = this.pump_detail[0].service_3;
+      this.service_4 = this.pump_detail[0].service_4;
+      this.service_5 = this.pump_detail[0].service_5;
+      this.service_6 = this.pump_detail[0].service_6;
+      this.service_other = this.pump_detail[0].service_other;
+      this.seal_1 = this.pump_detail[0].seal_1;
+      this.seal_2 = this.pump_detail[0].seal_2;
+      this.seal_3 = this.pump_detail[0].seal_3;
+      this.seal_4 = this.pump_detail[0].seal_4;
+      this.seal_other = this.pump_detail[0].seal_other;
+      this.condition_1 = this.pump_detail[0].condition_1;
+      this.condition_2 = this.pump_detail[0].condition_2;
+      this.condition_3 = this.pump_detail[0].condition_3;
+      this.condition_4 = this.pump_detail[0].condition_4;
+      this.condition_5 = this.pump_detail[0].condition_5;
+      this.condition_6 = this.pump_detail[0].condition_6;
+      this.condition_other = this.pump_detail[0].condition_other;
+      this.propeller_1 = this.pump_detail[0].propeller_1;
+      this.propeller_2 = this.pump_detail[0].propeller_2;
+      this.propeller_3 = this.pump_detail[0].propeller_3;
+      this.propeller_4 = this.pump_detail[0].propeller_4;
+      this.propeller_5 = this.pump_detail[0].propeller_5;
+      this.propeller_6 = this.pump_detail[0].propeller_6;
+      this.propeller_other = this.pump_detail[0].propeller_other;
+      this.snail_1 = this.pump_detail[0].snail_1;
+      this.snail_2 = this.pump_detail[0].snail_2;
+      this.snail_3 = this.pump_detail[0].snail_3;
+      this.snail_4 = this.pump_detail[0].snail_4;
+      this.snail_5 = this.pump_detail[0].snail_5;
+      this.snail_6 = this.pump_detail[0].snail_6;
+      this.snail_other = this.pump_detail[0].snail_other;
+      this.oil_1 = this.pump_detail[0].oil_1;
+      this.oil_2 = this.pump_detail[0].oil_2;
+      this.oil_3 = this.pump_detail[0].oil_3;
+      this.oil_4 = this.pump_detail[0].oil_4;
+      this.oil_5 = this.pump_detail[0].oil_5;
+      this.oil_other = this.pump_detail[0].oil_other;
+      this.jarabi_1 = this.pump_detail[0].jarabi_1;
+      this.jarabi_2 = this.pump_detail[0].jarabi_2;
+      this.jarabi_other = this.pump_detail[0].jarabi_other;
+      this.clean_1 = this.pump_detail[0].clean_1;
+      this.clean_2 = this.pump_detail[0].clean_2;
+      this.clean_3 = this.pump_detail[0].clean_3;
+      this.clean_4 = this.pump_detail[0].clean_4;
+      this.clean_other = this.pump_detail[0].clean_other;
+      this.arm_1 = this.pump_detail[0].arm_1;
+      this.arm_2 = this.pump_detail[0].arm_2;
+      this.arm_3 = this.pump_detail[0].arm_3;
+      this.arm_4 = this.pump_detail[0].arm_4;
+      this.arm_5 = this.pump_detail[0].arm_5;
+      this.arm_other = this.pump_detail[0].arm_other;
+      this.system_1 = this.pump_detail[0].system_1;
+      this.system_2 = this.pump_detail[0].system_2;
+      this.system_3 = this.pump_detail[0].system_3;
+      this.system_4 = this.pump_detail[0].system_4;
+      this.system_5 = this.pump_detail[0].system_5;
+      this.system_other = this.pump_detail[0].system_other;
+      this.sump_1 = this.pump_detail[0].sump_1;
+      this.sump_2 = this.pump_detail[0].sump_2;
+      this.sump_3 = this.pump_detail[0].sump_3;
+      this.sump_4 = this.pump_detail[0].sump_4;
+      this.sump_5 = this.pump_detail[0].sump_5;
+      this.sump_6 = this.pump_detail[0].sump_6;
+      this.sump_7 = this.pump_detail[0].sump_7;
+      this.sump_8 = this.pump_detail[0].sump_8;
+      this.sump_other = this.pump_detail[0].sump_other;
+      this.chlorine_1 = this.pump_detail[0].chlorine_1;
+      this.chlorine_2 = this.pump_detail[0].chlorine_2;
+      this.chlorine_3 = this.pump_detail[0].chlorine_3;
+      this.chlorine_4 = this.pump_detail[0].chlorine_4;
+      this.chlorine_5 = this.pump_detail[0].chlorine_5;
+      this.chlorine_other = this.pump_detail[0].chlorine_other;
+      this.woker = this.pump_detail[0].woker;
+      this.woker_approve = this.pump_detail[0].woker_approve;
+      this.woker_other = this.pump_detail[0].woker_other;
+    },
   },
   mounted() {
-    // alert(apiPath.getBaseUrl());
-    console.log('tag', '');
+    //ดูรายละเอียดใบเช็ค
+
+    this.getpump(this.num);
+
     // รุ่น
     axios
 

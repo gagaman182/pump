@@ -1,5 +1,5 @@
 <template>
-  <div class="Wire">
+  <div class="Service">
     <fish-row>
       <fish-col span="6" class="demo-col">ตรวจสอบการ ทำงานของเครื่อง</fish-col>
       <fish-col span="6" class="demo-col"
@@ -28,18 +28,20 @@
       <fish-col span="6" class="demo-col">
         <fish-input
           type="textarea"
+          hint="หมายเหตุ..."
           style="height:100%; width:100%;"
           v-model="pumpall[0].service_other"
           disabled
         ></fish-input>
       </fish-col>
     </fish-row>
+    <fish-divider fitted></fish-divider>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Wire",
+  name: 'Service',
   props: {
     pumpall: String,
   },

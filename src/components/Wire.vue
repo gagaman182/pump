@@ -23,18 +23,20 @@
       <fish-col span="6" class="demo-col">
         <fish-input
           type="textarea"
+          hint="หมายเหตุ..."
           style="height:100%; width:100%;"
           v-model="pumpall[0].wire_other"
           disabled
         ></fish-input>
       </fish-col>
     </fish-row>
+    <fish-divider fitted></fish-divider>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Wire",
+  name: 'Wire',
   props: {
     pumpall: String,
   },
