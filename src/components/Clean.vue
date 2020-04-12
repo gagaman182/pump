@@ -33,12 +33,12 @@
 
 <script>
 export default {
-  name: 'Clean',
+  name: "Clean",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

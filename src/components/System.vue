@@ -40,12 +40,12 @@
 
 <script>
 export default {
-  name: 'System',
+  name: "System",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

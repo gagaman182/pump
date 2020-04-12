@@ -24,7 +24,7 @@
               <td>
                 <button
                   class="btn red darken-2 waves-effect waves-light compact-btn"
-                  @click="(e) => onRowClick(props.row, e)"
+                  @click="e => onRowClick(props.row, e)"
                 >
                   <i class="material-icons white-text">add_to_queue</i>
                 </button>
@@ -149,27 +149,27 @@
 </template>
 
 <script>
-import DataTable from 'vue-materialize-datatable';
-import axios from 'axios';
-import {APIPath} from '../../service/APIPath';
+import DataTable from "vue-materialize-datatable";
+import axios from "axios";
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 
-import Wire from '@/components/Wire.vue';
-import Service from '@/components/Service.vue';
-import Seal from '@/components/Seal.vue';
-import Condition from '@/components/Condition.vue';
-import Propeller from '@/components/Propeller.vue';
-import Snail from '@/components/Snail.vue';
-import Oil from '@/components/Oil.vue';
-import Jarabi from '@/components/Jarabi.vue';
-import Clean from '@/components/Clean.vue';
-import Arm from '@/components/Arm.vue';
-import System from '@/components/System.vue';
-import Sump from '@/components/Sump.vue';
-import Chlorine from '@/components/Chlorine.vue';
+import Wire from "@/components/Wire.vue";
+import Service from "@/components/Service.vue";
+import Seal from "@/components/Seal.vue";
+import Condition from "@/components/Condition.vue";
+import Propeller from "@/components/Propeller.vue";
+import Snail from "@/components/Snail.vue";
+import Oil from "@/components/Oil.vue";
+import Jarabi from "@/components/Jarabi.vue";
+import Clean from "@/components/Clean.vue";
+import Arm from "@/components/Arm.vue";
+import System from "@/components/System.vue";
+import Sump from "@/components/Sump.vue";
+import Chlorine from "@/components/Chlorine.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     datatable: DataTable,
     Wire,
@@ -184,7 +184,7 @@ export default {
     Arm,
     System,
     Sump,
-    Chlorine,
+    Chlorine
   },
   data() {
     return {
@@ -204,16 +204,16 @@ export default {
       showModal: false,
       loadpumphead: [
         {
-          label: 'เลขที่ใบตรวจเช็ค',
-          field: 'num',
+          label: "เลขที่ใบตรวจเช็ค",
+          field: "num",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'ช่วงเดือนบำรุงรักษา',
-          field: 'month',
+          label: "ช่วงเดือนบำรุงรักษา",
+          field: "month",
           numeric: false,
-          html: false,
+          html: false
         },
         // {
         //   label: 'สถานที่',
@@ -222,65 +222,65 @@ export default {
         //   html: false,
         // },
         {
-          label: 'ยี่ห้อ',
-          field: 'p_pump_brand',
+          label: "ยี่ห้อ",
+          field: "p_pump_brand",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'ON',
-          field: 'on_number',
+          label: "ON",
+          field: "on_number",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'หมายเลขเครื่อง / รุ่น',
-          field: 'p_pump',
+          label: "หมายเลขเครื่อง / รุ่น",
+          field: "p_pump",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'ID',
-          field: 'id',
+          label: "ID",
+          field: "id",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'จุดติดตั้ง',
-          field: 'install_point_name',
+          label: "จุดติดตั้ง",
+          field: "install_point_name",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'วันที่ตรวจเช็ค',
-          field: 'dateservice',
+          label: "วันที่ตรวจเช็ค",
+          field: "dateservice",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'หัวหน้าประปา ',
-          field: 'boss_approve',
+          label: "หัวหน้าประปา ",
+          field: "boss_approve",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'ผู้ตรวจสอบ',
-          field: 'inspector_approve',
+          label: "ผู้ตรวจสอบ",
+          field: "inspector_approve",
           numeric: false,
-          html: false,
+          html: false
         },
         {
-          label: 'รองผู้อำนวยการฝ่ายบริหาร',
-          field: 'manage_approve',
+          label: "รองผู้อำนวยการฝ่ายบริหาร",
+          field: "manage_approve",
           numeric: false,
-          html: false,
-        },
+          html: false
+        }
       ],
       tableloadpump: [],
-      tableloadpump_detail: '0',
-      wire_detail: '0',
-      okmessage: '1',
-      idsend: '',
+      tableloadpump_detail: "0",
+      wire_detail: "0",
+      okmessage: "1",
+      idsend: ""
     };
   },
 
@@ -293,7 +293,7 @@ export default {
     // },
 
     loadpump() {
-      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then((response) => {
+      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then(response => {
         this.tableloadpump = response.data;
         // //ส่ง object ไปให้ compunent
         // this.tableloadpump_detail = this.tableloadpump_detail;
@@ -315,9 +315,9 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: {num: num},
+          params: { num: num }
         })
-        .then((response) => {
+        .then(response => {
           this.tableloadpump_detail = response.data;
           // //ส่งเลขไปให้ compunent
           // this.tableloadpump_detail = this.tableloadpump_detail;
@@ -342,34 +342,16 @@ export default {
     },
     pumpchange() {
       if (
-        this.tableloadpump_detail[0].p_pump_id == '1' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "1" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '2' &&
-        this.tableloadpump_detail[0].month == '3'
-      ) {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == '3' &&
-        this.tableloadpump_detail[0].month == '3'
-      ) {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == '4' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "2" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -378,8 +360,26 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '5' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "3" &&
+        this.tableloadpump_detail[0].month == "3"
+      ) {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == "4" &&
+        this.tableloadpump_detail[0].month == "3"
+      ) {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == "5" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -389,8 +389,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '6' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "6" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -401,15 +401,15 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '7' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "7" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '8' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "8" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -417,8 +417,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '9' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "9" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -428,8 +428,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '1' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "1" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -441,8 +441,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '2' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "2" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -454,8 +454,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '3' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "3" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -467,8 +467,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '4' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "4" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -480,8 +480,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '5' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "5" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -491,8 +491,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '6' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "6" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -503,8 +503,8 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '7' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "7" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -516,8 +516,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '8' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "8" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -525,8 +525,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '9' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "9" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -553,11 +553,11 @@ export default {
     },
     pumpedit() {
       // alert(this.idsend);
-      this.$router.push('/edit/' + this.idsend);
-    },
+      this.$router.push("/edit/" + this.idsend);
+    }
   },
   mounted() {
     this.loadpump();
-  },
+  }
 };
 </script>

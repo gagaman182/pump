@@ -47,12 +47,12 @@
 
 <script>
 export default {
-  name: 'Sump',
+  name: "Sump",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

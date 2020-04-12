@@ -42,12 +42,12 @@
 
 <script>
 export default {
-  name: 'Properller',
+  name: "Properller",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

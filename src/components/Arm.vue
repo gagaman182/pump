@@ -39,12 +39,12 @@
 
 <script>
 export default {
-  name: 'Arm',
+  name: "Arm",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

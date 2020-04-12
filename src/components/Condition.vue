@@ -41,12 +41,12 @@
 
 <script>
 export default {
-  name: 'Condition',
+  name: "Condition",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

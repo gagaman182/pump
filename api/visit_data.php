@@ -112,7 +112,8 @@ INNER JOIN p_pump_brand ON p_visit.pump_brand = p_pump_brand.id
 INNER JOIN p_pump ON p_visit.pump = p_pump.id
 inner join p_install_point on p_visit.install_point = p_install_point.id
 
-group by num desc
+
+ORDER  by num DESC
 ";
 
 

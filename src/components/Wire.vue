@@ -36,12 +36,12 @@
 
 <script>
 export default {
-  name: 'Wire',
+  name: "Wire",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

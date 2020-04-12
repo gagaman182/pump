@@ -40,12 +40,12 @@
 
 <script>
 export default {
-  name: 'Chlorine',
+  name: "Chlorine",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

@@ -27,12 +27,12 @@
 
 <script>
 export default {
-  name: 'Jarabi',
+  name: "Jarabi",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>

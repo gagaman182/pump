@@ -38,12 +38,12 @@
 
 <script>
 export default {
-  name: 'Oil',
+  name: "Oil",
   props: {
-    pumpall: String,
+    pumpall: String
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
