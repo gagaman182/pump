@@ -6,24 +6,48 @@
         >ดูจุดแตกร้าวซึกหรอ การกัดกรอน</fish-col
       >
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].snail_1">
-          <fish-checkbox index="1" disabled>พร้อมใช้</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].snail_2">
-          <fish-checkbox index="1" disabled>มีรอยร้าว</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].snail_3">
-          <fish-checkbox index="1" disabled>แตกร้าว</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].snail_4">
-          <fish-checkbox index="1" disabled>มีการกัดกร่อน</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].snail_5">
-          <fish-checkbox index="1" disabled>สึกหรอ</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].snail_6">
-          <fish-checkbox index="1" disabled>อุดตัน</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].snail_1"
+          label="พร้อมใช้"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].snail_2"
+          label="มีรอยร้าว"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].snail_3"
+          label="แตกร้าว"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].snail_4"
+          label="มีการกัดกร่อน"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].snail_5"
+          label="สึกหรอ"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].snail_6"
+          label="อุดตัน"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -40,8 +64,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Snail",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

@@ -6,24 +6,53 @@
         >ดูสี จุดแตกร้าว การกัดกรอน น๊อต/สกรู การสั่นสะเทือน</fish-col
       >
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].condition_1">
-          <fish-checkbox index="1" disabled>พร้อมใช้</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].condition_2">
-          <fish-checkbox index="1" disabled>เปลี่ยนน๊อต/สกรู</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].condition_3">
-          <fish-checkbox index="1" disabled>แตกร้าว</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].condition_4">
-          <fish-checkbox index="1" disabled>มีการกัดกร่อน</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].condition_5">
-          <fish-checkbox index="1" disabled>ทาสีใหม่</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].condition_6">
-          <fish-checkbox index="1" disabled>ส่งซ่อมบริษัท</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].condition_1"
+          label="พร้อมใช้"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].condition_2"
+          label="เปลี่ยนน๊อต/สกรู"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].condition_3"
+          label="แตกร้าว"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].condition_4"
+          label="มีการกัดกร่อน"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].condition_5"
+          label="ทาสีใหม่"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].condition_6"
+          label="ส่งซ่อมบริษัท"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -40,8 +69,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Condition",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

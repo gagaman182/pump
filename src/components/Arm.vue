@@ -7,21 +7,45 @@
         การกัดกร่อน</fish-col
       >
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].arm_1">
-          <fish-checkbox index="1" disabled>พร้อมใช้</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].arm_2">
-          <fish-checkbox index="1" disabled>เปลี่ยนน๊อต/สกรู</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].arm_3">
-          <fish-checkbox index="1" disabled>ชำรุด</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].arm_4">
-          <fish-checkbox index="1" disabled>สึกหรอ/เป็นสนิม</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].arm_5">
-          <fish-checkbox index="1" disabled>ทาสีใหม่</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].arm_1"
+          label="พร้อมใช้"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].arm_2"
+          label="เปลี่ยนน๊อต/สกรู"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].arm_3"
+          label="ชำรุด"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].arm_4"
+          label="สึกหรอ/เป็นสนิม"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].arm_5"
+          label="ทาสีใหม่"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -38,8 +62,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Arm",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

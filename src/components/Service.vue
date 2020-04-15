@@ -6,24 +6,53 @@
         >ดูปริมาณน้ำที่ออกจากท่อ เมื่อเครื่องทำงาน</fish-col
       >
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].service_1">
-          <fish-checkbox index="1" disabled>ปกติ/พร้อมใช้</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].service_2">
-          <fish-checkbox index="1" disabled>ไม่ออก/มีเสียงดัง</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].service_3">
-          <fish-checkbox index="1" disabled>ปานกลาง</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].service_4">
-          <fish-checkbox index="1" disabled>ทำการซ่อม</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].service_5">
-          <fish-checkbox index="1" disabled>น้อย</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].service_6">
-          <fish-checkbox index="1" disabled>แจ้งหัวหน้า</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].service_1"
+          label="ปกติ/พร้อมใช้"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].service_2"
+          label="ไม่ออก/มีเสียงดัง"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].service_3"
+          label="ปานกลาง"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].service_4"
+          label="ทำการซ่อม"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].service_5"
+          label="น้อย"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].service_6"
+          label="แจ้งหัวหน้า"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -40,8 +69,13 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Service",
+
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

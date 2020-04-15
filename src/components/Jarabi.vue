@@ -4,12 +4,21 @@
       <fish-col span="6" class="demo-col">อัดจาระบี</fish-col>
       <fish-col span="6" class="demo-col">อัดจารบีตามจุดต่างๆ</fish-col>
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].jarabi_1">
-          <fish-checkbox index="1" disabled>พร้อมใช้</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].jarabi_2">
-          <fish-checkbox index="1" disabled>อัดจารบี</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].jarabi_1"
+          label="พร้อมใช้"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].jarabi_2"
+          label="อัดจารบี"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -26,8 +35,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Jarabi",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

@@ -45,7 +45,7 @@
             span="6"
             label="ระบุช่วงเดือนบำรุงรักษา"
             name="month"
-            :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
           >
             <fish-select v-model="month" hint="เลือกเดือน" @change="pumpchange">
               <fish-option index="1" content="1 เดือน"></fish-option>
@@ -86,7 +86,7 @@
             span="6"
             label="ยี่ห้อ"
             name="pump_brand"
-            :rules="[{required: true, message: 'ยี่ห้อเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
           >
             <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
               <fish-option
@@ -115,7 +115,7 @@
             span="6"
             label="จุดติดตั้ง"
             name="install_point"
-            :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
           >
             <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
               <fish-option
@@ -131,7 +131,7 @@
             span="6"
             label="วันที่"
             name="dateservice"
-            :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
           >
             <!-- format from moment js L = DD/MM/YYYY -->
             <fish-date-picker
@@ -162,7 +162,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome>
                 ชุดสายไฟเครื่องปั้ม
@@ -173,7 +173,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ดูสภาพของสาย
                 จุดจับยึด
@@ -184,30 +184,55 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ
             </fish-tag>
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="wire_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="wire_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
+              <fish-divider />
+
+              <enhanced-check
+                v-model="wire_3"
+                label="สายรั่ว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="wire_3">สายรั่ว</fish-checkbox>
 
-              <fish-divider />
-
-              <fish-checkbox v-model="wire_5">แจ้งหัวหน้า</fish-checkbox>
+              <enhanced-check
+                v-model="wire_5"
+                label="แจ้งหัวหน้า"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="wire_2"> สายขาด</fish-checkbox>
-
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="wire_2"
+                label="สายขาด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="wire_4" index="1">เปลี่ยน</fish-checkbox>
+
+              <enhanced-check
+                v-model="wire_4"
+                label="เปลี่ยน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  ">
+            <fish-segment style="height: 220px;  ">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -225,7 +250,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome>
                 ตรวจสอบการ ทำงานของเครื่อง
@@ -236,7 +261,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 ดูปริมาณน้ำที่ออกจากท่อ เมื่อเครื่องทำงาน
@@ -247,36 +272,65 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="service_1">ปกติ / พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="service_1"
+                label="ปกติ / พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="service_3">ปานกลาง</fish-checkbox>
+
+              <enhanced-check
+                v-model="service_3"
+                label="ปานกลาง"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
 
-              <fish-checkbox v-model="service_5">น้อย</fish-checkbox>
+              <enhanced-check
+                v-model="service_5"
+                label="น้อย"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="service_2">
-                ไม่ออก/มีเสียงดัง</fish-checkbox
-              >
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="service_2"
+                label="ไม่ออก/มีเสียงดัง"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
+              <fish-divider />
+
+              <enhanced-check
+                v-model="service_4"
+                label="ทำการซ่อม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="service_4">ทำการซ่อม</fish-checkbox>
 
-              <fish-divider />
-
-              <fish-checkbox v-model="service_6">แจ้งหัวหน้า</fish-checkbox>
+              <enhanced-check
+                v-model="service_6"
+                label="แจ้งหัวหน้า"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -294,7 +348,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ซีลเครื่องปั้ม
@@ -305,7 +359,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 สังเกตุด้วยสายตา ดูว่ามีการรั่วของน้ำ ความซึกหรอ
@@ -316,26 +370,47 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="seal_1">พร้อมใช้</fish-checkbox>
-
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="seal_1"
+                label="ปกติ / พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="seal_3">ชำรุด</fish-checkbox>
+
+              <enhanced-check
+                v-model="seal_3"
+                label="ชำรุด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="seal_2"> มีรอยรั่วซึม</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="seal_2"
+                label="มีรอยรั่วซึม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="seal_4">ส่งซ่อมบริษัท</fish-checkbox>
+
+              <enhanced-check
+                v-model="seal_4"
+                label="ส่งซ่อมบริษัท"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -353,7 +428,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome>สภาพโดยรวม
                 ของเครื่อง
@@ -364,7 +439,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ดูสี จุดแตกร้าว
                 การกัดกรอน น๊อต/สกรู การสั่นสะเทือน
@@ -376,34 +451,63 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="condition_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="condition_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="condition_3">แตกร้าว</fish-checkbox>
+
+              <enhanced-check
+                v-model="condition_3"
+                label="แตกร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="condition_5">ทาสีใหม่</fish-checkbox>
+
+              <enhanced-check
+                v-model="condition_5"
+                label="ทาสีใหม่"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-checkbox v-model="condition_2">
                 เปลี่ยนน๊อต/สกรู</fish-checkbox
               >
 
               <fish-divider />
-              <fish-checkbox v-model="condition_4">มีการกัดกร่อน</fish-checkbox>
+
+              <enhanced-check
+                v-model="condition_4"
+                label="มีการกัดกร่อน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="condition_6">ส่งซ่อมบริษัท</fish-checkbox>
+
+              <enhanced-check
+                v-model="condition_6"
+                label="ส่งซ่อมบริษัท"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -421,7 +525,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ชุดใบพัดปั้ม
@@ -432,7 +536,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 ดูจุดแตกร้าว ซึกหรอ การหมุน การสั่นสะเทือน เสียงดัง การกัดกรอน
@@ -443,34 +547,63 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="propeller_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="propeller_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="propeller_3">แตกร้าว</fish-checkbox>
+
+              <enhanced-check
+                v-model="propeller_3"
+                label="แตกร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="propeller_5">สึกหรอ</fish-checkbox>
+
+              <enhanced-check
+                v-model="propeller_5"
+                label="สึกหรอ"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-checkbox v-model="propeller_2">
                 สันสะเทือน/เสียงดัง</fish-checkbox
               >
 
               <fish-divider />
-              <fish-checkbox v-model="propeller_4">มีการกัดกร่อน</fish-checkbox>
+
+              <enhanced-check
+                v-model="propeller_4"
+                label="มีการกัดกร่อน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="propeller_6">ส่งซ่อมบริษัท</fish-checkbox>
+
+              <enhanced-check
+                v-model="propeller_6"
+                label="ส่งซ่อมบริษัท"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -488,7 +621,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >หอยโข่งปั้ม
@@ -499,7 +632,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ดูจุดแตกร้าว
                 ซึกหรอ การกัดกรอน
@@ -510,32 +643,65 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="snail_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="snail_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="snail_3">แตกร้าว</fish-checkbox>
+
+              <enhanced-check
+                v-model="snail_3"
+                label="แตกร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="snail_5">สึกหรอ</fish-checkbox>
+
+              <enhanced-check
+                v-model="snail_5"
+                label="สึกหรอ"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="snail_2">มีรอยร้าว</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="snail_2"
+                label="มีรอยร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
+              <fish-divider />
+
+              <enhanced-check
+                v-model="snail_4"
+                label="มีการกัดกร่อน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="snail_4">มีการกัดกร่อน</fish-checkbox>
 
-              <fish-divider />
-              <fish-checkbox v-model="snail_6">อุดตัน</fish-checkbox>
+              <enhanced-check
+                v-model="snail_6"
+                label="อุดตัน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -553,7 +719,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ระดับน้ำมันเครื่อง
@@ -564,7 +730,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 ดูระดับน้ำมันเครื่อง สีของน้ำมัน
@@ -575,29 +741,57 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="oil_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="oil_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="oil_3">เติม</fish-checkbox>
+
+              <enhanced-check
+                v-model="oil_3"
+                label="เติม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="oil_5">เปลี่ยน</fish-checkbox>
+
+              <enhanced-check
+                v-model="oil_5"
+                label="เปลี่ยน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="oil_2">ต่ำกว่าระดับ</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="oil_2"
+                label="ต่ำกว่าระดับ"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="oil_4">สีดำ/ค้น</fish-checkbox>
+
+              <enhanced-check
+                v-model="oil_4"
+                label="สีดำ/ค้น"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -615,7 +809,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome>อัดจาระบี
               </h5>
@@ -625,7 +819,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 อัดจารบีตามจุดต่างๆ
@@ -636,20 +830,30 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="jarabi_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="jarabi_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="jarabi_2">อัดจารบี</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="jarabi_2"
+                label="อัดจารบี"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -667,7 +871,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ทำความสะอาด
@@ -678,7 +882,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ดูคราบสกปรก
               </h5>
@@ -688,26 +892,48 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="clean_1">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="clean_1"
+                label="ฉีดน้ำใช้แปรงขัด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="clean_3">ใช้โบว์เวอร์เปา</fish-checkbox>
+
+              <enhanced-check
+                v-model="clean_3"
+                label="ใช้โบว์เวอร์เปา"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="clean_2">ใช้ปั้มแรงดัน</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="clean_2"
+                label="ใช้ปั้มแรงดัน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="clean_4">ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
+
+              <enhanced-check
+                v-model="clean_4"
+                label="ใช้ผ้าชุบน้ำเช็ด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -725,7 +951,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ชุดแขนของเครื่อง กวาดตะกอน
@@ -736,7 +962,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 ดูการหมุนของแขนกวาดตะกอน น๊อต/สกรู การสั่นสะเทือน เสียงดัง
@@ -748,29 +974,56 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="arm_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="arm_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="arm_3">ชำรุด</fish-checkbox>
 
+              <enhanced-check
+                v-model="arm_3"
+                label="ชำรุด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="arm_5">ทาสีใหม่</fish-checkbox>
+
+              <enhanced-check
+                v-model="arm_5"
+                label="ทาสีใหม่"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="arm_2">เปลี่ยนน๊อต/สกรู</fish-checkbox>
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="arm_2"
+                label="เปลี่ยนน๊อต/สกรู"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="arm_4">สึกหรอ/เป็นสนิม</fish-checkbox>
+
+              <enhanced-check
+                v-model="arm_4"
+                label="สึกหรอ/เป็นสนิม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -788,7 +1041,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 250px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ตรวจเช็คระบบ ควบคุมปั้ม
@@ -799,7 +1052,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 250px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome>
                 ตรวจเช็คอุปกรณ์/ทำความสะอาด
@@ -810,33 +1063,57 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="system_1">พร้อมใช้</fish-checkbox>
+            <fish-segment style="height: 250px;  position: relative;">
+              <enhanced-check
+                v-model="system_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="system_3">เปลี่ยนอุปกรณ์</fish-checkbox>
+
+              <enhanced-check
+                v-model="system_3"
+                label="เปลี่ยนอุปกรณ์"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="system_5"
-                >ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม</fish-checkbox
-              >
+
+              <enhanced-check
+                v-model="system_5"
+                label="ตรวจเช๊ค AUTO MAN ON OFF ตู้ควบคุม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="system_2">ตรวจเช็คไฟโชว์</fish-checkbox>
+            <fish-segment style="height: 250px;  position: relative;">
+              <enhanced-check
+                v-model="system_2"
+                label="ตรวจเช็คไฟโชว์"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
 
               <fish-divider />
-              <fish-checkbox v-model="system_4"
-                >ใช้โบว์เป้าทำความสะอาด</fish-checkbox
-              >
+
+              <enhanced-check
+                v-model="system_4"
+                label="ใช้โบว์เป้าทำความสะอาด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 250px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -854,7 +1131,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 220px;  position: relative;">
+            <fish-segment style="height: 280px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome>ตรวจสอบบ่อ
               </h5>
@@ -864,7 +1141,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 220px;  position: relative;">
+            <fish-segment style="height: 280px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ความสกปรก ขยะ
                 รอยร้าวของบ่อ สภาพโดยรวม
@@ -875,38 +1152,78 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 220px;  position: relative;">
-              <fish-checkbox v-model="sump_1">มีรอยร้าว</fish-checkbox>
-
+            <fish-segment style="height: 280px;  position: relative;">
+              <enhanced-check
+                v-model="sump_1"
+                label="มีรอยร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_3">ตักเอาขยะออก</fish-checkbox>
 
+              <enhanced-check
+                v-model="sump_3"
+                label="ตักเอาขยะออก"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_5">ฉีดน้ำใช้แปรงขัด</fish-checkbox>
 
+              <enhanced-check
+                v-model="sump_5"
+                label="ฉีดน้ำใช้แปรงขัด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_7">ใช้ปั้มแรงดันฉีด</fish-checkbox>
+
+              <enhanced-check
+                v-model="sump_7"
+                label="ใช้ปั้มแรงดันฉีด"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 220px;  position: relative;">
-              <fish-checkbox v-model="sump_2">แจ้งหัวหน้า</fish-checkbox>
-
+            <fish-segment style="height: 280px;  position: relative;">
+              <enhanced-check
+                v-model="sump_2"
+                label="แจ้งหัวหน้า"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_4">ดูดเลนด้วยไดโว่</fish-checkbox>
 
+              <enhanced-check
+                v-model="sump_4"
+                label="ดูดเลนด้วยไดโว่"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_6">ทำการซ่อมแซม</fish-checkbox>
 
+              <enhanced-check
+                v-model="sump_6"
+                label="ทำการซ่อมแซม"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="sump_8">แจ้งบริษัท</fish-checkbox>
+
+              <enhanced-check
+                v-model="sump_8"
+                label="แจ้งบริษัท"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 220px;  position: relative;">
+            <fish-segment style="height: 280px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -923,7 +1240,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >รายการ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="arrow-right"></vue-fontawesome
                 >ตรวจเช็คถังคลอรีน จุดต่อสาย
@@ -934,7 +1251,7 @@
             <fish-tag index="bottom left" attached="bottom left"
               >แนวทางการตรวจเช็ค</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <h5>
                 <vue-fontawesome icon="bug"></vue-fontawesome> ดูรอยแตก
                 สภาพของถัง จุดต่อของสายคลอรีน
@@ -945,31 +1262,54 @@
             <fish-tag index="bottom left" attached="bottom left"
               >สถานะ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="chlorine_1">พร้อมใช้</fish-checkbox>
-
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="chlorine_1"
+                label="พร้อมใช้"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="chlorine_3">แตกร้าว</fish-checkbox>
 
+              <enhanced-check
+                v-model="chlorine_3"
+                label="แตกร้าว"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="chlorine_5">มีการกัดกร่อน</fish-checkbox>
+
+              <enhanced-check
+                v-model="chlorine_5"
+                label="มีการกัดกร่อน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="3">
-            <fish-segment style="height: 200px;  position: relative;">
-              <fish-checkbox v-model="chlorine_2">เปลี่ยนถัง</fish-checkbox>
-
+            <fish-segment style="height: 220px;  position: relative;">
+              <enhanced-check
+                v-model="chlorine_2"
+                label="เปลี่ยนถัง"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
               <fish-divider />
-              <fish-checkbox v-model="chlorine_4"
-                >เปลี่ยนสายคลอรีน</fish-checkbox
-              >
+
+              <enhanced-check
+                v-model="chlorine_4"
+                label="เปลี่ยนสายคลอรีน"
+                subClass="primary"
+                animate="true"
+              ></enhanced-check>
             </fish-segment>
           </fish-col>
           <fish-col span="6">
             <fish-tag index="bottom left" attached="bottom left"
               >หมายเหตุ</fish-tag
             >
-            <fish-segment style="height: 200px;  position: relative;">
+            <fish-segment style="height: 220px;  position: relative;">
               <fish-input
                 type="textarea"
                 style="height:100%; width:100%;"
@@ -1170,16 +1510,20 @@
 </template>
 
 <script>
-import axios from 'axios';
-import {APIPath} from '../../service/APIPath';
+import axios from "axios";
+import { EnhancedCheck } from "vue-enhanced-check";
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 export default {
-  name: 'form',
+  name: "form",
+  components: {
+    EnhancedCheck
+  },
   data() {
     return {
       // api_path: 'http://192.168.5.187/0161/pump/pump/api/',
       //api_path: "http://localhost/pump/pump/api/",
-      tab: '',
+      tab: "",
       p1_show: true,
       p2_show: true,
       p3_show: true,
@@ -1194,110 +1538,110 @@ export default {
       p12_show: true,
       p13_show: true,
       no: false,
-      month: '',
-      place: 'บ่อบำบัดน้ำเสีย',
-      pumps_brands: '',
-      pump_brand: '',
-      on: '',
-      pumps: '',
-      pump: '',
-      id: '',
-      install_points: '',
-      install_point: '',
-      dateservice: '',
+      month: "",
+      place: "บ่อบำบัดน้ำเสีย",
+      pumps_brands: "",
+      pump_brand: "",
+      on: "",
+      pumps: "",
+      pump: "",
+      id: "",
+      install_points: "",
+      install_point: "",
+      dateservice: "",
       wire_1: [],
-      wire_2: '',
-      wire_3: '',
-      wire_4: '',
-      wire_5: '',
-      wire_other: '',
-      service_1: '',
-      service_2: '',
-      service_3: '',
-      service_4: '',
-      service_5: '',
-      service_6: '',
-      service_other: '',
-      seal_1: '',
-      seal_2: '',
-      seal_3: '',
-      seal_4: '',
-      seal_other: '',
-      condition_1: '',
-      condition_2: '',
-      condition_3: '',
-      condition_4: '',
-      condition_5: '',
-      condition_6: '',
-      condition_other: '',
-      propeller_1: '',
-      propeller_2: '',
-      propeller_3: '',
-      propeller_4: '',
-      propeller_5: '',
-      propeller_6: '',
-      propeller_other: '',
-      snail_1: '',
-      snail_2: '',
-      snail_3: '',
-      snail_4: '',
-      snail_5: '',
-      snail_6: '',
-      snail_other: '',
-      oil_1: '',
-      oil_2: '',
-      oil_3: '',
-      oil_4: '',
-      oil_5: '',
-      oil_other: '',
-      jarabi_1: '',
-      jarabi_2: '',
-      jarabi_other: '',
-      clean_1: '',
-      clean_2: '',
-      clean_3: '',
-      clean_4: '',
-      clean_other: '',
-      arm_1: '',
-      arm_2: '',
-      arm_3: '',
-      arm_4: '',
-      arm_5: '',
-      arm_other: '',
-      system_1: '',
-      system_2: '',
-      system_3: '',
-      system_4: '',
-      system_5: '',
-      system_other: '',
-      sump_1: '',
-      sump_2: '',
-      sump_3: '',
-      sump_4: '',
-      sump_5: '',
-      sump_6: '',
-      sump_7: '',
-      sump_8: '',
-      sump_other: '',
-      chlorine_1: '',
-      chlorine_2: '',
-      chlorine_3: '',
-      chlorine_4: '',
-      chlorine_5: '',
-      chlorine_other: '',
-      woker: '',
-      woker_approve: '',
-      woker_other: '',
-      boss_pump: '',
-      boss_pump_approve: '',
-      boss_pump_other: '',
-      inspector: '',
-      inspector_approve: '',
-      inspector_other: '',
-      manage: '',
-      manage_approve: '',
-      manage_other: '',
-      ok: ''
+      wire_2: "",
+      wire_3: "",
+      wire_4: "",
+      wire_5: "",
+      wire_other: "",
+      service_1: "",
+      service_2: "",
+      service_3: "",
+      service_4: "",
+      service_5: "",
+      service_6: "",
+      service_other: "",
+      seal_1: "",
+      seal_2: "",
+      seal_3: "",
+      seal_4: "",
+      seal_other: "",
+      condition_1: "",
+      condition_2: "",
+      condition_3: "",
+      condition_4: "",
+      condition_5: "",
+      condition_6: "",
+      condition_other: "",
+      propeller_1: "",
+      propeller_2: "",
+      propeller_3: "",
+      propeller_4: "",
+      propeller_5: "",
+      propeller_6: "",
+      propeller_other: "",
+      snail_1: "",
+      snail_2: "",
+      snail_3: "",
+      snail_4: "",
+      snail_5: "",
+      snail_6: "",
+      snail_other: "",
+      oil_1: "",
+      oil_2: "",
+      oil_3: "",
+      oil_4: "",
+      oil_5: "",
+      oil_other: "",
+      jarabi_1: "",
+      jarabi_2: "",
+      jarabi_other: "",
+      clean_1: "",
+      clean_2: "",
+      clean_3: "",
+      clean_4: "",
+      clean_other: "",
+      arm_1: "",
+      arm_2: "",
+      arm_3: "",
+      arm_4: "",
+      arm_5: "",
+      arm_other: "",
+      system_1: "",
+      system_2: "",
+      system_3: "",
+      system_4: "",
+      system_5: "",
+      system_other: "",
+      sump_1: "",
+      sump_2: "",
+      sump_3: "",
+      sump_4: "",
+      sump_5: "",
+      sump_6: "",
+      sump_7: "",
+      sump_8: "",
+      sump_other: "",
+      chlorine_1: "",
+      chlorine_2: "",
+      chlorine_3: "",
+      chlorine_4: "",
+      chlorine_5: "",
+      chlorine_other: "",
+      woker: "",
+      woker_approve: "",
+      woker_other: "",
+      boss_pump: "",
+      boss_pump_approve: "",
+      boss_pump_other: "",
+      inspector: "",
+      inspector_approve: "",
+      inspector_other: "",
+      manage: "",
+      manage_approve: "",
+      manage_other: "",
+      ok: ""
     };
   },
   methods: {
@@ -1306,7 +1650,7 @@ export default {
       this.$refs.form.validate(valid => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
           axios
             .get(`${apiPath.getBaseUrl()}form_pump_save.php`, {
@@ -1408,10 +1752,10 @@ export default {
               this.ok = response.data;
 
               //this.$message.success('สำเร็จ:' + this.ok[0].message, 5000);
-              this.$message.success('สำเร็จ:' + 'เพิ่มข้อมูลสำเร็จ', 5000);
+              this.$message.success("สำเร็จ:" + "เพิ่มข้อมูลสำเร็จ", 5000);
 
               this.clear();
-              this.$router.push('/');
+              this.$router.push("/");
             });
         }
       });
@@ -1419,97 +1763,97 @@ export default {
     clear() {
       //เลื่อนไปหน้าจอ
       window.scrollTo(0, 0);
-      this.month = '';
-      this.pump = '';
-      this.on = '';
-      this.pump_brand = '';
-      this.pump = '';
-      this.id = '';
-      this.install_point = '';
-      this.dateservice = '';
-      this.wire_1 = '';
-      this.wire_2 = '';
-      this.wire_3 = '';
-      this.wire_4 = '';
-      this.wire_5 = '';
-      this.wire_other = '';
-      this.service_1 = '';
-      this.service_2 = '';
-      this.service_3 = '';
-      this.service_4 = '';
-      this.service_5 = '';
-      this.service_6 = '';
-      this.service_other = '';
-      this.seal_1 = '';
-      this.seal_2 = '';
-      this.seal_3 = '';
-      this.seal_4 = '';
-      this.seal_other = '';
-      this.condition_1 = '';
-      this.condition_2 = '';
-      this.condition_3 = '';
-      this.condition_4 = '';
-      this.condition_5 = '';
-      this.condition_6 = '';
-      this.condition_other = '';
-      this.propeller_1 = '';
-      this.propeller_2 = '';
-      this.propeller_3 = '';
-      this.propeller_4 = '';
-      this.propeller_5 = '';
-      this.propeller_6 = '';
-      this.propeller_other = '';
-      this.snail_1 = '';
-      this.snail_2 = '';
-      this.snail_3 = '';
-      this.snail_4 = '';
-      this.snail_5 = '';
-      this.snail_6 = '';
-      this.snail_other = '';
-      this.oil_1 = '';
-      this.oil_2 = '';
-      this.oil_3 = '';
-      this.oil_4 = '';
-      this.oil_5 = '';
-      this.oil_other = '';
-      this.jarabi_1 = '';
-      this.jarabi_2 = '';
-      this.jarabi_other = '';
-      this.clean_1 = '';
-      this.clean_2 = '';
-      this.clean_3 = '';
-      this.clean_4 = '';
-      this.clean_other = '';
-      this.arm_1 = '';
-      this.arm_2 = '';
-      this.arm_3 = '';
-      this.arm_4 = '';
-      this.arm_5 = '';
-      this.arm_other = '';
-      this.system_1 = '';
-      this.system_2 = '';
-      this.system_3 = '';
-      this.system_4 = '';
-      this.system_5 = '';
-      this.system_other = '';
-      this.sump_1 = '';
-      this.sump_2 = '';
-      this.sump_3 = '';
-      this.sump_4 = '';
-      this.sump_5 = '';
-      this.sump_6 = '';
-      this.sump_7 = '';
-      this.sump_8 = '';
-      this.sump_other = '';
-      this.chlorine_1 = '';
-      this.chlorine_2 = '';
-      this.chlorine_3 = '';
-      this.chlorine_4 = '';
-      this.chlorine_5 = '';
-      this.chlorine_other = '';
-      this.woker = '';
-      this.woker_approve = '';
-      this.woker_other = '';
+      this.month = "";
+      this.pump = "";
+      this.on = "";
+      this.pump_brand = "";
+      this.pump = "";
+      this.id = "";
+      this.install_point = "";
+      this.dateservice = "";
+      this.wire_1 = "";
+      this.wire_2 = "";
+      this.wire_3 = "";
+      this.wire_4 = "";
+      this.wire_5 = "";
+      this.wire_other = "";
+      this.service_1 = "";
+      this.service_2 = "";
+      this.service_3 = "";
+      this.service_4 = "";
+      this.service_5 = "";
+      this.service_6 = "";
+      this.service_other = "";
+      this.seal_1 = "";
+      this.seal_2 = "";
+      this.seal_3 = "";
+      this.seal_4 = "";
+      this.seal_other = "";
+      this.condition_1 = "";
+      this.condition_2 = "";
+      this.condition_3 = "";
+      this.condition_4 = "";
+      this.condition_5 = "";
+      this.condition_6 = "";
+      this.condition_other = "";
+      this.propeller_1 = "";
+      this.propeller_2 = "";
+      this.propeller_3 = "";
+      this.propeller_4 = "";
+      this.propeller_5 = "";
+      this.propeller_6 = "";
+      this.propeller_other = "";
+      this.snail_1 = "";
+      this.snail_2 = "";
+      this.snail_3 = "";
+      this.snail_4 = "";
+      this.snail_5 = "";
+      this.snail_6 = "";
+      this.snail_other = "";
+      this.oil_1 = "";
+      this.oil_2 = "";
+      this.oil_3 = "";
+      this.oil_4 = "";
+      this.oil_5 = "";
+      this.oil_other = "";
+      this.jarabi_1 = "";
+      this.jarabi_2 = "";
+      this.jarabi_other = "";
+      this.clean_1 = "";
+      this.clean_2 = "";
+      this.clean_3 = "";
+      this.clean_4 = "";
+      this.clean_other = "";
+      this.arm_1 = "";
+      this.arm_2 = "";
+      this.arm_3 = "";
+      this.arm_4 = "";
+      this.arm_5 = "";
+      this.arm_other = "";
+      this.system_1 = "";
+      this.system_2 = "";
+      this.system_3 = "";
+      this.system_4 = "";
+      this.system_5 = "";
+      this.system_other = "";
+      this.sump_1 = "";
+      this.sump_2 = "";
+      this.sump_3 = "";
+      this.sump_4 = "";
+      this.sump_5 = "";
+      this.sump_6 = "";
+      this.sump_7 = "";
+      this.sump_8 = "";
+      this.sump_other = "";
+      this.chlorine_1 = "";
+      this.chlorine_2 = "";
+      this.chlorine_3 = "";
+      this.chlorine_4 = "";
+      this.chlorine_5 = "";
+      this.chlorine_other = "";
+      this.woker = "";
+      this.woker_approve = "";
+      this.woker_other = "";
 
       this.p1_show = true;
       this.p2_show = true;
@@ -1525,36 +1869,36 @@ export default {
       this.p12_show = true;
       this.p13_show = true;
 
-      this.$message.warning('ระบบเคลียร์หน้าจอแล้ว', 5000);
+      this.$message.warning("ระบบเคลียร์หน้าจอแล้ว", 5000);
     },
 
     //เลิอกหมายเลขเครื่อง / รุ่น
     pumpchange() {
-      if (this.pump == '1' && this.month == '3') {
+      if (this.pump == "1" && this.month == "3") {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '3') {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '3') {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '3') {
+      } else if (this.pump == "2" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '3') {
+      } else if (this.pump == "3" && this.month == "3") {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "4" && this.month == "3") {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "5" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1562,7 +1906,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '3') {
+      } else if (this.pump == "6" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1571,25 +1915,25 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '3') {
+      } else if (this.pump == "7" && this.month == "3") {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '3') {
-        this.p2_show = false;
-        this.p3_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '3') {
+      } else if (this.pump == "8" && this.month == "3") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "9" && this.month == "3") {
+        this.p2_show = false;
+        this.p3_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
         this.p7_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '1' && this.month == '1') {
+      } else if (this.pump == "1" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1599,7 +1943,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '1') {
+      } else if (this.pump == "2" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1609,7 +1953,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '1') {
+      } else if (this.pump == "3" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1619,7 +1963,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '1') {
+      } else if (this.pump == "4" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1629,7 +1973,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '1') {
+      } else if (this.pump == "5" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1637,7 +1981,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '1') {
+      } else if (this.pump == "6" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1646,7 +1990,7 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '1') {
+      } else if (this.pump == "7" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1656,13 +2000,13 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '1') {
+      } else if (this.pump == "8" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '1') {
+      } else if (this.pump == "9" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
@@ -1689,7 +2033,7 @@ export default {
   },
   mounted() {
     // alert(apiPath.getBaseUrl());
-    console.log('tag', '');
+    console.log("tag", "");
     // รุ่น
     axios
 
@@ -1719,11 +2063,11 @@ export default {
   background: MEDIUMAQUAMARINE;
 }
 .head {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
 }
 .headsmall {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 2px 2px 2px #aaa;
 }
 </style>

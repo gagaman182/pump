@@ -129,7 +129,7 @@
             <Sump :pumpall="tableloadpump_detail" v-show="p12_show" />
 
             <!-- 13    ตรวจเช็คถังคลอรีน จุดต่อสาย -->
-            <Chlorine :pumpall="tableloadpump_detail" v-show="p12_show" />
+            <Chlorine :pumpall="tableloadpump_detail" v-show="p13_show" />
           </fish-card>
           <br />
           <fish-row>

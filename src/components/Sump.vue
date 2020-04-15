@@ -6,30 +6,62 @@
         >ความสกปรก ขยะ รอยร้าวของบ่อ สภาพโดยรวม
       </fish-col>
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].sump_1">
-          <fish-checkbox index="1" disabled>มีรอยร้าว</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_2">
-          <fish-checkbox index="1" disabled>แจ้งหัวหน้า</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_3">
-          <fish-checkbox index="1" disabled>ตักเอาขยะออก</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_4">
-          <fish-checkbox index="1" disabled>ดูดเลนด้วยไดโว่</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_5">
-          <fish-checkbox index="1" disabled>ฉีดน้ำใช้แปรงขัด</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_6">
-          <fish-checkbox index="1" disabled>ทำการซ่อมแซม</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_7">
-          <fish-checkbox index="1" disabled>ใช้ปั้มแรงดันฉีด</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].sump_8">
-          <fish-checkbox index="1" disabled>แจ้งบริษัท</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].sump_1"
+          label="มีรอยร้าว"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_2"
+          label="แจ้งหัวหน้า"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_3"
+          label="ตักเอาขยะออก"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_4"
+          label="ดูดเลนด้วยไดโว่"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_5"
+          label="ฉีดน้ำใช้แปรงขัด"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_6"
+          label="ทำการซ่อมแซม"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_7"
+          label="ใช้ปั้มแรงดันฉีด"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+        <enhanced-check
+          v-model="pumpall[0].sump_8"
+          label="แจ้งบริษัท"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -46,8 +78,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Sump",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },

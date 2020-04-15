@@ -4,18 +4,37 @@
       <fish-col span="6" class="demo-col">ทำความสะอาด</fish-col>
       <fish-col span="6" class="demo-col">ดูคราบสกปรก</fish-col>
       <fish-col span="6" class="demo-col">
-        <fish-checkboxes v-model="pumpall[0].clean_1">
-          <fish-checkbox index="1" disabled>ฉีดน้ำใช้แปรงขัด</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].clean_2">
-          <fish-checkbox index="1" disabled>ใช้ปั้มแรงดัน</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].clean_3">
-          <fish-checkbox index="1" disabled>ใช้โบว์เวอร์เปา</fish-checkbox>
-        </fish-checkboxes>
-        <fish-checkboxes v-model="pumpall[0].clean_4">
-          <fish-checkbox index="1" disabled>ใช้ผ้าชุบน้ำเช็ด</fish-checkbox>
-        </fish-checkboxes>
+        <enhanced-check
+          v-model="pumpall[0].clean_1"
+          label="ฉีดน้ำใช้แปรงขัด"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].clean_2"
+          label="ใช้ปั้มแรงดัน"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].clean_3"
+          label="ใช้โบว์เวอร์เปา"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
+
+        <enhanced-check
+          v-model="pumpall[0].clean_4"
+          label="ใช้ผ้าชุบน้ำเช็ด"
+          subClass="primary"
+          animate="true"
+          disabled="true"
+        ></enhanced-check>
       </fish-col>
       <fish-col span="6" class="demo-col">
         <fish-input
@@ -32,8 +51,12 @@
 </template>
 
 <script>
+import { EnhancedCheck } from "vue-enhanced-check";
 export default {
   name: "Clean",
+  components: {
+    EnhancedCheck
+  },
   props: {
     pumpall: String
   },
