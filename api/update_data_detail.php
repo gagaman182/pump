@@ -99,18 +99,27 @@ $woker_other= $_GET["woker_other"];
 
 
 
-
-
-
-
 	 $return_arr = array();
 
 
 
  $sql = "UPDATE p_visit SET month='".$month."' ,place = '".$place."',pump_brand = '".$pump_brand."' ,on_number = '".$on_number."' ,pump = '".$pump."' ,
- id = '".$id."' ,install_point = '".$install_point."' ,dateservice = '".$dateservice."',
- wire_1 = '".$wire_1."',wire_2 = '".$wire_2."',wire_3 = '".$wire_3."',wire_4 = '".$wire_4."',wire_5 = '".$wire_5."',wire_other = '".$wire_other."',
- service_1 = '".$service_1."',service_2 = '".$service_2."',service_3 = '".$service_3."',service_4 = '".$service_4."',service_5 = '".$service_5."',service_6 = '".$service_6."',service_other = '".$service_other."' WHERE num = '".$num."' ";
+id = '".$id."' ,install_point = '".$install_point."' ,dateservice = '".$dateservice."',
+wire_1 = '".$wire_1."',wire_2 = '".$wire_2."',wire_3 = '".$wire_3."',wire_4 = '".$wire_4."',wire_5 = '".$wire_5."',wire_other = '".$wire_other."',
+service_1 = '".$service_1."',service_2 = '".$service_2."',service_3 = '".$service_3."',service_4 = '".$service_4."',service_5 = '".$service_5."',service_6 = '".$service_6."',service_other = '".$service_other."',
+seal_1 = '".$seal_1."',seal_2 = '".$seal_2."',seal_3 = '".$seal_3."',seal_4 = '".$seal_4."',seal_other = '".$seal_other."',
+condition_1 = '".$condition_1."', condition_2 = '".$condition_2."', condition_3 = '".$condition_3."', condition_4 = '".$condition_4."', condition_5 = '".$condition_5."', condition_6 = '".$condition_6."', condition_other = '".$condition_other."',
+propeller_1 = '".$propeller_1."', propeller_2 = '".$propeller_2."', propeller_3 = '".$propeller_3."', propeller_4 = '".$propeller_4."', propeller_5 = '".$propeller_5."', propeller_6 = '".$propeller_6."', propeller_other = '".$propeller_other."',
+snail_1 = '".$snail_1."', snail_2 = '".$snail_2."', snail_3 = '".$snail_3."', snail_4 = '".$snail_4."', snail_5 = '".$snail_5."', snail_6 = '".$snail_6."', snail_other = '".$snail_other."',
+oil_1 = '".$oil_1."', oil_2 = '".$oil_2."', oil_3 = '".$oil_3."', oil_4 = '".$oil_4."', oil_5 = '".$oil_5."', oil_other = '".$oil_other."',
+jarabi_1 = '".$jarabi_1."',jarabi_2 = '".$jarabi_2."',jarabi_other = '".$jarabi_other."',
+clean_1 = '".$clean_1."',clean_2 = '".$clean_2."',clean_3 = '".$clean_3."',clean_4 = '".$clean_4."',clean_other = '".$clean_other."',
+arm_1 = '".$arm_1."', arm_2 = '".$arm_2."', arm_3 = '".$arm_3."', arm_4 = '".$arm_4."', arm_5 = '".$arm_5."', arm_other = '".$arm_other."',
+system_1 = '".$system_1."', system_2 = '".$system_2."', system_3 = '".$system_3."', system_4 = '".$system_4."', system_5 = '".$system_5."', system_other = '".$system_other."',
+sump_1 = '".$sump_1."', sump_2 = '".$sump_2."', sump_3 = '".$sump_3."', sump_4 = '".$sump_4."', sump_5 = '".$sump_5."', sump_6 = '".$sump_6."', sump_7 = '".$sump_7."', sump_8 = '".$sump_8."', sump_other = '".$sump_other."',
+chlorine_1 = '".$chlorine_1."', chlorine_2 = '".$chlorine_2."', chlorine_3 = '".$chlorine_3."', chlorine_4 = '".$chlorine_4."', chlorine_5 = '".$chlorine_5."', chlorine_other = '".$chlorine_other."',
+woker = '".$woker."',woker_approve = '".$woker_approve."',woker_other = '".$woker_other."'
+WHERE num = '".$num."' ";
 
 
 
