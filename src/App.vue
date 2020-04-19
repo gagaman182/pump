@@ -39,7 +39,7 @@
 </template>
 <script>
 export default {
-  name: "pump"
+  name: "pump",
 };
 </script>
 <style scoped>
@@ -79,5 +79,8 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 42px;
+}
+.mainmenu-color {
+  color: blue;
 }
 </style>
