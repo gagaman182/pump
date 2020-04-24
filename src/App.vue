@@ -24,9 +24,14 @@
         <fish-option index="0" content="Content">
           <h3><router-link to="/">หน้าหลัก</router-link></h3></fish-option
         >
-        <fish-option index="2" content="Tongji">
+        <fish-option index="2" content="form">
           <h3>
             <router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link>
+          </h3></fish-option
+        >
+        <fish-option index="3" content="dayform">
+          <h3>
+            <router-link to="/dayform">แบบบันทึกบ่อบำบัด</router-link>
           </h3></fish-option
         >
       </fish-menu>
@@ -39,7 +44,7 @@
 </template>
 <script>
 export default {
-  name: "pump",
+  name: 'pump'
 };
 </script>
 <style scoped>
@@ -61,7 +66,7 @@ export default {
 }
 .head {
   color: navy;
-  font-family: "Sriracha";
+  font-family: 'Sriracha';
   text-shadow: 4px 4px 4px #aaa;
   font-size: 40px;
 }
