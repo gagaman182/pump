@@ -44,7 +44,7 @@
 </template>
 <script>
 export default {
-  name: 'pump'
+  name: "pump"
 };
 </script>
 <style scoped>
@@ -66,7 +66,7 @@ export default {
 }
 .head {
   color: navy;
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
   font-size: 40px;
 }
