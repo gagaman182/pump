@@ -145,7 +145,7 @@ $woker_other= $_GET["woker_other"];
         } else {
             // echo "Error: " . $sql . "<br>" . $conn->error;
             $return_message = array();
-            $row_array['message'] = "เพิ่มข้อมูลไม่สำเร็จหรือมีข้อมูลแล้ว";
+            $row_array['message'] = "เพิ่มข้อมูลไม่สำเร็จ";
             array_push($return_message,$row_array);
             
         }

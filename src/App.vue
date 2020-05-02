@@ -22,17 +22,28 @@
     <div slot="sider">
       <fish-menu mode="inline" style="width: 200px;">
         <fish-option index="0" content="Content">
-          <h3><router-link to="/">หน้าหลัก</router-link></h3></fish-option
+          <h4>
+            <i class="material-icons white-text">public</i
+            ><router-link to="/">หน้าหลัก</router-link>
+          </h4></fish-option
         >
         <fish-option index="2" content="form">
-          <h3>
-            <router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link>
-          </h3></fish-option
+          <h4>
+            <i class="material-icons white-text">calendar_today</i
+            ><router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link>
+          </h4></fish-option
         >
         <fish-option index="3" content="dayform">
-          <h3>
+          <h4>
+            <i class="material-icons white-text">store</i>
             <router-link to="/dayform">แบบบันทึกบ่อบำบัด</router-link>
-          </h3></fish-option
+          </h4></fish-option
+        >
+        <fish-option index="3" content="dayform">
+          <h4>
+            <i class="material-icons white-text">waves</i>
+            <router-link to="/quality">แบบวัดคุณภาพน้ำ</router-link>
+          </h4></fish-option
         >
       </fish-menu>
     </div>
@@ -44,7 +55,7 @@
 </template>
 <script>
 export default {
-  name: "pump"
+  name: 'pump',
 };
 </script>
 <style scoped>
@@ -66,7 +77,7 @@ export default {
 }
 .head {
   color: navy;
-  font-family: "Sriracha";
+  font-family: 'Sriracha';
   text-shadow: 4px 4px 4px #aaa;
   font-size: 40px;
 }

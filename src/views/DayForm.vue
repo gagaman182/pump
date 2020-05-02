@@ -1302,13 +1302,10 @@
           </div>
         </fish-col>
         <fish-col span="5">
-          <fish-form ref="form">
-            <fish-fields>
-              <fish-field>
-                <fish-input v-model="chlorineintank1" hint="ระบุ"></fish-input>
-              </fish-field>
-            </fish-fields>
-          </fish-form>
+          <fish-time-picker
+            v-model="input.chlorineintank1"
+            hint="ระบุเวลา"
+          ></fish-time-picker>
         </fish-col>
 
         <fish-col span="5">
@@ -1321,7 +1318,7 @@
           <fish-form ref="form">
             <fish-fields>
               <fish-field>
-                <fish-input v-model="chlorineintank1" hint="ระบุ"></fish-input>
+                <fish-input v-model="garbage" hint="กก."></fish-input>
               </fish-field>
             </fish-fields>
           </fish-form>
@@ -1335,13 +1332,11 @@
           </div>
         </fish-col>
         <fish-col span="5">
-          <fish-form ref="form">
-            <fish-fields>
-              <fish-field>
-                <fish-input v-model="chlorineintank2" hint="ระบุ"></fish-input>
-              </fish-field>
-            </fish-fields>
-          </fish-form>
+          <!-- <fish-input v-model="chlorineintank2" hint="ระบุ"></fish-input> -->
+          <fish-time-picker
+            v-model="input.chlorineintank2"
+            hint="ระบุเวลา"
+          ></fish-time-picker>
         </fish-col>
       </fish-row>
       <fish-row gutter=".5">
@@ -1370,12 +1365,17 @@
             </fish-fields>
           </fish-form>
         </fish-col>
+        <div class="input-wrapper">
+          <PincodeInput v-model="code" placeholder="0" />
+        </div>
       </fish-row>
-    </fish-card></div
-></template>
+    </fish-card>
+  </div>
+</template>
 <script>
 import {EnhancedCheck} from 'vue-enhanced-check';
 export default {
+  name: 'dayform',
   data() {
     return {
       input: {
@@ -1462,6 +1462,7 @@ export default {
         storetrap2_3: '',
         chlorineintank1: '',
         chlorineintank2: '',
+        garbage: '',
         others: '',
         woker: '',
       },
@@ -1472,7 +1473,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .demo-col {
   padding: 10px 0;
