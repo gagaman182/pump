@@ -17,7 +17,7 @@
           span="6"
           label="วันที่ตรวจสอบและบำรุงรักษา"
           name="dateservice"
-          :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
+          :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
         >
           <!-- format from moment js L = DD/MM/YYYY -->
           <fish-date-picker
@@ -511,63 +511,63 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import {APIPath} from '../../service/APIPath';
+import axios from "axios";
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 export default {
-  name: 'qulity',
+  name: "qulity",
   data() {
     return {
       input: {
-        dateservice: '',
-        pumpadjuct1: '',
-        pumpadjuct2: '',
-        pumpadjuctdo1: '',
-        pumpadjuctdo2: '',
-        pumpadjucttemp1: '',
-        pumpadjucttemp2: '',
-        pumpadjuctv301: '',
-        pumpadjuctv302: '',
-        pumpadjuctchlorine1: '',
-        pumpadjuctchlorine2: '',
-        pumpadjuctother: '',
-        aeration1: '',
-        aeration2: '',
-        aerationdo1: '',
-        aerationdo2: '',
-        aerationtemp1: '',
-        aerationtemp2: '',
-        aerationtv301: '',
-        aerationtv302: '',
-        aerationchlorine1: '',
-        aerationchlorine2: '',
-        aerationother: '',
-        silt1: '',
-        silt2: '',
-        siltdo1: '',
-        siltdo2: '',
-        silttemp1: '',
-        silttemp2: '',
-        siltv301: '',
-        siltv302: '',
-        siltchlorine1: '',
-        siltchlorine2: '',
-        siltother: '',
-        chlorine1: '',
-        chlorine2: '',
-        chlorinedo1: '',
-        chlorinedo2: '',
-        chlorinetemp1: '',
-        chlorinetemp2: '',
-        chlorinev301: '',
-        chlorinev302: '',
-        chlorinechlorine1: '',
-        chlorinechlorine2: '',
-        chlorineother: '',
+        dateservice: "",
+        pumpadjuct1: "",
+        pumpadjuct2: "",
+        pumpadjuctdo1: "",
+        pumpadjuctdo2: "",
+        pumpadjucttemp1: "",
+        pumpadjucttemp2: "",
+        pumpadjuctv301: "",
+        pumpadjuctv302: "",
+        pumpadjuctchlorine1: "",
+        pumpadjuctchlorine2: "",
+        pumpadjuctother: "",
+        aeration1: "",
+        aeration2: "",
+        aerationdo1: "",
+        aerationdo2: "",
+        aerationtemp1: "",
+        aerationtemp2: "",
+        aerationtv301: "",
+        aerationtv302: "",
+        aerationchlorine1: "",
+        aerationchlorine2: "",
+        aerationother: "",
+        silt1: "",
+        silt2: "",
+        siltdo1: "",
+        siltdo2: "",
+        silttemp1: "",
+        silttemp2: "",
+        siltv301: "",
+        siltv302: "",
+        siltchlorine1: "",
+        siltchlorine2: "",
+        siltother: "",
+        chlorine1: "",
+        chlorine2: "",
+        chlorinedo1: "",
+        chlorinedo2: "",
+        chlorinetemp1: "",
+        chlorinetemp2: "",
+        chlorinev301: "",
+        chlorinev302: "",
+        chlorinechlorine1: "",
+        chlorinechlorine2: "",
+        chlorineother: "",
 
-        others: '',
-        woker: '',
-        ok: '',
+        others: "",
+        woker: "",
+        ok: "",
       },
     };
   },
@@ -577,7 +577,7 @@ export default {
       this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
           axios
             .get(`${apiPath.getBaseUrl()}quality_water_save.php`, {
@@ -635,7 +635,7 @@ export default {
               this.input.ok = response.data;
 
               this.$message.success(
-                'สำเร็จ: ' + this.input.ok[0].message,
+                "สำเร็จ: " + this.input.ok[0].message,
                 5000
               );
             });
@@ -661,11 +661,11 @@ export default {
   background: navy;
 }
 .head {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
 }
 .headsmall {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 2px 2px 2px #aaa;
 }
 .left {

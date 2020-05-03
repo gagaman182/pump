@@ -68,13 +68,13 @@ $woker = $_GET["woker"];
         pumpadjuct1,pumpadjuct2,pumpadjuctdo1,pumpadjuctdo2,pumpadjucttemp1,pumpadjucttemp2,pumpadjuctv301,pumpadjuctv302,pumpadjuctchlorine1,pumpadjuctchlorine2,pumpadjuctother,
         aeration1,aeration2,aerationdo1,aerationdo2,aerationtemp1,aerationtemp2,aerationtv301,aerationtv302,aerationchlorine1,aerationchlorine2,aerationother,
         silt1,silt2,siltdo1,siltdo2,silttemp1,silttemp2,siltv301,siltv302,siltchlorine1,siltchlorine2,siltother,
-        chlorine1,chlorine2,chlorinedo1,chlorinedo2,chlorinetemp1,chlorinetemp2,chlorinev301,chlorinev302,chlorinechlorine1,chlorinechlorine2,chlorineother
+        chlorine1,chlorine2,chlorinedo1,chlorinedo2,chlorinetemp1,chlorinetemp2,chlorinev301,chlorinev302,chlorinechlorine1,chlorinechlorine2,chlorineother,
         others,woker) VALUES('".$dateservice."',
         '".$pumpadjuct1."','".$pumpadjuct2."','".$pumpadjuctdo1."','".$pumpadjuctdo2."','".$pumpadjucttemp1."','".$pumpadjucttemp2."','".$pumpadjuctv301."','".$pumpadjuctv302."','".$pumpadjuctchlorine1."','".$pumpadjuctchlorine2."','".$pumpadjuctother."',
         '".$aeration1."','".$aeration2."','".$aerationdo1."','".$aerationdo2."','".$aerationtemp1."','".$aerationtemp2."','".$aerationtv301."','".$aerationtv302."','".$aerationchlorine1."','".$aerationchlorine2."','".$aerationother."',
         '".$silt1."','".$silt2."','".$siltdo1."','".$siltdo2."','".$silttemp1."','".$silttemp2."','".$siltv301."','".$siltv302."','".$siltchlorine1."','".$siltchlorine2."','".$siltother."',
         '".$chlorine1."','".$chlorine2."','".$chlorinedo1."','".$chlorinedo2."','".$chlorinetemp1."','".$chlorinetemp2."','".$chlorinev301."','".$chlorinev302."','".$chlorinechlorine1."','".$chlorinechlorine2."','".$chlorineother."',
-        '".$others."','".$woker."',)";
+        '".$others."','".$woker."')";
         if ($conn->query($strvisit) === TRUE) {
             // echo "ระบบทำงานเสร็จสมบูรณ์";
             

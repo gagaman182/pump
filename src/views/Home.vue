@@ -25,7 +25,7 @@
               <td>
                 <button
                   class="btn red darken-2 waves-effect waves-light compact-btn"
-                  @click="e => onRowClick(props.row, e)"
+                  @click="(e) => onRowClick(props.row, e)"
                 >
                   <i class="material-icons white-text">add_to_queue</i>
                 </button>
@@ -41,7 +41,7 @@
         <fish-modal
           title="ใบตรวจเช็คบำรุงรักษา"
           :visible.sync="showModal"
-          attached="right"
+          attached="left"
         >
           <fish-card color="orange" fluid>
             <div slot="header">
@@ -185,7 +185,7 @@ export default {
     Arm,
     System,
     Sump,
-    Chlorine
+    Chlorine,
   },
   data() {
     return {
@@ -208,13 +208,13 @@ export default {
           label: "เลขที่ใบตรวจเช็ค",
           field: "num",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "ช่วงเดือนบำรุงรักษา",
           field: "month",
           numeric: false,
-          html: false
+          html: false,
         },
         // {
         //   label: 'สถานที่',
@@ -226,62 +226,62 @@ export default {
           label: "ยี่ห้อ",
           field: "p_pump_brand",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "ON",
           field: "on_number",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "หมายเลขเครื่อง / รุ่น",
           field: "p_pump",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "ID",
           field: "id",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "จุดติดตั้ง",
           field: "install_point_name",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "วันที่ตรวจเช็ค",
           field: "dateservice",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "หัวหน้าประปา ",
           field: "boss_approve",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "ผู้ตรวจสอบ",
           field: "inspector_approve",
           numeric: false,
-          html: false
+          html: false,
         },
         {
           label: "รองผู้อำนวยการฝ่ายบริหาร",
           field: "manage_approve",
           numeric: false,
-          html: false
-        }
+          html: false,
+        },
       ],
       tableloadpump: [],
       tableloadpump_detail: "0",
       wire_detail: "0",
       okmessage: "1",
-      idsend: ""
+      idsend: "",
     };
   },
 
@@ -294,7 +294,7 @@ export default {
     // },
 
     loadpump() {
-      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then(response => {
+      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then((response) => {
         this.tableloadpump = response.data;
         // //ส่ง object ไปให้ compunent
         // this.tableloadpump_detail = this.tableloadpump_detail;
@@ -316,9 +316,9 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: { num: num }
+          params: { num: num },
         })
-        .then(response => {
+        .then((response) => {
           this.tableloadpump_detail = response.data;
           // //ส่งเลขไปให้ compunent
           // this.tableloadpump_detail = this.tableloadpump_detail;
@@ -555,10 +555,10 @@ export default {
     pumpedit() {
       // alert(this.idsend);
       this.$router.push("/edit/" + this.idsend);
-    }
+    },
   },
   mounted() {
     this.loadpump();
-  }
+  },
 };
 </script>

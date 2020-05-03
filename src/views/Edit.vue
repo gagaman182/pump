@@ -48,7 +48,7 @@
             span="6"
             label="ระบุช่วงเดือนบำรุงรักษา"
             name="month"
-            :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'วันที่เป็นค่าว่าง' }]"
           >
             <fish-select v-model="month" hint="เลือกเดือน" @change="pumpchange">
               <fish-option index="1" content="1 เดือน"></fish-option>
@@ -62,8 +62,8 @@
             :rules="[
               {
                 required: true,
-                message: 'รุ่นเป็นค่าว่าง',
-              },
+                message: 'รุ่นเป็นค่าว่าง'
+              }
             ]"
           >
             <!-- <fish-select v-model="pump" @change="pumpchange" hint="เลือกรุ่น">
@@ -114,7 +114,7 @@
             span="6"
             label="ยี่ห้อ"
             name="pump_brand"
-            :rules="[{required: true, message: 'ยี่ห้อเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'ยี่ห้อเป็นค่าว่าง' }]"
           >
             <!-- <fish-select v-model="pump_brand" hint="เลือกยี่ห้อ">
               <fish-option
@@ -151,7 +151,7 @@
             span="6"
             label="จุดติดตั้ง"
             name="install_point"
-            :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
           >
             <!-- <fish-select v-model="install_point" hint="เลือกจุดติดตั้ง">
               <fish-option
@@ -178,7 +178,7 @@
             span="6"
             label="วันที่"
             name="dateservice"
-            :rules="[{required: true, message: 'จุดติดตั้งเป็นค่าว่าง'}]"
+            :rules="[{ required: true, message: 'จุดติดตั้งเป็นค่าว่าง' }]"
           >
             <!-- format from moment js L = DD/MM/YYYY -->
             <fish-date-picker
@@ -1563,19 +1563,19 @@
 </template>
 
 <script>
-import axios from 'axios';
-import {EnhancedCheck} from 'vue-enhanced-check';
+import axios from "axios";
+import { EnhancedCheck } from "vue-enhanced-check";
 // import moment from 'moment';
-import {APIPath} from '../../service/APIPath';
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 export default {
-  name: 'form',
+  name: "form",
   components: {
-    EnhancedCheck,
+    EnhancedCheck
   },
   data() {
     return {
-      tab: '',
+      tab: "",
       p1_show: true,
       p2_show: true,
       p3_show: true,
@@ -1590,123 +1590,123 @@ export default {
       p12_show: true,
       p13_show: true,
       no: false,
-      month: '',
-      place: 'บ่อบำบัดน้ำเสีย',
-      pumps_brands: '',
-      pump_brand: '',
-      on: '',
-      pumps: '',
-      pump: '',
-      id: '',
-      install_points: '',
-      install_point: '',
-      dateservice: '',
+      month: "",
+      place: "บ่อบำบัดน้ำเสีย",
+      pumps_brands: "",
+      pump_brand: "",
+      on: "",
+      pumps: "",
+      pump: "",
+      id: "",
+      install_points: "",
+      install_point: "",
+      dateservice: "",
 
-      wire_1: '',
-      wire_2: '',
-      wire_3: '',
-      wire_4: '',
-      wire_5: '',
-      wire_other: '',
-      service_1: '',
-      service_2: '',
-      service_3: '',
-      service_4: '',
-      service_5: '',
-      service_6: '',
-      service_other: '',
-      seal_1: '',
-      seal_2: '',
-      seal_3: '',
-      seal_4: '',
-      seal_other: '',
-      condition_1: '',
-      condition_2: '',
-      condition_3: '',
-      condition_4: '',
-      condition_5: '',
-      condition_6: '',
-      condition_other: '',
-      propeller_1: '',
-      propeller_2: '',
-      propeller_3: '',
-      propeller_4: '',
-      propeller_5: '',
-      propeller_6: '',
-      propeller_other: '',
-      snail_1: '',
-      snail_2: '',
-      snail_3: '',
-      snail_4: '',
-      snail_5: '',
-      snail_6: '',
-      snail_other: '',
-      oil_1: '',
-      oil_2: '',
-      oil_3: '',
-      oil_4: '',
-      oil_5: '',
-      oil_other: '',
-      jarabi_1: '',
-      jarabi_2: '',
-      jarabi_other: '',
-      clean_1: '',
-      clean_2: '',
-      clean_3: '',
-      clean_4: '',
-      clean_other: '',
-      arm_1: '',
-      arm_2: '',
-      arm_3: '',
-      arm_4: '',
-      arm_5: '',
-      arm_other: '',
-      system_1: '',
-      system_2: '',
-      system_3: '',
-      system_4: '',
-      system_5: '',
-      system_other: '',
-      sump_1: '',
-      sump_2: '',
-      sump_3: '',
-      sump_4: '',
-      sump_5: '',
-      sump_6: '',
-      sump_7: '',
-      sump_8: '',
-      sump_other: '',
-      chlorine_1: '',
-      chlorine_2: '',
-      chlorine_3: '',
-      chlorine_4: '',
-      chlorine_5: '',
-      chlorine_other: '',
-      woker: '',
-      woker_approve: '',
-      woker_other: '',
-      boss_pump: '',
-      boss_pump_approve: '',
-      boss_pump_other: '',
-      inspector: '',
-      inspector_approve: '',
-      inspector_other: '',
-      manage: '',
-      manage_approve: '',
-      manage_other: '',
-      ok: '',
-      pump_detail: '',
+      wire_1: "",
+      wire_2: "",
+      wire_3: "",
+      wire_4: "",
+      wire_5: "",
+      wire_other: "",
+      service_1: "",
+      service_2: "",
+      service_3: "",
+      service_4: "",
+      service_5: "",
+      service_6: "",
+      service_other: "",
+      seal_1: "",
+      seal_2: "",
+      seal_3: "",
+      seal_4: "",
+      seal_other: "",
+      condition_1: "",
+      condition_2: "",
+      condition_3: "",
+      condition_4: "",
+      condition_5: "",
+      condition_6: "",
+      condition_other: "",
+      propeller_1: "",
+      propeller_2: "",
+      propeller_3: "",
+      propeller_4: "",
+      propeller_5: "",
+      propeller_6: "",
+      propeller_other: "",
+      snail_1: "",
+      snail_2: "",
+      snail_3: "",
+      snail_4: "",
+      snail_5: "",
+      snail_6: "",
+      snail_other: "",
+      oil_1: "",
+      oil_2: "",
+      oil_3: "",
+      oil_4: "",
+      oil_5: "",
+      oil_other: "",
+      jarabi_1: "",
+      jarabi_2: "",
+      jarabi_other: "",
+      clean_1: "",
+      clean_2: "",
+      clean_3: "",
+      clean_4: "",
+      clean_other: "",
+      arm_1: "",
+      arm_2: "",
+      arm_3: "",
+      arm_4: "",
+      arm_5: "",
+      arm_other: "",
+      system_1: "",
+      system_2: "",
+      system_3: "",
+      system_4: "",
+      system_5: "",
+      system_other: "",
+      sump_1: "",
+      sump_2: "",
+      sump_3: "",
+      sump_4: "",
+      sump_5: "",
+      sump_6: "",
+      sump_7: "",
+      sump_8: "",
+      sump_other: "",
+      chlorine_1: "",
+      chlorine_2: "",
+      chlorine_3: "",
+      chlorine_4: "",
+      chlorine_5: "",
+      chlorine_other: "",
+      woker: "",
+      woker_approve: "",
+      woker_other: "",
+      boss_pump: "",
+      boss_pump_approve: "",
+      boss_pump_other: "",
+      inspector: "",
+      inspector_approve: "",
+      inspector_other: "",
+      manage: "",
+      manage_approve: "",
+      manage_other: "",
+      ok: "",
+      pump_detail: "",
       num: this.$route.params.id,
-      pumps_edit: [],
+      pumps_edit: []
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
           // alert(this.wire_1.split());
           // const wire_1_array = this.wire_1.split();
@@ -1804,16 +1804,16 @@ export default {
                 chlorine_other: this.chlorine_other,
                 woker: this.woker,
                 woker_approve: this.woker_approve,
-                woker_other: this.woker_other,
-              },
+                woker_other: this.woker_other
+              }
             })
-            .then((response) => {
+            .then(response => {
               this.ok = response.data;
 
-              this.$message.success('สำเร็จ:' + this.ok[0].message, 5000);
+              this.$message.success("สำเร็จ:" + this.ok[0].message, 5000);
               //this.$message.success("สำเร็จ:" + "แก้ไขข้อมูลบุคคลสำเร็จ", 5000);
 
-              this.$router.push('/');
+              this.$router.push("/");
             });
         }
       });
@@ -1821,31 +1821,31 @@ export default {
 
     //เลิอกหมายเลขเครื่อง / รุ่น
     pumpchange() {
-      if (this.pump == '1' && this.month == '3') {
+      if (this.pump == "1" && this.month == "3") {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '3') {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '3') {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '3') {
+      } else if (this.pump == "2" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '3') {
+      } else if (this.pump == "3" && this.month == "3") {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "4" && this.month == "3") {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "5" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1853,7 +1853,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '3') {
+      } else if (this.pump == "6" && this.month == "3") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1862,25 +1862,25 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '3') {
+      } else if (this.pump == "7" && this.month == "3") {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '3') {
-        this.p2_show = false;
-        this.p3_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '3') {
+      } else if (this.pump == "8" && this.month == "3") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
+        this.p13_show = false;
+      } else if (this.pump == "9" && this.month == "3") {
+        this.p2_show = false;
+        this.p3_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
         this.p7_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '1' && this.month == '1') {
+      } else if (this.pump == "1" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1890,7 +1890,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '2' && this.month == '1') {
+      } else if (this.pump == "2" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1900,7 +1900,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '3' && this.month == '1') {
+      } else if (this.pump == "3" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1910,7 +1910,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '4' && this.month == '1') {
+      } else if (this.pump == "4" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1920,7 +1920,7 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '5' && this.month == '1') {
+      } else if (this.pump == "5" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1928,7 +1928,7 @@ export default {
         this.p8_show = false;
         this.p10_show = false;
         this.p12_show = false;
-      } else if (this.pump == '6' && this.month == '1') {
+      } else if (this.pump == "6" && this.month == "1") {
         this.p2_show = false;
         this.p5_show = false;
         this.p6_show = false;
@@ -1937,7 +1937,7 @@ export default {
         this.p10_show = false;
         this.p11_show = false;
         this.p12_show = false;
-      } else if (this.pump == '7' && this.month == '1') {
+      } else if (this.pump == "7" && this.month == "1") {
         this.p3_show = false;
         this.p4_show = false;
         this.p5_show = false;
@@ -1947,13 +1947,13 @@ export default {
         this.p9_show = false;
         this.p10_show = false;
         this.p13_show = false;
-      } else if (this.pump == '8' && this.month == '1') {
+      } else if (this.pump == "8" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
         this.p6_show = false;
         this.p13_show = false;
-      } else if (this.pump == '9' && this.month == '1') {
+      } else if (this.pump == "9" && this.month == "1") {
         this.p2_show = false;
         this.p3_show = false;
         this.p5_show = false;
@@ -1982,9 +1982,9 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: {num: num},
+          params: { num: num }
         })
-        .then((response) => {
+        .then(response => {
           this.pump_detail = response.data;
           this.getpump_detail(this.pump_detail);
           this.pumpchange();
@@ -2082,7 +2082,7 @@ export default {
       this.woker = this.pump_detail[0].woker;
       this.woker_approve = this.pump_detail[0].woker_approve;
       this.woker_other = this.pump_detail[0].woker_other;
-    },
+    }
   },
   mounted() {
     //ดูรายละเอียดใบเช็ค
@@ -2093,18 +2093,18 @@ export default {
     axios
 
       .get(`${apiPath.getBaseUrl()}pump.php`)
-      .then((response) => (this.pumps = response.data));
+      .then(response => (this.pumps = response.data));
     // ยี่ห้อ
     axios
 
       .get(`${apiPath.getBaseUrl()}pump_brand.php`)
-      .then((response) => (this.pumps_brands = response.data));
+      .then(response => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
 
       .get(`${apiPath.getBaseUrl()}install_point.php`)
-      .then((response) => (this.install_points = response.data));
-  },
+      .then(response => (this.install_points = response.data));
+  }
 };
 </script>
 
@@ -2119,11 +2119,11 @@ export default {
 }
 
 .head {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 4px 4px 4px #aaa;
 }
 .headsmall {
-  font-family: 'Sriracha';
+  font-family: "Sriracha";
   text-shadow: 2px 2px 2px #aaa;
 }
 </style>
