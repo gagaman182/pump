@@ -9,7 +9,7 @@
               >รายการตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย
             </h3>
           </div>
-          <datatable title="" :columns="tableColumns1" :rows="tableRows1" />
+
           <datatable
             title="ตารางตรวจเช็คบำรุงรักษา"
             :columns="loadpumphead"
@@ -135,7 +135,7 @@
           <br />
           <fish-row>
             <fish-col span="2">
-              <fish-button type="basic" @click="pumpedit">
+              <fish-button type="primary" @click="pumpedit">
                 <vue-fontawesome icon="edit" size="2"></vue-fontawesome>
                 ตรวจสอบ-แก้ไข</fish-button
               >
@@ -208,13 +208,13 @@ export default {
           label: "เลขที่ใบตรวจเช็ค",
           field: "num",
           numeric: false,
-          html: false,
+          html: true,
         },
         {
-          label: "ช่วงเดือนบำรุงรักษา",
+          label: "ช่วงเดือน",
           field: "month",
           numeric: false,
-          html: false,
+          html: true,
         },
         // {
         //   label: 'สถานที่',
@@ -232,10 +232,10 @@ export default {
           label: "ON",
           field: "on_number",
           numeric: false,
-          html: false,
+          html: true,
         },
         {
-          label: "หมายเลขเครื่อง / รุ่น",
+          label: "หมายเลขเครื่อง/รุ่น",
           field: "p_pump",
           numeric: false,
           html: false,
@@ -262,19 +262,19 @@ export default {
           label: "หัวหน้าประปา ",
           field: "boss_approve",
           numeric: false,
-          html: false,
+          html: true,
         },
         {
           label: "ผู้ตรวจสอบ",
           field: "inspector_approve",
           numeric: false,
-          html: false,
+          html: true,
         },
         {
           label: "รองผู้อำนวยการฝ่ายบริหาร",
           field: "manage_approve",
           numeric: false,
-          html: false,
+          html: true,
         },
       ],
       tableloadpump: [],
@@ -562,3 +562,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+h1 {
+  color: green;
+}
+</style>

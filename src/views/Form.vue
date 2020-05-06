@@ -60,8 +60,8 @@
             :rules="[
               {
                 required: true,
-                message: 'รุ่นเป็นค่าว่าง'
-              }
+                message: 'รุ่นเป็นค่าว่าง',
+              },
             ]"
           >
             <fish-select v-model="pump" @change="pumpchange" hint="เลือกรุ่น">
@@ -1371,13 +1371,13 @@
           <fish-col>
             <fish-fields>
               <fish-field>
-                <fish-button type="basic" @click="submitHandler">
+                <fish-button type="primary" @click="submitHandler">
                   <vue-fontawesome icon="save" size="2"></vue-fontawesome
                   >บันทึก</fish-button
                 >
               </fish-field>
               <fish-field>
-                <fish-button type="basic" @click="clear">
+                <fish-button type="negative" @click="clear">
                   <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
                   >ยกเลิก</fish-button
                 >
@@ -1388,130 +1388,6 @@
       </fish-form>
     </fish-card>
     <br />
-    <fish-row>
-      <fish-col span="24">
-        <fish-card color="teal" fluid>
-          <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-          <fish-card color="orange" fluid>
-            <div slot="header">
-              <strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong>
-            </div>
-            <fish-row>
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input
-                  size="large"
-                  v-model="boss_pump"
-                  hint="ชื่อ-นามสกุล"
-                  disabled
-                ></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch
-                    v-model="boss_pump_approve"
-                    :yesOrNo="[1, 0]"
-                  ></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input
-                  size="large"
-                  type="textarea"
-                  style="height: 80px;  width: 100%; "
-                  v-model="boss_pump_other"
-                  hint="ระบุ"
-                ></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-          <br />
-
-          <fish-cards cols="two">
-            <fish-card color="orange">
-              <div slot="header">
-                <strong class="headsmall">ผู้ตรวจสอบ</strong>
-              </div>
-              <fish-row>
-                <fish-col span="6">
-                  <h4>ชื่อ-นามสกุล</h4>
-                  <fish-input
-                    size="large"
-                    v-model="inspector"
-                    hint="ชื่อ-นามสกุล"
-                    disabled
-                  ></fish-input>
-                </fish-col>
-                <fish-col span="6">
-                  <center>
-                    <h4>ตรวจสอบแล้ว</h4>
-                    <fish-switch
-                      v-model="inspector_approve"
-                      :yesOrNo="[1, 0]"
-                    ></fish-switch>
-                  </center>
-                </fish-col>
-                <fish-col span="12">
-                  <h4>หมายเหตุ</h4>
-                  <fish-input
-                    size="large"
-                    type="textarea"
-                    style="height: 80px;  width: 100%; "
-                    v-model="inspector_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </fish-col>
-              </fish-row>
-            </fish-card>
-            <fish-card color="orange">
-              <div slot="header">
-                <strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong>
-              </div>
-              <fish-row>
-                <fish-col span="6">
-                  <h4>ชื่อ-นามสกุล</h4>
-                  <fish-input
-                    size="large"
-                    v-model="manage"
-                    hint="ชื่อ-นามสกุล"
-                  ></fish-input>
-                </fish-col>
-                <fish-col span="6">
-                  <center>
-                    <h4>ตรวจสอบแล้ว</h4>
-                    <fish-switch
-                      v-model="manage_approve"
-                      :yesOrNo="[1, 0]"
-                    ></fish-switch>
-                  </center>
-                </fish-col>
-                <fish-col span="12">
-                  <h4>หมายเหตุ</h4>
-                  <fish-input
-                    size="large"
-                    type="textarea"
-                    style="height: 80px;  width: 100%; "
-                    v-model="manage_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </fish-col>
-              </fish-row>
-            </fish-card>
-          </fish-cards>
-          <br />
-          <fish-row>
-            <fish-col span="2">
-              <fish-button type="basic" @click="submitHandler">
-                <vue-fontawesome icon="save" size="2"></vue-fontawesome>
-                บันทึก</fish-button
-              >
-            </fish-col>
-          </fish-row>
-        </fish-card>
-      </fish-col>
-    </fish-row>
   </div>
 </template>
 
@@ -1523,7 +1399,7 @@ const apiPath = new APIPath();
 export default {
   name: "form",
   components: {
-    EnhancedCheck
+    EnhancedCheck,
   },
   data() {
     return {
@@ -1647,13 +1523,13 @@ export default {
       manage: "",
       manage_approve: "",
       manage_other: "",
-      ok: ""
+      ok: "",
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
           this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
@@ -1751,13 +1627,16 @@ export default {
                 chlorine_other: this.chlorine_other,
                 woker: this.woker,
                 woker_approve: this.woker_approve,
-                woker_other: this.woker_other
-              }
+                woker_other: this.woker_other,
+              },
             })
-            .then(response => {
+            .then((response) => {
               this.ok = response.data;
-
-              this.$message.success("สำเร็จ:" + this.ok[0].message, 5000);
+              if (this.ok[0].message == "เพิ่มข้อมูลสำเร็จ") {
+                this.$message.success("สำเร็จ: " + this.ok[0].message, 5000);
+              } else {
+                this.$message.error("เตือน: " + this.ok[0].message, 5000);
+              }
 
               this.clear();
               this.$router.push("/");
@@ -2034,7 +1913,7 @@ export default {
         this.p12_show = true;
         this.p13_show = true;
       }
-    }
+    },
   },
   mounted() {
     // alert(apiPath.getBaseUrl());
@@ -2043,18 +1922,18 @@ export default {
     axios
 
       .get(`${apiPath.getBaseUrl()}pump.php`)
-      .then(response => (this.pumps = response.data));
+      .then((response) => (this.pumps = response.data));
     // ยี่ห้อ
     axios
 
       .get(`${apiPath.getBaseUrl()}pump_brand.php`)
-      .then(response => (this.pumps_brands = response.data));
+      .then((response) => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
 
       .get(`${apiPath.getBaseUrl()}install_point.php`)
-      .then(response => (this.install_points = response.data));
-  }
+      .then((response) => (this.install_points = response.data));
+  },
 };
 </script>
 

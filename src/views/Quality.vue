@@ -500,7 +500,7 @@
         </fish-row>
         <fish-row>
           <fish-col span="2">
-            <fish-button type="basic" @click="submitHandler">
+            <fish-button type="primary" @click="submitHandler">
               <vue-fontawesome icon="save" size="2"></vue-fontawesome>
               บันทึก</fish-button
             >
@@ -633,11 +633,14 @@ export default {
             })
             .then((response) => {
               this.input.ok = response.data;
-
-              this.$message.success(
-                "สำเร็จ: " + this.input.ok[0].message,
-                5000
-              );
+              if (this.input.ok[0].message == "เพิ่มข้อมูลสำเร็จ") {
+                this.$message.success(
+                  "สำเร็จ: " + this.input.ok[0].message,
+                  5000
+                );
+              } else {
+                this.$message.error("เตือน: " + this.input.ok[0].message, 5000);
+              }
             });
         }
       });
