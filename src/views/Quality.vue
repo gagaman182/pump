@@ -567,14 +567,14 @@ export default {
 
         others: "",
         woker: "",
-        ok: "",
-      },
+        ok: ""
+      }
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         // console.log(valid);
         if (valid === false) {
           this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
@@ -628,10 +628,10 @@ export default {
                 chlorinechlorine2: this.input.chlorinechlorine2,
                 chlorineother: this.input.chlorineother,
                 others: this.input.others,
-                woker: this.input.woker,
-              },
+                woker: this.input.woker
+              }
             })
-            .then((response) => {
+            .then(response => {
               this.input.ok = response.data;
               if (this.input.ok[0].message == "เพิ่มข้อมูลสำเร็จ") {
                 this.$message.success(
@@ -644,8 +644,8 @@ export default {
             });
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

@@ -62,8 +62,8 @@
             :rules="[
               {
                 required: true,
-                message: 'รุ่นเป็นค่าว่าง',
-              },
+                message: 'รุ่นเป็นค่าว่าง'
+              }
             ]"
           >
             <!-- <fish-select v-model="pump" @change="pumpchange" hint="เลือกรุ่น">
@@ -1571,7 +1571,7 @@ const apiPath = new APIPath();
 export default {
   name: "form",
   components: {
-    EnhancedCheck,
+    EnhancedCheck
   },
   data() {
     return {
@@ -1697,13 +1697,13 @@ export default {
       ok: "",
       pump_detail: "",
       num: this.$route.params.id,
-      pumps_edit: [],
+      pumps_edit: []
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         // console.log(valid);
         if (valid === false) {
           this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
@@ -1804,10 +1804,10 @@ export default {
                 chlorine_other: this.chlorine_other,
                 woker: this.woker,
                 woker_approve: this.woker_approve,
-                woker_other: this.woker_other,
-              },
+                woker_other: this.woker_other
+              }
             })
-            .then((response) => {
+            .then(response => {
               this.ok = response.data;
               if (this.ok[0].message == "แก้ไขข้อมูลบุคคลสำเร็จ") {
                 this.$message.success("สำเร็จ: " + this.ok[0].message, 5000);
@@ -1984,9 +1984,9 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: { num: num },
+          params: { num: num }
         })
-        .then((response) => {
+        .then(response => {
           this.pump_detail = response.data;
           this.getpump_detail(this.pump_detail);
           this.pumpchange();
@@ -2084,7 +2084,7 @@ export default {
       this.woker = this.pump_detail[0].woker;
       this.woker_approve = this.pump_detail[0].woker_approve;
       this.woker_other = this.pump_detail[0].woker_other;
-    },
+    }
   },
   mounted() {
     //ดูรายละเอียดใบเช็ค
@@ -2095,18 +2095,18 @@ export default {
     axios
 
       .get(`${apiPath.getBaseUrl()}pump.php`)
-      .then((response) => (this.pumps = response.data));
+      .then(response => (this.pumps = response.data));
     // ยี่ห้อ
     axios
 
       .get(`${apiPath.getBaseUrl()}pump_brand.php`)
-      .then((response) => (this.pumps_brands = response.data));
+      .then(response => (this.pumps_brands = response.data));
     // จุดติดตั้ง
     axios
 
       .get(`${apiPath.getBaseUrl()}install_point.php`)
-      .then((response) => (this.install_points = response.data));
-  },
+      .then(response => (this.install_points = response.data));
+  }
 };
 </script>
 

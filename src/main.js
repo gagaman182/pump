@@ -25,8 +25,8 @@ import VueNumberInput from "@chenfengyuan/vue-number-input";
 
 //defined as global component
 Vue.component(
-    "VueFontawesome",
-    require("vue-fontawesome-icon/VueFontawesome.vue").default
+  "VueFontawesome",
+  require("vue-fontawesome-icon/VueFontawesome.vue").default
 );
 
 Vue.config.productionTip = false;
@@ -37,6 +37,6 @@ Vue.use(VueScrollProgressBar);
 Vue.component(VueNumberInput.name, VueNumberInput);
 
 new Vue({
-    router,
-    render: (h) => h(App),
+  router,
+  render: h => h(App)
 }).$mount("#app");

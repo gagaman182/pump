@@ -55,7 +55,7 @@
 </template>
 <script>
 export default {
-  name: "pump",
+  name: "pump"
 };
 </script>
 <style scoped>
