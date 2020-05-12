@@ -38,125 +38,60 @@
 
     <fish-row>
       <fish-col span="24">
-        <fish-modal
-          title="ใบตรวจเช็คบำรุงรักษา"
-          :visible.sync="showModal"
-          attached="left"
-        >
+        <!-- <fish-button @click="Line()">ทดสอบ</fish-button>
+        <pre>{{ okmessage }}</pre> -->
+        <vue-modaltor :visible="open" @hide="hideModal">
           <fish-card color="orange" fluid>
             <div slot="header">
-              <i class="material-icons white-text">library_books</i
-              ><strong>รายละเอียด</strong>
+              <h3>
+                <i class="material-icons white-text">library_books</i>
+                รายละเอียด
+              </h3>
             </div>
             <fish-form inline>
               <fish-field label=" ลำดับใบตรวจเช็ค:" inline>
-                <h4>{{ tableloadpump_detail[0].num }}</h4>
+                <h3>{{ tableloadpump_detail[0].num }}</h3>
               </fish-field>
               <fish-field label=" ช่วงเดือนบำรุงรักษา:" inline>
-                <h4>{{ tableloadpump_detail[0].month }} เดือน</h4>
+                <h3>{{ tableloadpump_detail[0].month }} เดือน</h3>
               </fish-field>
               <fish-field label=" สถานที่:" inline>
-                <h4>{{ tableloadpump_detail[0].place }}</h4>
+                <h3>{{ tableloadpump_detail[0].place }}</h3>
               </fish-field>
               <fish-field label=" ยี่ห้อ:" inline>
-                <h4>{{ tableloadpump_detail[0].p_pump_brand }}</h4>
+                <h3>{{ tableloadpump_detail[0].p_pump_brand }}</h3>
               </fish-field>
               <fish-field label=" ON:" inline>
-                <h4>{{ tableloadpump_detail[0].on_number }}</h4>
+                <h3>{{ tableloadpump_detail[0].on_number }}</h3>
               </fish-field>
               <fish-field label=" หมายเลขเครื่อง / รุ่น:" inline>
-                <h4>{{ tableloadpump_detail[0].p_pump }}</h4>
+                <h3>{{ tableloadpump_detail[0].p_pump }}</h3>
               </fish-field>
               <fish-field label=" ID:" inline>
-                <h4>{{ tableloadpump_detail[0].id }}</h4>
+                <h3>{{ tableloadpump_detail[0].id }}</h3>
               </fish-field>
               <fish-field label=" จุดติดตั้ง:" inline>
-                <h4>{{ tableloadpump_detail[0].install_point_name }}</h4>
+                <h3>{{ tableloadpump_detail[0].install_point_name }}</h3>
               </fish-field>
               <fish-field label=" วันที่ตรวจเช็ค:" inline>
-                <h4>{{ tableloadpump_detail[0].dateservice }}</h4>
+                <h3>{{ tableloadpump_detail[0].dateservice }}</h3>
               </fish-field>
             </fish-form>
           </fish-card>
           <fish-divider />
           <fish-card color="orange" fluid>
             <div slot="header">
-              <i class="material-icons white-text">web</i
-              ><strong>รายการตรวจเช็ค</strong>
+              <h3>
+                <i class="material-icons white-text">web</i>รายการตรวจเช็ค
+              </h3>
             </div>
             <fish-row>
-              <fish-col span="6" class="demo-col"><h4>รายการ</h4></fish-col>
+              <fish-col span="6" class="demo-col"><h3>รายการ</h3></fish-col>
               <fish-col span="6" class="demo-col"
-                ><h4>แนวทางการตรวจเช็ค</h4></fish-col
+                ><h3>แนวทางการตรวจเช็ค</h3></fish-col
               >
-              <fish-col span="6" class="demo-col"><h4>สถานะ</h4></fish-col>
-              <fish-col span="6" class="demo-col"><h4>หมายเหตุ</h4></fish-col>
-            </fish-row>
-            <fish-divider fitted></fish-divider>
-            <!-- 1 ชุดสายไฟเครื่องปั้ม  -->
-            <Wire :pumpall="tableloadpump_detail" v-show="p1_show" />
-
-            <!-- 2 ตรวจสอบการ ทำงานของเครื่อง  -->
-            <Service :pumpall="tableloadpump_detail" v-show="p2_show" />
-
-            <!-- 3 ซีลเครื่องปั้ม -->
-            <Seal :pumpall="tableloadpump_detail" v-show="p3_show" />
-
-            <!-- 4 สภาพโดยรวมของเครื่อง -->
-            <Condition :pumpall="tableloadpump_detail" v-show="p4_show" />
-
-            <!-- 5 ชุดใบพัดปั้ม -->
-            <Propeller :pumpall="tableloadpump_detail" v-show="p5_show" />
-
-            <!-- 6 หอยโข่งปั้ม -->
-            <Snail :pumpall="tableloadpump_detail" v-show="p6_show" />
-
-            <!-- 7 ระดับน้ำมันเครื่อง -->
-            <Oil :pumpall="tableloadpump_detail" v-show="p7_show" />
-
-            <!-- 8 อัดจาระบี -->
-            <Jarabi :pumpall="tableloadpump_detail" v-show="p8_show" />
-
-            <!-- 9 ทำความสะอาด -->
-            <Clean :pumpall="tableloadpump_detail" v-show="p9_show" />
-
-            <!-- 10 ชุดแขนของเครื่อง กวาดตะกอน -->
-            <Arm :pumpall="tableloadpump_detail" v-show="p10_show" />
-
-            <!-- 11  ตรวจเช็คระบบ ควบคุมปั้ม -->
-            <System :pumpall="tableloadpump_detail" v-show="p11_show" />
-
-            <!-- 12  ตรวจเช็คระบบ ควบคุมปั้ม -->
-            <Sump :pumpall="tableloadpump_detail" v-show="p12_show" />
-
-            <!-- 13    ตรวจเช็คถังคลอรีน จุดต่อสาย -->
-            <Chlorine :pumpall="tableloadpump_detail" v-show="p13_show" />
-          </fish-card>
-          <br />
-          <fish-row>
-            <fish-col span="2">
-              <fish-button type="primary" @click="pumpedit">
-                <vue-fontawesome icon="edit" size="2"></vue-fontawesome>
-                ตรวจสอบ-แก้ไข</fish-button
-              >
-            </fish-col>
-          </fish-row>
-        </fish-modal>
-        <!-- <fish-button @click="Line()">ทดสอบ</fish-button>
-        <pre>{{ okmessage }}</pre> -->
-        <vue-modaltor :visible="open" @hide="hideModal">
-          <fish-card color="orange" fluid>
-            <div slot="header">
-              <i class="material-icons white-text">web</i
-              ><strong>รายการตรวจเช็ค</strong>
-            </div>
-            <fish-row>
-              <fish-col span="6" class="demo-col"><h4>รายการ</h4></fish-col>
-              <fish-col span="6" class="demo-col"
-                ><h4>แนวทางการตรวจเช็ค</h4></fish-col
-              >
-              <fish-col span="6" class="demo-col"><h4>สถานะ</h4></fish-col>
-              <fish-col span="6" class="demo-col"><h4>หมายเหตุ</h4></fish-col>
+              <fish-col span="6" class="demo-col"><h3>สถานะ</h3></fish-col>
+              <fish-col span="6" class="demo-col"><h3>หมายเหตุ</h3></fish-col>
             </fish-row>
             <fish-divider fitted></fish-divider>
             <!-- 1 ชุดสายไฟเครื่องปั้ม  -->
@@ -215,27 +150,27 @@
 </template>
 
 <script>
-import DataTable from 'vue-materialize-datatable';
-import axios from 'axios';
-import {APIPath} from '../../service/APIPath';
+import DataTable from "vue-materialize-datatable";
+import axios from "axios";
+import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
 
-import Wire from '@/components/Wire.vue';
-import Service from '@/components/Service.vue';
-import Seal from '@/components/Seal.vue';
-import Condition from '@/components/Condition.vue';
-import Propeller from '@/components/Propeller.vue';
-import Snail from '@/components/Snail.vue';
-import Oil from '@/components/Oil.vue';
-import Jarabi from '@/components/Jarabi.vue';
-import Clean from '@/components/Clean.vue';
-import Arm from '@/components/Arm.vue';
-import System from '@/components/System.vue';
-import Sump from '@/components/Sump.vue';
-import Chlorine from '@/components/Chlorine.vue';
+import Wire from "@/components/Wire.vue";
+import Service from "@/components/Service.vue";
+import Seal from "@/components/Seal.vue";
+import Condition from "@/components/Condition.vue";
+import Propeller from "@/components/Propeller.vue";
+import Snail from "@/components/Snail.vue";
+import Oil from "@/components/Oil.vue";
+import Jarabi from "@/components/Jarabi.vue";
+import Clean from "@/components/Clean.vue";
+import Arm from "@/components/Arm.vue";
+import System from "@/components/System.vue";
+import Sump from "@/components/Sump.vue";
+import Chlorine from "@/components/Chlorine.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     datatable: DataTable,
     Wire,
@@ -271,14 +206,14 @@ export default {
       showModal: false,
       loadpumphead: [
         {
-          label: 'เลขที่ใบตรวจเช็ค',
-          field: 'num',
+          label: "เลขที่ใบตรวจเช็ค",
+          field: "num",
           numeric: false,
           html: true,
         },
         {
-          label: 'ช่วงเดือน',
-          field: 'month',
+          label: "ช่วงเดือน",
+          field: "month",
           numeric: false,
           html: true,
         },
@@ -289,65 +224,65 @@ export default {
         //   html: false,
         // },
         {
-          label: 'ยี่ห้อ',
-          field: 'p_pump_brand',
+          label: "ยี่ห้อ",
+          field: "p_pump_brand",
           numeric: false,
           html: false,
         },
         {
-          label: 'ON',
-          field: 'on_number',
+          label: "ON",
+          field: "on_number",
           numeric: false,
           html: true,
         },
         {
-          label: 'หมายเลขเครื่อง/รุ่น',
-          field: 'p_pump',
+          label: "หมายเลขเครื่อง/รุ่น",
+          field: "p_pump",
           numeric: false,
           html: false,
         },
         {
-          label: 'ID',
-          field: 'id',
+          label: "ID",
+          field: "id",
           numeric: false,
           html: false,
         },
         {
-          label: 'จุดติดตั้ง',
-          field: 'install_point_name',
+          label: "จุดติดตั้ง",
+          field: "install_point_name",
           numeric: false,
           html: false,
         },
         {
-          label: 'วันที่ตรวจเช็ค',
-          field: 'dateservice',
+          label: "วันที่ตรวจเช็ค",
+          field: "dateservice",
           numeric: false,
           html: false,
         },
         {
-          label: 'หัวหน้าประปา ',
-          field: 'boss_approve',
+          label: "หัวหน้าประปา ",
+          field: "boss_approve",
           numeric: false,
           html: true,
         },
         {
-          label: 'ผู้ตรวจสอบ',
-          field: 'inspector_approve',
+          label: "ผู้ตรวจสอบ",
+          field: "inspector_approve",
           numeric: false,
           html: true,
         },
         {
-          label: 'รองผู้อำนวยการฝ่ายบริหาร',
-          field: 'manage_approve',
+          label: "รองผู้อำนวยการฝ่ายบริหาร",
+          field: "manage_approve",
           numeric: false,
           html: true,
         },
       ],
       tableloadpump: [],
-      tableloadpump_detail: '0',
-      wire_detail: '0',
-      okmessage: '1',
-      idsend: '',
+      tableloadpump_detail: "0",
+      wire_detail: "0",
+      okmessage: "1",
+      idsend: "",
     };
   },
 
@@ -384,7 +319,7 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: {num: num},
+          params: { num: num },
         })
         .then((response) => {
           this.tableloadpump_detail = response.data;
@@ -411,34 +346,16 @@ export default {
     },
     pumpchange() {
       if (
-        this.tableloadpump_detail[0].p_pump_id == '1' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "1" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '2' &&
-        this.tableloadpump_detail[0].month == '3'
-      ) {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == '3' &&
-        this.tableloadpump_detail[0].month == '3'
-      ) {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == '4' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "2" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -447,8 +364,26 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '5' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "3" &&
+        this.tableloadpump_detail[0].month == "3"
+      ) {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == "4" &&
+        this.tableloadpump_detail[0].month == "3"
+      ) {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == "5" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -458,8 +393,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '6' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "6" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -470,15 +405,15 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '7' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "7" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '8' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "8" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -486,8 +421,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '9' &&
-        this.tableloadpump_detail[0].month == '3'
+        this.tableloadpump_detail[0].p_pump_id == "9" &&
+        this.tableloadpump_detail[0].month == "3"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -497,8 +432,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '1' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "1" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -510,8 +445,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '2' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "2" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -523,8 +458,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '3' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "3" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -536,8 +471,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '4' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "4" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -549,8 +484,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '5' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "5" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -560,8 +495,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '6' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "6" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -572,8 +507,8 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '7' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "7" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -585,8 +520,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '8' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "8" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -594,8 +529,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == '9' &&
-        this.tableloadpump_detail[0].month == '1'
+        this.tableloadpump_detail[0].p_pump_id == "9" &&
+        this.tableloadpump_detail[0].month == "1"
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -622,7 +557,7 @@ export default {
     },
     pumpedit() {
       // alert(this.idsend);
-      this.$router.push('/edit/' + this.idsend);
+      this.$router.push("/edit/" + this.idsend);
     },
     hideModal() {
       this.open = false;
