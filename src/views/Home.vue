@@ -4,34 +4,54 @@
       <fish-col span="24">
         <fish-card fluid color="teal">
           <div slot="header">
-            <h3 class="head">
-              <vue-fontawesome icon="copy" size="2"></vue-fontawesome
+            <h2>
+              <i class="material-icons white-text">build</i
               >รายการตรวจเช็คบำรุงรักษาเครื่องปั้ม / เครื่องจักรบ่อบำบัดน้ำเสีย
-            </h3>
+            </h2>
           </div>
 
-          <datatable
-            title="ตารางตรวจเช็คบำรุงรักษา"
-            :columns="loadpumphead"
-            :rows="tableloadpump"
+          <div>
+            <h2 class="head">
+              <i class="material-icons white-text">calendar_today</i
+              >ตารางใบตรวจเช็คบำรุงรักษา
+            </h2>
+          </div>
+          <fish-divider></fish-divider>
+          <vue-good-table
+            ref="formref"
+            :columns="form_column"
+            :rows="form_data"
+            :search-options="{ enabled: true }"
+            :pagination-options="{ enabled: true }"
+            :totalRows="totalRecords"
+            styleClass="vgt-table  striped"
+            :line-numbers="true"
+            :row-style-class="rowStyleClassFn"
+            @on-row-click="formbtn"
           >
-            <!-- @row-click="onRowClick"
-        > -->
-
-            <th slot="thead-tr">
-              รายละเอียด
-            </th>
-            <template slot="tbody-tr" scope="props">
-              <td>
-                <button
-                  class="btn red darken-2 waves-effect waves-light compact-btn"
-                  @click="(e) => onRowClick(props.row, e)"
-                >
-                  <i class="material-icons white-text">add_to_queue</i>
-                </button>
-              </td>
+            <template slot="table-row" slot-scope="props">
+              <span v-if="props.column.field == 'boss_approve'">
+                <span style="font-weight: bold; color: green;">{{
+                  props.row.boss_approve
+                }}</span>
+              </span>
+              <span v-else-if="props.column.field == 'inspector_approve'">
+                <span style="font-weight: bold; color: green;">{{
+                  props.row.inspector_approve
+                }}</span>
+              </span>
+              <span v-else-if="props.column.field == 'manage_approve'">
+                <span style="font-weight: bold; color: green;">{{
+                  props.row.manage_approve
+                }}</span>
+              </span>
+              <span v-else>
+                {{ props.formattedRow[props.column.field] }}
+              </span>
             </template>
-          </datatable>
+          </vue-good-table>
+          <!-- <pre>{{ form_data }}</pre> -->
+          <pre>{{ this.dd }}</pre>
         </fish-card>
       </fish-col>
     </fish-row>
@@ -40,7 +60,12 @@
       <fish-col span="24">
         <!-- <fish-button @click="Line()">ทดสอบ</fish-button>
         <pre>{{ okmessage }}</pre> -->
-        <vue-modaltor :visible="open" @hide="hideModal">
+        <vue-modaltor
+          :visible="open"
+          @hide="hideModal"
+          :animation-parent="'modal-scale'"
+          :default-width="'60%'"
+        >
           <fish-card color="orange" fluid>
             <div slot="header">
               <h3>
@@ -143,14 +168,12 @@
             </fish-col>
           </fish-row>
         </vue-modaltor>
-        <button @click="open = true">modal-basic</button>
       </fish-col>
     </fish-row>
   </div>
 </template>
 
 <script>
-import DataTable from "vue-materialize-datatable";
 import axios from "axios";
 import { APIPath } from "../../service/APIPath";
 const apiPath = new APIPath();
@@ -172,7 +195,6 @@ import Chlorine from "@/components/Chlorine.vue";
 export default {
   name: "Home",
   components: {
-    datatable: DataTable,
     Wire,
     Service,
     Seal,
@@ -204,85 +226,61 @@ export default {
       p12_show: true,
 
       showModal: false,
-      loadpumphead: [
-        {
-          label: "เลขที่ใบตรวจเช็ค",
-          field: "num",
-          numeric: false,
-          html: true,
-        },
-        {
-          label: "ช่วงเดือน",
-          field: "month",
-          numeric: false,
-          html: true,
-        },
-        // {
-        //   label: 'สถานที่',
-        //   field: 'place',
-        //   numeric: false,
-        //   html: false,
-        // },
-        {
-          label: "ยี่ห้อ",
-          field: "p_pump_brand",
-          numeric: false,
-          html: false,
-        },
-        {
-          label: "ON",
-          field: "on_number",
-          numeric: false,
-          html: true,
-        },
-        {
-          label: "หมายเลขเครื่อง/รุ่น",
-          field: "p_pump",
-          numeric: false,
-          html: false,
-        },
-        {
-          label: "ID",
-          field: "id",
-          numeric: false,
-          html: false,
-        },
-        {
-          label: "จุดติดตั้ง",
-          field: "install_point_name",
-          numeric: false,
-          html: false,
-        },
-        {
-          label: "วันที่ตรวจเช็ค",
-          field: "dateservice",
-          numeric: false,
-          html: false,
-        },
-        {
-          label: "หัวหน้าประปา ",
-          field: "boss_approve",
-          numeric: false,
-          html: true,
-        },
-        {
-          label: "ผู้ตรวจสอบ",
-          field: "inspector_approve",
-          numeric: false,
-          html: true,
-        },
-        {
-          label: "รองผู้อำนวยการฝ่ายบริหาร",
-          field: "manage_approve",
-          numeric: false,
-          html: true,
-        },
-      ],
+
       tableloadpump: [],
+
       tableloadpump_detail: "0",
       wire_detail: "0",
       okmessage: "1",
       idsend: "",
+      form_column: [
+        {
+          label: "เลขที่ใบตรวจเช็ค",
+          field: "num",
+        },
+        {
+          label: "ช่วงเดือน",
+          field: "month",
+        },
+        {
+          label: "ยี่ห้อ",
+          field: "p_pump_brand",
+        },
+        {
+          label: "ON",
+          field: "on_number",
+        },
+        {
+          label: "หมายเลขเครื่อง/รุ่น",
+          field: "p_pump",
+        },
+        {
+          label: "ID",
+          field: "id",
+        },
+        {
+          label: "จุดติดตั้ง",
+          field: "install_point_name",
+        },
+        {
+          label: "วันที่ตรวจเช็ค",
+          field: "dateservice",
+        },
+        {
+          label: "หัวหน้าประปา",
+          field: "boss_approve",
+        },
+        {
+          label: "ผู้ตรวจสอบ",
+          field: "inspector_approve",
+        },
+        {
+          label: "รองผู้อำนวยการฝ่ายบริหาร",
+          field: "manage_approve",
+        },
+      ],
+      form_data: "",
+      dd: "",
     };
   },
 
@@ -294,15 +292,6 @@ export default {
     //   });
     // },
 
-    loadpump() {
-      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then((response) => {
-        this.tableloadpump = response.data;
-        // //ส่ง object ไปให้ compunent
-        // this.tableloadpump_detail = this.tableloadpump_detail;
-
-        this.pumpchange();
-      });
-    },
     //คลิกที่แถว
     onRowClick: function(row) {
       // alert(row.num);
@@ -562,14 +551,30 @@ export default {
     hideModal() {
       this.open = false;
     },
+    loadpump() {
+      // show person
+      axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then((response) => {
+        this.form_data = response.data;
+      });
+    },
+
+    formbtn(params) {
+      this.open = true;
+      this.getpump(params.row.num);
+      this.idsend = params.row.num;
+    },
   },
+
   mounted() {
     this.loadpump();
   },
 };
 </script>
 <style scoped>
-h1 {
-  color: green;
+.head {
+  color: navy;
+  font-family: "Sriracha";
+  text-shadow: 4px 4px 4px #aaa;
+  font-size: 24px;
 }
 </style>

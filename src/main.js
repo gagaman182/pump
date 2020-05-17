@@ -33,6 +33,14 @@ Vue.component(
 import VueModalTor from "vue-modaltor";
 Vue.use(VueModalTor);
 
+var VueResource = require("vue-resource");
+Vue.use(VueResource);
+
+//good table
+import VueGoodTablePlugin from "vue-good-table";
+import "vue-good-table/dist/vue-good-table.css";
+Vue.use(VueGoodTablePlugin);
+
 Vue.config.productionTip = false;
 Vue.use(FishUI);
 Vue.use(VueAxios, axios);

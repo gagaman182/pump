@@ -8,7 +8,7 @@
     <fish-card fluid color="teal">
       <div slot="header">
         <h3 class="head">
-          <vue-fontawesome icon="copy" size="2"></vue-fontawesome
+          <i class="material-icons white-text">store</i
           >แบบบันทึกการตรวจสอบและบำรุงรักษาประจำวัน
         </h3>
       </div>
@@ -1442,17 +1442,17 @@ export default {
 
         others: "",
         woker: "",
-        ok: ""
-      }
+        ok: "",
+      },
     };
   },
   components: {
-    EnhancedCheck
+    EnhancedCheck,
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         if (valid === false) {
           this.$message.error("แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ", 5000);
         } else {
@@ -1542,10 +1542,10 @@ export default {
                 storetrap2_3: this.input.storetrap2_3,
                 chlorineintank1: this.input.chlorineintank1,
                 garbage: this.input.garbage,
-                chlorineintank2: this.input.chlorineintank2
-              }
+                chlorineintank2: this.input.chlorineintank2,
+              },
             })
-            .then(response => {
+            .then((response) => {
               this.input.ok = response.data;
               if (this.input.ok[0].message == "เพิ่มข้อมูลสำเร็จ") {
                 this.$message.success(
@@ -1558,8 +1558,8 @@ export default {
             });
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
