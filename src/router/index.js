@@ -5,6 +5,8 @@ import Edit from '../views/Edit.vue';
 import DayForm from '../views/DayForm.vue';
 import Quality from '../views/Quality.vue';
 import Login from '../views/Login.vue';
+import DayForm_Edit from '../views/DayForm_Edit.vue';
+import Quality_Edit from '../views/Quality_Edit.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +41,9 @@ const routes = [{
         name: 'Login',
         component: Login,
     },
+
+    { path: '/dayform_edit/:id', component: DayForm_Edit },
+    { path: '/quality_edit/:id', component: Quality_Edit },
 ];
 
 const router = new VueRouter({

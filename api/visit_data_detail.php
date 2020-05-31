@@ -4,6 +4,7 @@
 	 include 'conn.php';
 
    $num = $_GET["num"];
+  //  $num = '93';
  $sql = "SELECT
  num,
  MONTH as month,
@@ -17,9 +18,9 @@
  install_point as install_point_id,
  p_install_point.name as install_point_name,
 DATE_FORMAT(p_visit.dateservice, '%d-%m-%Y') as dateservice,
-case when boss_approve = '1' then 'ตรวจสอบแล้ว' else '' end as boss_approve,
-case when inspector_approve = '1' then 'ตรวจสอบแล้ว' else '' end as inspector_approve,
-case when manage_approve = '1' then 'ตรวจสอบแล้ว' else '' end as manage_approve,
+case when boss_approve = '1' then 'ตรวจสอบแล้ว' else '' end as boss_approve_text,
+case when inspector_approve = '1' then 'ตรวจสอบแล้ว' else '' end as inspector_approve_text,
+case when manage_approve = '1' then 'ตรวจสอบแล้ว' else '' end as manage_approve_text,
 case when wire_1 = 'true' then 'true' else '' end as wire_1,
 case when wire_2 = 'true' then 'true' else '' end as wire_2,
 case when wire_3 = 'true' then 'true' else '' end as wire_3,
@@ -110,7 +111,16 @@ case when chlorine_5 = 'true' then 'true' else '' end as chlorine_5,
 chlorine_other,
 woker,
 woker_approve,
-woker_other
+woker_other,
+boss_pump,
+boss_approve,
+boss_pump_other,
+inspector,
+inspector_approve,
+inspector_other,
+manage,
+manage_approve,
+manage_other
 
 
 

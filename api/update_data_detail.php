@@ -96,6 +96,15 @@ $chlorine_other= $_GET["chlorine_other"];
 $woker= $_GET["woker"];
 $woker_approve= $_GET["woker_approve"];
 $woker_other= $_GET["woker_other"];
+$boss_pump= $_GET["boss_pump"];
+$boss_approve= $_GET["boss_approve"];
+$boss_pump_other= $_GET["boss_pump_other"];
+$inspector= $_GET["inspector"];
+$inspector_approve= $_GET["inspector_approve"];
+$inspector_other= $_GET["inspector_other"];
+$manage= $_GET["manage"];
+$manage_approve= $_GET["manage_approve"];
+$manage_other= $_GET["manage_other"];
 
 
 
@@ -118,7 +127,10 @@ arm_1 = '".$arm_1."', arm_2 = '".$arm_2."', arm_3 = '".$arm_3."', arm_4 = '".$ar
 system_1 = '".$system_1."', system_2 = '".$system_2."', system_3 = '".$system_3."', system_4 = '".$system_4."', system_5 = '".$system_5."', system_other = '".$system_other."',
 sump_1 = '".$sump_1."', sump_2 = '".$sump_2."', sump_3 = '".$sump_3."', sump_4 = '".$sump_4."', sump_5 = '".$sump_5."', sump_6 = '".$sump_6."', sump_7 = '".$sump_7."', sump_8 = '".$sump_8."', sump_other = '".$sump_other."',
 chlorine_1 = '".$chlorine_1."', chlorine_2 = '".$chlorine_2."', chlorine_3 = '".$chlorine_3."', chlorine_4 = '".$chlorine_4."', chlorine_5 = '".$chlorine_5."', chlorine_other = '".$chlorine_other."',
-woker = '".$woker."',woker_approve = '".$woker_approve."',woker_other = '".$woker_other."'
+woker = '".$woker."',woker_approve = '".$woker_approve."',woker_other = '".$woker_other."',
+boss_pump = '".$boss_pump."',boss_approve = '".$boss_approve."',boss_pump_other = '".$boss_pump_other."',
+inspector = '".$inspector."',inspector_approve = '".$inspector_approve."',inspector_other = '".$inspector_other."',
+manage = '".$manage."',manage_approve = '".$manage_approve."',manage_other = '".$manage_other."'
 WHERE num = '".$num."' ";
 
 

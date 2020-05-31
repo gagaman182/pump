@@ -1443,7 +1443,10 @@ export default {
         others: '',
         woker: '',
         ok: '',
+
+        pump_detail: '',
       },
+      num: this.$route.params.id,
     };
   },
   components: {
@@ -1553,7 +1556,6 @@ export default {
                   'สำเร็จ: ' + this.input.ok[0].message,
                   5000
                 );
-                this.$router.push('/');
               } else {
                 this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
               }
@@ -1561,6 +1563,108 @@ export default {
         }
       });
     },
+    getpump(num) {
+      axios
+
+        .get(`${apiPath.getBaseUrl()}dayform_data_detail.php`, {
+          params: {num: num},
+        })
+        .then((response) => {
+          this.input.pump_detail = response.data;
+          this.getpump_detail(this.input.pump_detail);
+        });
+    },
+    //เอาค่าจาก database มาใส่ใน form
+    getpump_detail() {
+      this.input.dateservice = this.input.pump_detail[0].dateservice_format;
+      this.input.trap1 = this.input.pump_detail[0].trap1;
+      this.input.trap2 = this.input.pump_detail[0].trap2;
+      this.input.trap3 = this.input.pump_detail[0].trap3;
+      this.input.pondcolor1 = this.input.pump_detail[0].pondcolor1;
+      this.input.pondcolor2 = this.input.pump_detail[0].pondcolor2;
+      this.input.pumpfailed1_1 = this.input.pump_detail[0].pumpfailed1_1;
+      this.input.pumpfailed1_2 = this.input.pump_detail[0].pumpfailed1_2;
+      this.input.pumpfailed1_3 = this.input.pump_detail[0].pumpfailed1_3;
+      this.input.pumpfailed2_1 = this.input.pump_detail[0].pumpfailed2_1;
+      this.input.pumpfailed2_2 = this.input.pump_detail[0].pumpfailed2_2;
+      this.input.pumpfailed2_3 = this.input.pump_detail[0].pumpfailed2_3;
+      this.input.pumpadjuct1_1 = this.input.pump_detail[0].pumpadjuct1_1;
+      this.input.pumpadjuct1_2 = this.input.pump_detail[0].pumpadjuct1_2;
+      this.input.pumpadjuct1_3 = this.input.pump_detail[0].pumpadjuct1_3;
+      this.input.pumpadjuct2_1 = this.input.pump_detail[0].pumpadjuct2_1;
+      this.input.pumpadjuct2_2 = this.input.pump_detail[0].pumpadjuct2_2;
+      this.input.pumpadjuct2_3 = this.input.pump_detail[0].pumpadjuct2_3;
+      this.input.pondhight1 = this.input.pump_detail[0].pondhight1;
+      this.input.pondhight2 = this.input.pump_detail[0].pondhight2;
+      this.input.pumpsediment1_1 = this.input.pump_detail[0].pumpsediment1_1;
+      this.input.pumpsediment1_2 = this.input.pump_detail[0].pumpsediment1_2;
+      this.input.pumpsediment1_3 = this.input.pump_detail[0].pumpsediment1_3;
+      this.input.pumpsediment2_1 = this.input.pump_detail[0].pumpsediment2_1;
+      this.input.pumpsediment2_2 = this.input.pump_detail[0].pumpsediment2_2;
+      this.input.pumpsediment2_3 = this.input.pump_detail[0].pumpsediment2_3;
+      this.input.sediment1 = this.input.pump_detail[0].sediment1;
+      this.input.sediment2 = this.input.pump_detail[0].sediment2;
+      this.input.pumpcrolene1_1 = this.input.pump_detail[0].pumpcrolene1_1;
+      this.input.pumpcrolene1_2 = this.input.pump_detail[0].pumpcrolene1_2;
+      this.input.pumpcrolene1_3 = this.input.pump_detail[0].pumpcrolene1_3;
+      this.input.pumpcrolene2_1 = this.input.pump_detail[0].pumpcrolene2_1;
+      this.input.pumpcrolene2_2 = this.input.pump_detail[0].pumpcrolene2_2;
+      this.input.pumpcrolene2_3 = this.input.pump_detail[0].pumpcrolene2_3;
+      this.input.polymer1 = this.input.pump_detail[0].polymer1;
+      this.input.polymer2 = this.input.pump_detail[0].polymer2;
+      this.input.polymer3 = this.input.pump_detail[0].polymer3;
+      this.input.ppm1 = this.input.pump_detail[0].ppm1;
+      this.input.ppm2 = this.input.pump_detail[0].ppm2;
+      this.input.rolled1 = this.input.pump_detail[0].rolled1;
+      this.input.rolled2 = this.input.pump_detail[0].rolled2;
+      this.input.rolled3 = this.input.pump_detail[0].rolled3;
+      this.input.water1 = this.input.pump_detail[0].water1;
+      this.input.water2 = this.input.pump_detail[0].water2;
+      this.input.pumpexcess1 = this.input.pump_detail[0].pumpexcess1;
+      this.input.pumpexcess2 = this.input.pump_detail[0].pumpexcess2;
+      this.input.pumpexcess3 = this.input.pump_detail[0].pumpexcess3;
+      this.input.wastewater1 = this.input.pump_detail[0].wastewater1;
+      this.input.wastewater2 = this.input.pump_detail[0].wastewater2;
+      this.input.meter = this.input.pump_detail[0].meter;
+      this.input.meterfailed1 = this.input.pump_detail[0].meterfailed1;
+      this.input.aeration1_1 = this.input.pump_detail[0].aeration1_1;
+      this.input.aeration1_2 = this.input.pump_detail[0].aeration1_2;
+      this.input.aeration1_3 = this.input.pump_detail[0].aeration1_3;
+      this.input.meterfailed2 = this.input.pump_detail[0].meterfailed2;
+      this.input.aeration2_1 = this.input.pump_detail[0].aeration2_1;
+      this.input.aeration2_2 = this.input.pump_detail[0].aeration2_2;
+      this.input.aeration2_3 = this.input.pump_detail[0].aeration2_3;
+      this.input.pumping1 = this.input.pump_detail[0].pumping1;
+      this.input.pumpcondition1_1 = this.input.pump_detail[0].pumpcondition1_1;
+      this.input.pumpcondition1_2 = this.input.pump_detail[0].pumpcondition1_2;
+      this.input.pumpcondition1_3 = this.input.pump_detail[0].pumpcondition1_3;
+      this.input.pumping2 = this.input.pump_detail[0].pumping2;
+      this.input.pumpcondition2_1 = this.input.pump_detail[0].pumpcondition2_1;
+      this.input.pumpcondition2_2 = this.input.pump_detail[0].pumpcondition2_2;
+      this.input.pumpcondition2_3 = this.input.pump_detail[0].pumpcondition2_3;
+      this.input.pumping3 = this.input.pump_detail[0].pumping3;
+      this.input.cleantrap1_1 = this.input.pump_detail[0].cleantrap1_1;
+      this.input.cleantrap1_2 = this.input.pump_detail[0].cleantrap1_2;
+      this.input.cleantrap1_3 = this.input.pump_detail[0].cleantrap1_3;
+      this.input.rainning = this.input.pump_detail[0].rainning;
+      this.input.cleantrap2_1 = this.input.pump_detail[0].cleantrap2_1;
+      this.input.cleantrap2_2 = this.input.pump_detail[0].cleantrap2_2;
+      this.input.cleantrap2_3 = this.input.pump_detail[0].cleantrap2_3;
+      this.input.volume = this.input.pump_detail[0].volume;
+      this.input.storetrap1_1 = this.input.pump_detail[0].storetrap1_1;
+      this.input.storetrap1_2 = this.input.pump_detail[0].storetrap1_2;
+      this.input.storetrap1_3 = this.input.pump_detail[0].storetrap1_3;
+      this.input.storetrap2_1 = this.input.pump_detail[0].storetrap2_1;
+      this.input.storetrap2_2 = this.input.pump_detail[0].storetrap2_2;
+      this.input.storetrap2_3 = this.input.pump_detail[0].storetrap2_3;
+      this.input.chlorineintank1 = this.input.pump_detail[0].chlorineintank1;
+      this.input.garbage = this.input.pump_detail[0].garbage;
+      this.input.chlorineintank2 = this.input.pump_detail[0].chlorineintank2;
+      this.input.others = this.input.pump_detail[0].others;
+    },
+  },
+  mounted() {
+    this.getpump(this.num);
   },
 };
 </script>

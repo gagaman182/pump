@@ -21,8 +21,8 @@
             ref="formref"
             :columns="form_column"
             :rows="form_data"
-            :search-options="{ enabled: true }"
-            :pagination-options="{ enabled: true }"
+            :search-options="{enabled: true}"
+            :pagination-options="{enabled: true}"
             :totalRows="totalRecords"
             styleClass="vgt-table  striped"
             :line-numbers="true"
@@ -50,8 +50,61 @@
               </span>
             </template>
           </vue-good-table>
-          <!-- <pre>{{ form_data }}</pre> -->
-          <pre>{{ this.dd }}</pre>
+          <fish-divider></fish-divider>
+          <!-- //ตาราง day form -->
+
+          <fish-row gutter=".6">
+            <fish-col span="12"
+              ><div class="demo-col">
+                <div>
+                  <h2 class="head">
+                    <i class="material-icons white-text">store</i
+                    >ตารางใบตรวจเช็คบำรุงรักษา
+                  </h2>
+                </div>
+                <fish-divider></fish-divider>
+                <vue-good-table
+                  ref="formref"
+                  :columns="pday_column"
+                  :rows="pday_data"
+                  :search-options="{enabled: true}"
+                  :pagination-options="{enabled: true}"
+                  :totalRows="totalRecords"
+                  styleClass="vgt-table  "
+                  :line-numbers="true"
+                  :row-style-class="rowStyleClassFn"
+                  @on-row-click="pdaybtn"
+                >
+                </vue-good-table></div
+            ></fish-col>
+            <fish-col span="12"
+              ><div class="demo-col demo-col2">
+                <div>
+                  <h2 class="head">
+                    <i class="material-icons white-text">waves</i
+                    >แบบวัดคุณภาพน้ำ
+                  </h2>
+                </div>
+              </div>
+              <fish-divider></fish-divider>
+              <vue-good-table
+                ref="formref"
+                :columns="quality_water_column"
+                :rows="quality_water_data"
+                :search-options="{enabled: true}"
+                :pagination-options="{enabled: true}"
+                :totalRows="totalRecords"
+                styleClass="vgt-table  "
+                :line-numbers="true"
+                :row-style-class="rowStyleClassFn"
+                @on-row-click="qualitywaterbtn"
+              >
+              </vue-good-table>
+            </fish-col>
+          </fish-row>
+
+          <!-- <pre>{{ pday_data }}</pre>
+          <pre>{{ this.dd }}</pre> -->
         </fish-card>
       </fish-col>
     </fish-row>
@@ -103,13 +156,15 @@
               </fish-field>
             </fish-form>
           </fish-card>
-          <fish-divider />
+
           <fish-card color="orange" fluid>
             <div slot="header">
               <h3>
                 <i class="material-icons white-text">web</i>รายการตรวจเช็ค
               </h3>
             </div>
+            <!-- ผู้ตรวจสอบแล้ว -->
+            <Approve :pumpall="tableloadpump_detail" v-show="p1_show" />
             <fish-row>
               <fish-col span="6" class="demo-col"><h3>รายการ</h3></fish-col>
               <fish-col span="6" class="demo-col"
@@ -166,6 +221,21 @@
                 ตรวจสอบ-แก้ไข</fish-button
               >
             </fish-col>
+            <fish-col span="12">
+              <code-card
+                title="Loading"
+                desc="A segment may show its content is being loaded"
+              >
+                <template slot="demo">
+                  <fish-segment loading style="height: 100px;"
+                    >Loading</fish-segment
+                  >
+                </template>
+                <template slot="codeHtml">
+                  <pre v-highlightjs><code class="xml"></code></pre>
+                </template>
+              </code-card>
+            </fish-col>
           </fish-row>
         </vue-modaltor>
       </fish-col>
@@ -174,26 +244,27 @@
 </template>
 
 <script>
-import axios from "axios";
-import { APIPath } from "../../service/APIPath";
+import axios from 'axios';
+import {APIPath} from '../../service/APIPath';
 const apiPath = new APIPath();
 
-import Wire from "@/components/Wire.vue";
-import Service from "@/components/Service.vue";
-import Seal from "@/components/Seal.vue";
-import Condition from "@/components/Condition.vue";
-import Propeller from "@/components/Propeller.vue";
-import Snail from "@/components/Snail.vue";
-import Oil from "@/components/Oil.vue";
-import Jarabi from "@/components/Jarabi.vue";
-import Clean from "@/components/Clean.vue";
-import Arm from "@/components/Arm.vue";
-import System from "@/components/System.vue";
-import Sump from "@/components/Sump.vue";
-import Chlorine from "@/components/Chlorine.vue";
+import Wire from '@/components/Wire.vue';
+import Service from '@/components/Service.vue';
+import Seal from '@/components/Seal.vue';
+import Condition from '@/components/Condition.vue';
+import Propeller from '@/components/Propeller.vue';
+import Snail from '@/components/Snail.vue';
+import Oil from '@/components/Oil.vue';
+import Jarabi from '@/components/Jarabi.vue';
+import Clean from '@/components/Clean.vue';
+import Arm from '@/components/Arm.vue';
+import System from '@/components/System.vue';
+import Sump from '@/components/Sump.vue';
+import Chlorine from '@/components/Chlorine.vue';
+import Approve from '@/components/Approve.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Wire,
     Service,
@@ -208,6 +279,7 @@ export default {
     System,
     Sump,
     Chlorine,
+    Approve,
   },
   data() {
     return {
@@ -229,58 +301,82 @@ export default {
 
       tableloadpump: [],
 
-      tableloadpump_detail: "0",
-      wire_detail: "0",
-      okmessage: "1",
-      idsend: "",
+      tableloadpump_detail: '0',
+      wire_detail: '0',
+      okmessage: '1',
+      idsend: '',
+      idsendpday: '',
+      idsendwater: '',
       form_column: [
         {
-          label: "เลขที่ใบตรวจเช็ค",
-          field: "num",
+          label: 'เลขที่ใบตรวจเช็ค',
+          field: 'num',
         },
         {
-          label: "ช่วงเดือน",
-          field: "month",
+          label: 'ช่วงเดือน',
+          field: 'month',
         },
         {
-          label: "ยี่ห้อ",
-          field: "p_pump_brand",
+          label: 'ยี่ห้อ',
+          field: 'p_pump_brand',
         },
         {
-          label: "ON",
-          field: "on_number",
+          label: 'ON',
+          field: 'on_number',
         },
         {
-          label: "หมายเลขเครื่อง/รุ่น",
-          field: "p_pump",
+          label: 'หมายเลขเครื่อง/รุ่น',
+          field: 'p_pump',
         },
         {
-          label: "ID",
-          field: "id",
+          label: 'ID',
+          field: 'id',
         },
         {
-          label: "จุดติดตั้ง",
-          field: "install_point_name",
+          label: 'จุดติดตั้ง',
+          field: 'install_point_name',
         },
         {
-          label: "วันที่ตรวจเช็ค",
-          field: "dateservice",
+          label: 'วันที่ตรวจเช็ค',
+          field: 'dateservice',
         },
         {
-          label: "หัวหน้าประปา",
-          field: "boss_approve",
+          label: 'หัวหน้าประปา',
+          field: 'boss_approve',
         },
         {
-          label: "ผู้ตรวจสอบ",
-          field: "inspector_approve",
+          label: 'ผู้ตรวจสอบ',
+          field: 'inspector_approve',
         },
         {
-          label: "รองผู้อำนวยการฝ่ายบริหาร",
-          field: "manage_approve",
+          label: 'รองผู้อำนวยการฝ่ายบริหาร',
+          field: 'manage_approve',
         },
       ],
-      form_data: "",
-      dd: "",
+      form_data: '',
+      pday_column: [
+        {
+          label: 'เลขที่ใบตรวจสอบ',
+          field: 'num',
+        },
+        {
+          label: 'วันที่ตรวจสอบและบำรุงรักษา',
+          field: 'dateservice',
+        },
+      ],
+      pday_data: '',
+      quality_water_column: [
+        {
+          label: 'เลขที่ใบตรวจสอบ',
+          field: 'num',
+        },
+        {
+          label: 'วันที่วัดคุณภาพน้ำ',
+          field: 'dateservice',
+        },
+      ],
+      quality_water_data: '',
+      dd: '',
     };
   },
 
@@ -308,7 +404,7 @@ export default {
       axios
 
         .get(`${apiPath.getBaseUrl()}visit_data_detail.php`, {
-          params: { num: num },
+          params: {num: num},
         })
         .then((response) => {
           this.tableloadpump_detail = response.data;
@@ -335,34 +431,16 @@ export default {
     },
     pumpchange() {
       if (
-        this.tableloadpump_detail[0].p_pump_id == "1" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '1' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p8_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "2" &&
-        this.tableloadpump_detail[0].month == "3"
-      ) {
-        this.p2_show = false;
-        this.p5_show = false;
-        this.p6_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == "3" &&
-        this.tableloadpump_detail[0].month == "3"
-      ) {
-        this.p2_show = false;
-        this.p8_show = false;
-        this.p10_show = false;
-        this.p13_show = false;
-      } else if (
-        this.tableloadpump_detail[0].p_pump_id == "4" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '2' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -371,8 +449,26 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "5" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '3' &&
+        this.tableloadpump_detail[0].month == '3'
+      ) {
+        this.p2_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == '4' &&
+        this.tableloadpump_detail[0].month == '3'
+      ) {
+        this.p2_show = false;
+        this.p5_show = false;
+        this.p6_show = false;
+        this.p8_show = false;
+        this.p10_show = false;
+        this.p13_show = false;
+      } else if (
+        this.tableloadpump_detail[0].p_pump_id == '5' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -382,8 +478,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "6" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '6' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -394,15 +490,15 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "7" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '7' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "8" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '8' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -410,8 +506,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "9" &&
-        this.tableloadpump_detail[0].month == "3"
+        this.tableloadpump_detail[0].p_pump_id == '9' &&
+        this.tableloadpump_detail[0].month == '3'
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -421,8 +517,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "1" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '1' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -434,8 +530,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "2" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '2' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -447,8 +543,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "3" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '3' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -460,8 +556,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "4" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '4' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -473,8 +569,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "5" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '5' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -484,8 +580,8 @@ export default {
         this.p10_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "6" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '6' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p2_show = false;
         this.p5_show = false;
@@ -496,8 +592,8 @@ export default {
         this.p11_show = false;
         this.p12_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "7" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '7' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p3_show = false;
         this.p4_show = false;
@@ -509,8 +605,8 @@ export default {
         this.p10_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "8" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '8' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -518,8 +614,8 @@ export default {
         this.p6_show = false;
         this.p13_show = false;
       } else if (
-        this.tableloadpump_detail[0].p_pump_id == "9" &&
-        this.tableloadpump_detail[0].month == "1"
+        this.tableloadpump_detail[0].p_pump_id == '9' &&
+        this.tableloadpump_detail[0].month == '1'
       ) {
         this.p2_show = false;
         this.p3_show = false;
@@ -546,16 +642,30 @@ export default {
     },
     pumpedit() {
       // alert(this.idsend);
-      this.$router.push("/edit/" + this.idsend);
+      this.$router.push('/edit/' + this.idsend);
     },
     hideModal() {
       this.open = false;
     },
     loadpump() {
-      // show person
+      // show pump
       axios.get(`${apiPath.getBaseUrl()}visit_data.php`).then((response) => {
         this.form_data = response.data;
       });
+    },
+    loadpday() {
+      // show pday
+      axios.get(`${apiPath.getBaseUrl()}dayform_data.php`).then((response) => {
+        this.pday_data = response.data;
+      });
+    },
+    loadqualitywater() {
+      // show pday
+      axios
+        .get(`${apiPath.getBaseUrl()}quality_water_data.php`)
+        .then((response) => {
+          this.quality_water_data = response.data;
+        });
     },
 
     formbtn(params) {
@@ -563,17 +673,29 @@ export default {
       this.getpump(params.row.num);
       this.idsend = params.row.num;
     },
+    pdaybtn(params) {
+      this.idsendpday = params.row.num;
+
+      this.$router.push('/dayform_edit/' + this.idsendpday);
+    },
+    qualitywaterbtn(params) {
+      this.idsendwater = params.row.num;
+
+      this.$router.push('/quality_edit/' + this.idsendwater);
+    },
   },
 
   mounted() {
     this.loadpump();
+    this.loadpday();
+    this.loadqualitywater();
   },
 };
 </script>
 <style scoped>
 .head {
   color: navy;
-  font-family: "Sriracha";
+  font-family: 'Sriracha';
   text-shadow: 4px 4px 4px #aaa;
   font-size: 24px;
 }

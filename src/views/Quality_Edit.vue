@@ -567,7 +567,9 @@ export default {
         others: '',
         woker: '',
         ok: '',
+        pump_detail: '',
       },
+      num: this.$route.params.id,
     };
   },
   methods: {
@@ -645,6 +647,70 @@ export default {
         }
       });
     },
+    getpump(num) {
+      axios
+
+        .get(`${apiPath.getBaseUrl()}quality_water_detail.php`, {
+          params: {num: num},
+        })
+        .then((response) => {
+          this.input.pump_detail = response.data;
+          this.getpump_detail(this.input.pump_detail);
+        });
+    },
+    //เอาค่าจาก database มาใส่ใน form
+    getpump_detail() {
+      this.input.dateservice = this.input.pump_detail[0].dateservice_format;
+      this.input.pumpadjuct1 = this.input.pump_detail[0].pumpadjuct1;
+      this.input.pumpadjuct2 = this.input.pump_detail[0].pumpadjuct2;
+      this.input.pumpadjuctdo1 = this.input.pump_detail[0].pumpadjuctdo1;
+      this.input.pumpadjuctdo2 = this.input.pump_detail[0].pumpadjuctdo2;
+      this.input.pumpadjucttemp1 = this.input.pump_detail[0].pumpadjucttemp1;
+      this.input.pumpadjucttemp2 = this.input.pump_detail[0].pumpadjucttemp2;
+      this.input.pumpadjuctv301 = this.input.pump_detail[0].pumpadjuctv301;
+      this.input.pumpadjuctv302 = this.input.pump_detail[0].pumpadjuctv302;
+      this.input.pumpadjuctchlorine1 = this.input.pump_detail[0].pumpadjuctchlorine1;
+      this.input.pumpadjuctchlorine2 = this.input.pump_detail[0].pumpadjuctchlorine2;
+      this.input.pumpadjuctother = this.input.pump_detail[0].pumpadjuctother;
+      this.input.aeration1 = this.input.pump_detail[0].aeration1;
+      this.input.aeration2 = this.input.pump_detail[0].aeration2;
+      this.input.aerationdo1 = this.input.pump_detail[0].aerationdo1;
+      this.input.aerationdo2 = this.input.pump_detail[0].aerationdo2;
+      this.input.aerationtemp1 = this.input.pump_detail[0].aerationtemp1;
+      this.input.aerationtemp2 = this.input.pump_detail[0].aerationtemp2;
+      this.input.aerationtv301 = this.input.pump_detail[0].aerationtv301;
+      this.input.aerationtv302 = this.input.pump_detail[0].aerationtv302;
+      this.input.aerationchlorine1 = this.input.pump_detail[0].aerationchlorine1;
+      this.input.aerationchlorine2 = this.input.pump_detail[0].aerationchlorine2;
+      this.input.aerationother = this.input.pump_detail[0].aerationother;
+      this.input.silt1 = this.input.pump_detail[0].silt1;
+      this.input.silt2 = this.input.pump_detail[0].silt2;
+      this.input.siltdo1 = this.input.pump_detail[0].siltdo1;
+      this.input.siltdo2 = this.input.pump_detail[0].siltdo2;
+      this.input.silttemp1 = this.input.pump_detail[0].silttemp1;
+      this.input.silttemp2 = this.input.pump_detail[0].silttemp2;
+      this.input.siltv301 = this.input.pump_detail[0].siltv301;
+      this.input.siltv302 = this.input.pump_detail[0].siltv302;
+      this.input.siltchlorine1 = this.input.pump_detail[0].siltchlorine1;
+      this.input.siltchlorine2 = this.input.pump_detail[0].siltchlorine2;
+      this.input.siltother = this.input.pump_detail[0].siltother;
+      this.input.chlorine1 = this.input.pump_detail[0].chlorine1;
+      this.input.chlorine2 = this.input.pump_detail[0].chlorine2;
+      this.input.chlorinedo1 = this.input.pump_detail[0].chlorinedo1;
+      this.input.chlorinedo2 = this.input.pump_detail[0].chlorinedo2;
+      this.input.chlorinetemp1 = this.input.pump_detail[0].chlorinetemp1;
+      this.input.chlorinetemp2 = this.input.pump_detail[0].chlorinetemp2;
+      this.input.chlorinev301 = this.input.pump_detail[0].chlorinev301;
+      this.input.chlorinev302 = this.input.pump_detail[0].chlorinev302;
+      this.input.chlorinechlorine1 = this.input.pump_detail[0].chlorinechlorine1;
+      this.input.chlorinechlorine2 = this.input.pump_detail[0].chlorinechlorine2;
+      this.input.chlorineother = this.input.pump_detail[0].chlorineother;
+      this.input.others = this.input.pump_detail[0].others;
+      this.input.woker = this.input.pump_detail[0].woker;
+    },
+  },
+  mounted() {
+    this.getpump(this.num);
   },
 };
 </script>
