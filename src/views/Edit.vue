@@ -37,11 +37,17 @@
           <i class="material-icons white-text">calendar_today</i
           >ใบตรวจเช็คบำรุงรักษา
         </h3>
+      </div>
+      <fish-row>
+        <fish-col span="23"> </fish-col>
         <!-- <pre>{{ pump_detail }}</pre>
         <pre>{{ pump_detail[0].wire_1 }}</pre>
         <pre>{{ pump_detail[0].wire_0 }}</pre> -->
-      </div>
 
+        <fish-col span="1"
+          ><H2>ID. {{ this.num }}</H2></fish-col
+        >
+      </fish-row>
       <fish-form ref="form">
         <fish-fields>
           <fish-field
@@ -1426,7 +1432,7 @@
               <fish-field>
                 <fish-button type="negative" @click="clear">
                   <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
-                  >ยกเลิก</fish-button
+                  >ลบ</fish-button
                 >
               </fish-field>
             </fish-fields>
@@ -1568,6 +1574,8 @@ import axios from 'axios';
 import {EnhancedCheck} from 'vue-enhanced-check';
 // import moment from 'moment';
 import {APIPath} from '../../service/APIPath';
+// popup alert
+import swal from 'sweetalert';
 const apiPath = new APIPath();
 export default {
   name: 'form',
@@ -1699,6 +1707,7 @@ export default {
       pump_detail: '',
       num: this.$route.params.id,
       pumps_edit: [],
+      romove_message: '',
     };
   },
   methods: {
@@ -1707,7 +1716,13 @@ export default {
       this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          swal({
+            title: 'แจ้งเตือน!',
+            text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
+            icon: 'error',
+            button: 'ปิด',
+          });
         } else {
           // alert(this.wire_1.split());
           // const wire_1_array = this.wire_1.split();
@@ -1820,9 +1835,21 @@ export default {
             .then((response) => {
               this.ok = response.data;
               if (this.ok[0].message == 'แก้ไขข้อมูลบุคคลสำเร็จ') {
-                this.$message.success('สำเร็จ: ' + this.ok[0].message, 5000);
+                // this.$message.success('สำเร็จ: ' + this.ok[0].message, 5000);
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.ok[0].message,
+                  icon: 'success',
+                  button: 'ปิด',
+                });
               } else {
-                this.$message.error('เตือน: ' + this.ok[0].message, 5000);
+                // this.$message.error('เตือน: ' + this.ok[0].message, 5000);
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.ok[0].message,
+                  icon: 'error',
+                  button: 'ปิด',
+                });
               }
 
               this.$router.push('/');
@@ -2004,6 +2031,7 @@ export default {
     },
     //เอาค่าจาก database มาใส่ใน form
     getpump_detail() {
+      this.num = this.pump_detail[0].num;
       this.month = this.pump_detail[0].month;
       this.pump_brand = this.pump_detail[0].p_pump_brand_id;
       this.on = this.pump_detail[0].on_number;
@@ -2103,6 +2131,42 @@ export default {
       this.manage = this.pump_detail[0].manage;
       this.manage_approve = this.pump_detail[0].manage_approve;
       this.manage_other = this.pump_detail[0].manage_other;
+    },
+    clear() {
+      swal({
+        title: 'แจ้งเตือนลบข้อมูล',
+        text: 'ท่านแน่ใจว่าจะลบข้อมูล',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.removeperson();
+          swal('ลบข้อมูลสำเร็จ!', {
+            icon: 'success',
+             button: 'ปิด',
+          });
+          this.$router.push('/');
+        } else {
+          swal({
+            text: 'ยกเลิกการลบข้อมูล!',
+            icon: 'info',
+            button: 'ปิด',
+          });
+        }
+      });
+    },
+    //ยืนยันการลบ
+    removeperson() {
+      axios
+        .get(`${apiPath.getBaseUrl()}remove_pump.php`, {
+          params: {
+            num: this.num,
+          },
+        })
+        .then((response) => {
+          this.romove_message = response.data;
+        });
     },
   },
   mounted() {

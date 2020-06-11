@@ -12,20 +12,26 @@
         </h3>
       </div>
       <fish-form ref="form" inline>
-        <fish-field
-          span="6"
-          label="วันที่วัดคุณภาพน้ำ"
-          name="dateservice"
-          :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
-        >
-          <!-- format from moment js L = DD/MM/YYYY -->
-          <fish-date-picker
-            v-model="input.dateservice"
-            hint="ระบุวันที่"
-            format="L"
-          ></fish-date-picker>
-        </fish-field>
+        <fish-row>
+          <fish-col span="23">
+            <fish-field
+              span="6"
+              label="วันที่วัดคุณภาพน้ำ"
+              name="dateservice"
+              :rules="[{required: true, message: 'วันที่เป็นค่าว่าง'}]"
+            >
+              <!-- format from moment js L = DD/MM/YYYY -->
+              <fish-date-picker
+                v-model="input.dateservice"
+                hint="ระบุวันที่"
+                format="L"
+              ></fish-date-picker> </fish-field
+          ></fish-col>
 
+          <fish-col span="1"
+            ><H2>ID. {{ this.input.num }}</H2></fish-col
+          >
+        </fish-row>
         <fish-divider></fish-divider>
 
         <fish-row gutter=".5">
@@ -498,11 +504,21 @@
           </fish-col>
         </fish-row>
         <fish-row>
-          <fish-col span="2">
-            <fish-button type="primary" @click="submitHandler">
-              <vue-fontawesome icon="save" size="2"></vue-fontawesome>
-              บันทึก</fish-button
-            >
+          <fish-col>
+            <fish-fields>
+              <fish-field>
+                <fish-button type="primary" @click="submitHandler">
+                  <vue-fontawesome icon="save" size="2"></vue-fontawesome
+                  >บันทึก</fish-button
+                >
+              </fish-field>
+              <fish-field>
+                <fish-button type="negative" @click="clear">
+                  <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
+                  >ลบ</fish-button
+                >
+              </fish-field>
+            </fish-fields>
           </fish-col>
         </fish-row>
       </fish-form>
@@ -512,12 +528,15 @@
 <script>
 import axios from 'axios';
 import {APIPath} from '../../service/APIPath';
+// popup alert
+import swal from 'sweetalert';
 const apiPath = new APIPath();
 export default {
   name: 'qulity',
   data() {
     return {
       input: {
+        num: '',
         dateservice: '',
         pumpadjuct1: '',
         pumpadjuct2: '',
@@ -570,6 +589,7 @@ export default {
         pump_detail: '',
       },
       num: this.$route.params.id,
+      romove_message: '',
     };
   },
   methods: {
@@ -578,7 +598,13 @@ export default {
       this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          swal({
+            title: 'แจ้งเตือน!',
+            text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
+            icon: 'error',
+            button: 'ปิด',
+          });
         } else {
           axios
             .get(`${apiPath.getBaseUrl()}quality_water_save.php`, {
@@ -635,14 +661,26 @@ export default {
             .then((response) => {
               this.input.ok = response.data;
               if (this.input.ok[0].message == 'เพิ่มข้อมูลสำเร็จ') {
-                this.$message.success(
-                  'สำเร็จ: ' + this.input.ok[0].message,
-                  5000
-                );
-                this.$router.push('/');
+                // this.$message.success(
+                //   'สำเร็จ: ' + this.input.ok[0].message,
+                //   5000
+                // );
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.input.ok[0].message,
+                  icon: 'success',
+                  button: 'ปิด',
+                });
               } else {
-                this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.input.ok[0].message,
+                  icon: 'error',
+                  button: 'ปิด',
+                });
               }
+              this.$router.push('/');
             });
         }
       });
@@ -660,6 +698,7 @@ export default {
     },
     //เอาค่าจาก database มาใส่ใน form
     getpump_detail() {
+      this.input.num = this.input.pump_detail[0].num;
       this.input.dateservice = this.input.pump_detail[0].dateservice_format;
       this.input.pumpadjuct1 = this.input.pump_detail[0].pumpadjuct1;
       this.input.pumpadjuct2 = this.input.pump_detail[0].pumpadjuct2;
@@ -707,6 +746,42 @@ export default {
       this.input.chlorineother = this.input.pump_detail[0].chlorineother;
       this.input.others = this.input.pump_detail[0].others;
       this.input.woker = this.input.pump_detail[0].woker;
+    },
+    clear() {
+      swal({
+        title: 'แจ้งเตือนลบข้อมูล',
+        text: 'ท่านแน่ใจว่าจะลบข้อมูล',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.removeperson();
+          swal('ลบข้อมูลสำเร็จ!', {
+            icon: 'success',
+            button: 'ปิด',
+          });
+          this.$router.push('/');
+        } else {
+          swal({
+            text: 'ยกเลิกการลบข้อมูล!',
+            icon: 'info',
+            button: 'ปิด',
+          });
+        }
+      });
+    },
+    //ยืนยันการลบ
+    removeperson() {
+      axios
+        .get(`${apiPath.getBaseUrl()}remove_water.php`, {
+          params: {
+            num: this.input.num,
+          },
+        })
+        .then((response) => {
+          this.romove_message = response.data;
+        });
     },
   },
   mounted() {

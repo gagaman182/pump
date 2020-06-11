@@ -1346,6 +1346,8 @@
 import {EnhancedCheck} from 'vue-enhanced-check';
 import axios from 'axios';
 import {APIPath} from '../../service/APIPath';
+// popup alert
+import swal from 'sweetalert';
 const apiPath = new APIPath();
 export default {
   name: 'dayform',
@@ -1454,7 +1456,13 @@ export default {
     submitHandler() {
       this.$refs.form.validate((valid) => {
         if (valid === false) {
-          this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+          swal({
+            title: 'แจ้งเตือน!',
+            text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
+            icon: 'error',
+            button: 'ปิด',
+          });
         } else {
           axios
             .get(`${apiPath.getBaseUrl()}dayform_save.php`, {
@@ -1549,14 +1557,26 @@ export default {
             .then((response) => {
               this.input.ok = response.data;
               if (this.input.ok[0].message == 'เพิ่มข้อมูลสำเร็จ') {
-                this.$message.success(
-                  'สำเร็จ: ' + this.input.ok[0].message,
-                  5000
-                );
-                this.$router.push('/');
+                // this.$message.success(
+                //   'สำเร็จ: ' + this.input.ok[0].message,
+                //   5000
+                // );
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.input.ok[0].message,
+                  icon: 'success',
+                  button: 'ปิด',
+                });
               } else {
-                this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                swal({
+                  title: 'แจ้งเตือน!',
+                  text: this.input.ok[0].message,
+                  icon: 'error',
+                  button: 'ปิด',
+                });
               }
+              this.$router.push('/');
             });
         }
       });

@@ -11,10 +11,22 @@
           </div>
 
           <div>
-            <h2 class="head">
-              <i class="material-icons white-text">calendar_today</i
-              >ตารางใบตรวจเช็คบำรุงรักษา
-            </h2>
+            <fish-row gutter=".6">
+              <fish-col span="24">
+                <h2 class="head">
+                  <i class="material-icons white-text">calendar_today</i
+                  >ตารางใบตรวจเช็คบำรุงรักษา
+                </h2>
+              </fish-col>
+
+              <fish-col span="2">
+                <fish-button type="basic" @click="plus">
+                  <h2>
+                    <i class="material-icons white-text">add_box</i>เพิ่ม
+                  </h2></fish-button
+                >
+              </fish-col>
+            </fish-row>
           </div>
           <fish-divider></fish-divider>
           <vue-good-table
@@ -57,11 +69,24 @@
             <fish-col span="12"
               ><div class="demo-col">
                 <div>
-                  <h2 class="head">
-                    <i class="material-icons white-text">store</i
-                    >ตารางใบตรวจเช็คบำรุงรักษา
-                  </h2>
+                  <fish-row>
+                    <fish-col span="21">
+                      <h2 class="head">
+                        <i class="material-icons white-text">store</i
+                        >ตารางใบตรวจเช็คบำรุงรักษา
+                      </h2>
+                    </fish-col>
+
+                    <fish-col span="2">
+                      <fish-button type="basic" @click="plusday">
+                        <h2>
+                          <i class="material-icons white-text">add_box</i>เพิ่ม
+                        </h2></fish-button
+                      >
+                    </fish-col>
+                  </fish-row>
                 </div>
+
                 <fish-divider></fish-divider>
                 <vue-good-table
                   ref="formref"
@@ -80,10 +105,22 @@
             <fish-col span="12"
               ><div class="demo-col demo-col2">
                 <div>
-                  <h2 class="head">
-                    <i class="material-icons white-text">waves</i
-                    >แบบวัดคุณภาพน้ำ
-                  </h2>
+                  <fish-row>
+                    <fish-col span="21">
+                      <h2 class="head">
+                        <i class="material-icons white-text">waves</i
+                        >แบบวัดคุณภาพน้ำ
+                      </h2>
+                    </fish-col>
+
+                    <fish-col span="2">
+                      <fish-button type="basic" @click="pluswater">
+                        <h2>
+                          <i class="material-icons white-text">add_box</i>เพิ่ม
+                        </h2></fish-button
+                      >
+                    </fish-col>
+                  </fish-row>
                 </div>
               </div>
               <fish-divider></fish-divider>
@@ -309,7 +346,7 @@ export default {
       idsendwater: '',
       form_column: [
         {
-          label: 'เลขที่ใบตรวจเช็ค',
+          label: 'ลำดับที่ใบตรวจเช็ค',
           field: 'num',
         },
         {
@@ -356,7 +393,7 @@ export default {
       form_data: '',
       pday_column: [
         {
-          label: 'เลขที่ใบตรวจสอบ',
+          label: 'ลำดับที่ใบตรวจสอบ',
           field: 'num',
         },
         {
@@ -367,7 +404,7 @@ export default {
       pday_data: '',
       quality_water_column: [
         {
-          label: 'เลขที่ใบตรวจสอบ',
+          label: 'ลำดับที่ใบตรวจสอบ',
           field: 'num',
         },
         {
@@ -682,6 +719,15 @@ export default {
       this.idsendwater = params.row.num;
 
       this.$router.push('/quality_edit/' + this.idsendwater);
+    },
+    plus() {
+      this.$router.push('/form');
+    },
+    plusday() {
+      this.$router.push('/dayform');
+    },
+    pluswater() {
+      this.$router.push('/quality');
     },
   },
 
