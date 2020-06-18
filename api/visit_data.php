@@ -19,7 +19,8 @@
 DATE_FORMAT(p_visit.dateservice, '%d-%m-%Y') as dateservice,
 case when boss_approve = '1' then 'ตรวจสอบแล้ว' else '' end as boss_approve,
 case when inspector_approve = '1' then 'ตรวจสอบแล้ว' else '' end as inspector_approve,
-case when manage_approve = '1' then 'ตรวจสอบแล้ว' else '' end as manage_approve
+case when manage_approve = '1' then 'ตรวจสอบแล้ว' else '' end as manage_approve,
+p_visit.woker
 
 
 

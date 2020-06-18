@@ -5,11 +5,12 @@
       height="1rem"
       backgroundColor="navy"
     />
+    <Account />
     <fish-row>
       <fish-col span="24">
         <fish-steps size="big">
           <fish-step
-            title="ใบตรวจเช็ค"
+            title="แบบตรวจเช็ค"
             active
             description="วิธีการเลือกแบบฟอร์ม"
           ></fish-step>
@@ -1398,10 +1399,13 @@ import {APIPath} from '../../service/APIPath';
 // popup alert
 import swal from 'sweetalert';
 const apiPath = new APIPath();
+import Account from '@/components/Account.vue';
+
 export default {
   name: 'form',
   components: {
     EnhancedCheck,
+    Account,
   },
   data() {
     return {
@@ -1517,7 +1521,7 @@ export default {
       woker_approve: '',
       woker_other: '',
       boss_pump: '',
-      boss_pump_approve: '',
+      boss_approve: '',
       boss_pump_other: '',
       inspector: '',
       inspector_approve: '',
@@ -1526,6 +1530,11 @@ export default {
       manage_approve: '',
       manage_other: '',
       ok: '',
+      form: {
+        token: '',
+        level: '',
+        user: '',
+      },
     };
   },
   methods: {
@@ -1939,6 +1948,21 @@ export default {
     // alert(apiPath.getBaseUrl());
     console.log('tag', '');
     // รุ่น
+    window.scrollTo(0, 0);
+
+    this.form.token = JSON.parse(localStorage.getItem('token'));
+    this.form.user = this.form.token[0].fullname;
+    this.form.level = this.form.token[0].level;
+
+    if (this.form.level == 'หัวหน้าประปา') {
+      this.boss_pump = this.form.user;
+    } else if (this.form.level == 'ผู้ตรวจสอบ') {
+      this.inspector = this.form.user;
+    } else if (this.form.level == 'รองผู้อำนวยการฝ่ายบริหาร') {
+      this.manage = this.form.user;
+    } else if (this.form.level == 'เจ้าหน้าที่') {
+      this.woker = this.form.user;
+    }
     axios
 
       .get(`${apiPath.getBaseUrl()}pump.php`)

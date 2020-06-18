@@ -5,6 +5,7 @@
       height="1rem"
       backgroundColor="navy"
     />
+    <Account />
     <fish-card fluid color="teal">
       <div slot="header">
         <h3 class="head">
@@ -29,7 +30,7 @@
           ></fish-col>
 
           <fish-col span="1"
-            ><H2>ID. {{ this.input.num }}</H2></fish-col
+            ><H3 class="idcolor">ใบที่. {{ this.input.num }}</H3></fish-col
           >
         </fish-row>
         <fish-divider></fish-divider>
@@ -531,8 +532,12 @@ import {APIPath} from '../../service/APIPath';
 // popup alert
 import swal from 'sweetalert';
 const apiPath = new APIPath();
+import Account from '@/components/Account.vue';
 export default {
   name: 'qulity',
+  components: {
+    Account,
+  },
   data() {
     return {
       input: {
@@ -590,100 +595,116 @@ export default {
       },
       num: this.$route.params.id,
       romove_message: '',
+      form: {
+        token: '',
+        level: '',
+        user: '',
+      },
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate((valid) => {
-        // console.log(valid);
-        if (valid === false) {
-          // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
-          swal({
-            title: 'แจ้งเตือน!',
-            text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
-            icon: 'error',
-            button: 'ปิด',
-          });
-        } else {
-          axios
-            .get(`${apiPath.getBaseUrl()}quality_water_save.php`, {
-              params: {
-                dateservice: this.input.dateservice,
-                pumpadjuct1: this.input.pumpadjuct1,
-                pumpadjuct2: this.input.pumpadjuct2,
-                pumpadjuctdo1: this.input.pumpadjuctdo1,
-                pumpadjuctdo2: this.input.pumpadjuctdo2,
-                pumpadjucttemp1: this.input.pumpadjucttemp1,
-                pumpadjucttemp2: this.input.pumpadjucttemp2,
-                pumpadjuctv301: this.input.pumpadjuctv301,
-                pumpadjuctv302: this.input.pumpadjuctv302,
-                pumpadjuctchlorine1: this.input.pumpadjuctchlorine1,
-                pumpadjuctchlorine2: this.input.pumpadjuctchlorine2,
-                pumpadjuctother: this.input.pumpadjuctother,
-                aeration1: this.input.aeration1,
-                aeration2: this.input.aeration2,
-                aerationdo1: this.input.aerationdo1,
-                aerationdo2: this.input.aerationdo2,
-                aerationtemp1: this.input.aerationtemp1,
-                aerationtemp2: this.input.aerationtemp2,
-                aerationtv301: this.input.aerationtv301,
-                aerationtv302: this.input.aerationtv302,
-                aerationchlorine1: this.input.aerationchlorine1,
-                aerationchlorine2: this.input.aerationchlorine2,
-                aerationother: this.input.aerationother,
-                silt1: this.input.silt1,
-                silt2: this.input.silt2,
-                siltdo1: this.input.siltdo1,
-                siltdo2: this.input.siltdo2,
-                silttemp1: this.input.silttemp1,
-                silttemp2: this.input.silttemp2,
-                siltv301: this.input.siltv301,
-                siltv302: this.input.siltv302,
-                siltchlorine1: this.input.siltchlorine1,
-                siltchlorine2: this.input.siltchlorine2,
-                siltother: this.input.siltother,
-                chlorine1: this.input.chlorine1,
-                chlorine2: this.input.chlorine2,
-                chlorinedo1: this.input.chlorinedo1,
-                chlorinedo2: this.input.chlorinedo2,
-                chlorinetemp1: this.input.chlorinetemp1,
-                chlorinetemp2: this.input.chlorinetemp2,
-                chlorinev301: this.input.chlorinev301,
-                chlorinev302: this.input.chlorinev302,
-                chlorinechlorine1: this.input.chlorinechlorine1,
-                chlorinechlorine2: this.input.chlorinechlorine2,
-                chlorineother: this.input.chlorineother,
-                others: this.input.others,
-                woker: this.input.woker,
-              },
-            })
-            .then((response) => {
-              this.input.ok = response.data;
-              if (this.input.ok[0].message == 'เพิ่มข้อมูลสำเร็จ') {
-                // this.$message.success(
-                //   'สำเร็จ: ' + this.input.ok[0].message,
-                //   5000
-                // );
-                swal({
-                  title: 'แจ้งเตือน!',
-                  text: this.input.ok[0].message,
-                  icon: 'success',
-                  button: 'ปิด',
-                });
-              } else {
-                // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
-                swal({
-                  title: 'แจ้งเตือน!',
-                  text: this.input.ok[0].message,
-                  icon: 'error',
-                  button: 'ปิด',
-                });
-              }
-              this.$router.push('/');
+      if (this.form.level == 'เจ้าหน้าที่') {
+        this.input.woker = this.form.user;
+        this.$refs.form.validate((valid) => {
+          // console.log(valid);
+          if (valid === false) {
+            // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+            swal({
+              title: 'แจ้งเตือน!',
+              text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
+              icon: 'error',
+              button: 'ปิด',
             });
-        }
-      });
+          } else {
+            axios
+              .get(`${apiPath.getBaseUrl()}update_water_detail.php`, {
+                params: {
+                  num: this.input.num,
+                  dateservice: this.input.dateservice,
+                  pumpadjuct1: this.input.pumpadjuct1,
+                  pumpadjuct2: this.input.pumpadjuct2,
+                  pumpadjuctdo1: this.input.pumpadjuctdo1,
+                  pumpadjuctdo2: this.input.pumpadjuctdo2,
+                  pumpadjucttemp1: this.input.pumpadjucttemp1,
+                  pumpadjucttemp2: this.input.pumpadjucttemp2,
+                  pumpadjuctv301: this.input.pumpadjuctv301,
+                  pumpadjuctv302: this.input.pumpadjuctv302,
+                  pumpadjuctchlorine1: this.input.pumpadjuctchlorine1,
+                  pumpadjuctchlorine2: this.input.pumpadjuctchlorine2,
+                  pumpadjuctother: this.input.pumpadjuctother,
+                  aeration1: this.input.aeration1,
+                  aeration2: this.input.aeration2,
+                  aerationdo1: this.input.aerationdo1,
+                  aerationdo2: this.input.aerationdo2,
+                  aerationtemp1: this.input.aerationtemp1,
+                  aerationtemp2: this.input.aerationtemp2,
+                  aerationtv301: this.input.aerationtv301,
+                  aerationtv302: this.input.aerationtv302,
+                  aerationchlorine1: this.input.aerationchlorine1,
+                  aerationchlorine2: this.input.aerationchlorine2,
+                  aerationother: this.input.aerationother,
+                  silt1: this.input.silt1,
+                  silt2: this.input.silt2,
+                  siltdo1: this.input.siltdo1,
+                  siltdo2: this.input.siltdo2,
+                  silttemp1: this.input.silttemp1,
+                  silttemp2: this.input.silttemp2,
+                  siltv301: this.input.siltv301,
+                  siltv302: this.input.siltv302,
+                  siltchlorine1: this.input.siltchlorine1,
+                  siltchlorine2: this.input.siltchlorine2,
+                  siltother: this.input.siltother,
+                  chlorine1: this.input.chlorine1,
+                  chlorine2: this.input.chlorine2,
+                  chlorinedo1: this.input.chlorinedo1,
+                  chlorinedo2: this.input.chlorinedo2,
+                  chlorinetemp1: this.input.chlorinetemp1,
+                  chlorinetemp2: this.input.chlorinetemp2,
+                  chlorinev301: this.input.chlorinev301,
+                  chlorinev302: this.input.chlorinev302,
+                  chlorinechlorine1: this.input.chlorinechlorine1,
+                  chlorinechlorine2: this.input.chlorinechlorine2,
+                  chlorineother: this.input.chlorineother,
+                  others: this.input.others,
+                  woker: this.input.woker,
+                },
+              })
+              .then((response) => {
+                this.input.ok = response.data;
+                if (this.input.ok[0].message == 'แก้ไขข้อมูลสำเร็จ') {
+                  // this.$message.success(
+                  //   'สำเร็จ: ' + this.input.ok[0].message,
+                  //   5000
+                  // );
+                  swal({
+                    title: 'แจ้งเตือน!',
+                    text: this.input.ok[0].message,
+                    icon: 'success',
+                    button: 'ปิด',
+                  });
+                } else {
+                  // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                  swal({
+                    title: 'แจ้งเตือน!',
+                    text: this.input.ok[0].message,
+                    icon: 'error',
+                    button: 'ปิด',
+                  });
+                }
+                this.$router.push('/');
+              });
+          }
+        });
+      } else {
+        swal({
+          title: 'แจ้งเตือน!',
+          text: 'หน้านี้สำหรับเจ้าหน้าที่ผู้ปฏบัติงาน',
+          icon: 'error',
+          button: 'ปิด',
+        });
+      }
     },
     getpump(num) {
       axios
@@ -785,7 +806,11 @@ export default {
     },
   },
   mounted() {
+    window.scrollTo(0, 0);
     this.getpump(this.num);
+    this.form.token = JSON.parse(localStorage.getItem('token'));
+    this.form.user = this.form.token[0].fullname;
+    this.form.level = this.form.token[0].level;
   },
 };
 </script>
@@ -814,5 +839,8 @@ export default {
 }
 .left {
   text-align: left;
+}
+.idcolor {
+  color: orange;
 }
 </style>

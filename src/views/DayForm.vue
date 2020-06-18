@@ -5,6 +5,7 @@
       height="1rem"
       backgroundColor="navy"
     />
+    <Account />
     <fish-card fluid color="teal">
       <div slot="header">
         <h3 class="head">
@@ -1317,7 +1318,7 @@
         <fish-row gutter=".5">
           <fish-col span="4" offset="21">
             <fish-fields>
-              <fish-field>
+              <fish-field style="width: 100%">
                 <fish-input
                   v-model="input.woker"
                   label="ผู้ดูแล "
@@ -1349,8 +1350,14 @@ import {APIPath} from '../../service/APIPath';
 // popup alert
 import swal from 'sweetalert';
 const apiPath = new APIPath();
+import Account from '@/components/Account.vue';
+
 export default {
   name: 'dayform',
+  components: {
+    EnhancedCheck,
+    Account,
+  },
   data() {
     return {
       input: {
@@ -1446,141 +1453,167 @@ export default {
         woker: '',
         ok: '',
       },
+      form: {
+        token: '',
+        level: '',
+        user: '',
+      },
     };
   },
-  components: {
-    EnhancedCheck,
-  },
+
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
-      this.$refs.form.validate((valid) => {
-        if (valid === false) {
-          // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
-          swal({
-            title: 'แจ้งเตือน!',
-            text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
-            icon: 'error',
-            button: 'ปิด',
-          });
-        } else {
-          axios
-            .get(`${apiPath.getBaseUrl()}dayform_save.php`, {
-              params: {
-                dateservice: this.input.dateservice,
-                trap1: this.input.trap1,
-                trap2: this.input.trap2,
-                trap3: this.input.trap3,
-                pondcolor1: this.input.pondcolor1,
-                pondcolor2: this.input.pondcolor2,
-                pumpfailed1_1: this.input.pumpfailed1_1,
-                pumpfailed1_2: this.input.pumpfailed1_2,
-                pumpfailed1_3: this.input.pumpfailed1_3,
-                pumpfailed2_1: this.input.pumpfailed2_1,
-                pumpfailed2_2: this.input.pumpfailed2_2,
-                pumpfailed2_3: this.input.pumpfailed2_3,
-                pumpadjuct1_1: this.input.pumpadjuct1_1,
-                pumpadjuct1_2: this.input.pumpadjuct1_2,
-                pumpadjuct1_3: this.input.pumpadjuct1_3,
-                pumpadjuct2_1: this.input.pumpadjuct2_1,
-                pumpadjuct2_2: this.input.pumpadjuct2_2,
-                pumpadjuct2_3: this.input.pumpadjuct2_3,
-                pondhight1: this.input.pondhight1,
-                pondhight2: this.input.pondhight2,
-                pumpsediment1_1: this.input.pumpsediment1_1,
-                pumpsediment1_2: this.input.pumpsediment1_2,
-                pumpsediment1_3: this.input.pumpsediment1_3,
-                pumpsediment2_1: this.input.pumpsediment2_1,
-                pumpsediment2_2: this.input.pumpsediment2_2,
-                pumpsediment2_3: this.input.pumpsediment2_3,
-                sediment1: this.input.sediment1,
-                sediment2: this.input.sediment2,
-                pumpcrolene1_1: this.input.pumpcrolene1_1,
-                pumpcrolene1_2: this.input.pumpcrolene1_2,
-                pumpcrolene1_3: this.input.pumpcrolene1_3,
-                pumpcrolene2_1: this.input.pumpcrolene2_1,
-                pumpcrolene2_2: this.input.pumpcrolene2_2,
-                pumpcrolene2_3: this.input.pumpcrolene2_3,
-                polymer1: this.input.polymer1,
-                polymer2: this.input.polymer2,
-                polymer3: this.input.polymer3,
-                ppm1: this.input.ppm1,
-                ppm2: this.input.ppm2,
-                rolled1: this.input.rolled1,
-                rolled2: this.input.rolled2,
-                rolled3: this.input.rolled3,
-                water1: this.input.water1,
-                water2: this.input.water2,
-                pumpexcess1: this.input.pumpexcess1,
-                pumpexcess2: this.input.pumpexcess2,
-                pumpexcess3: this.input.pumpexcess3,
-                wastewater1: this.input.wastewater1,
-                wastewater2: this.input.wastewater2,
-                meter: this.input.meter,
-                meterfailed1: this.input.meterfailed1,
-                aeration1_1: this.input.aeration1_1,
-                aeration1_2: this.input.aeration1_2,
-                aeration1_3: this.input.aeration1_3,
-                meterfailed2: this.input.meterfailed2,
-                aeration2_1: this.input.aeration2_1,
-                aeration2_2: this.input.aeration2_2,
-                aeration2_3: this.input.aeration2_3,
-                pumping1: this.input.pumping1,
-                pumpcondition1_1: this.input.pumpcondition1_1,
-                pumpcondition1_2: this.input.pumpcondition1_2,
-                pumpcondition1_3: this.input.pumpcondition1_3,
-                pumping2: this.input.pumping2,
-                pumpcondition2_1: this.input.pumpcondition2_1,
-                pumpcondition2_2: this.input.pumpcondition2_2,
-                pumpcondition2_3: this.input.pumpcondition2_3,
-                pumping3: this.input.pumping3,
-                cleantrap1_1: this.input.cleantrap1_1,
-                cleantrap1_2: this.input.cleantrap1_2,
-                cleantrap1_3: this.input.cleantrap1_3,
-                rainning: this.input.rainning,
-                cleantrap2_1: this.input.cleantrap2_1,
-                cleantrap2_2: this.input.cleantrap2_2,
-                cleantrap2_3: this.input.cleantrap2_3,
-                volume: this.input.volume,
-                storetrap1_1: this.input.storetrap1_1,
-                storetrap1_2: this.input.storetrap1_2,
-                storetrap1_3: this.input.storetrap1_3,
-                storetrap2_1: this.input.storetrap2_1,
-                storetrap2_2: this.input.storetrap2_2,
-                storetrap2_3: this.input.storetrap2_3,
-                chlorineintank1: this.input.chlorineintank1,
-                garbage: this.input.garbage,
-                chlorineintank2: this.input.chlorineintank2,
-                others: this.input.others,
-              },
-            })
-            .then((response) => {
-              this.input.ok = response.data;
-              if (this.input.ok[0].message == 'เพิ่มข้อมูลสำเร็จ') {
-                // this.$message.success(
-                //   'สำเร็จ: ' + this.input.ok[0].message,
-                //   5000
-                // );
-                swal({
-                  title: 'แจ้งเตือน!',
-                  text: this.input.ok[0].message,
-                  icon: 'success',
-                  button: 'ปิด',
-                });
-              } else {
-                // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
-                swal({
-                  title: 'แจ้งเตือน!',
-                  text: this.input.ok[0].message,
-                  icon: 'error',
-                  button: 'ปิด',
-                });
-              }
-              this.$router.push('/');
+      if (this.form.level == 'เจ้าหน้าที่') {
+        this.input.woker = this.form.user;
+
+        this.$refs.form.validate((valid) => {
+          if (valid === false) {
+            // this.$message.error('แจ้งเตือน: ท่านยังกรอกข้อมูลไม่ครบ', 5000);
+            swal({
+              title: 'แจ้งเตือน!',
+              text: 'ท่านยังกรอกข้อมูลไม่ครบ!',
+              icon: 'error',
+              button: 'ปิด',
             });
-        }
-      });
+          } else {
+            axios
+              .get(`${apiPath.getBaseUrl()}dayform_save.php`, {
+                params: {
+                  dateservice: this.input.dateservice,
+                  trap1: this.input.trap1,
+                  trap2: this.input.trap2,
+                  trap3: this.input.trap3,
+                  pondcolor1: this.input.pondcolor1,
+                  pondcolor2: this.input.pondcolor2,
+                  pumpfailed1_1: this.input.pumpfailed1_1,
+                  pumpfailed1_2: this.input.pumpfailed1_2,
+                  pumpfailed1_3: this.input.pumpfailed1_3,
+                  pumpfailed2_1: this.input.pumpfailed2_1,
+                  pumpfailed2_2: this.input.pumpfailed2_2,
+                  pumpfailed2_3: this.input.pumpfailed2_3,
+                  pumpadjuct1_1: this.input.pumpadjuct1_1,
+                  pumpadjuct1_2: this.input.pumpadjuct1_2,
+                  pumpadjuct1_3: this.input.pumpadjuct1_3,
+                  pumpadjuct2_1: this.input.pumpadjuct2_1,
+                  pumpadjuct2_2: this.input.pumpadjuct2_2,
+                  pumpadjuct2_3: this.input.pumpadjuct2_3,
+                  pondhight1: this.input.pondhight1,
+                  pondhight2: this.input.pondhight2,
+                  pumpsediment1_1: this.input.pumpsediment1_1,
+                  pumpsediment1_2: this.input.pumpsediment1_2,
+                  pumpsediment1_3: this.input.pumpsediment1_3,
+                  pumpsediment2_1: this.input.pumpsediment2_1,
+                  pumpsediment2_2: this.input.pumpsediment2_2,
+                  pumpsediment2_3: this.input.pumpsediment2_3,
+                  sediment1: this.input.sediment1,
+                  sediment2: this.input.sediment2,
+                  pumpcrolene1_1: this.input.pumpcrolene1_1,
+                  pumpcrolene1_2: this.input.pumpcrolene1_2,
+                  pumpcrolene1_3: this.input.pumpcrolene1_3,
+                  pumpcrolene2_1: this.input.pumpcrolene2_1,
+                  pumpcrolene2_2: this.input.pumpcrolene2_2,
+                  pumpcrolene2_3: this.input.pumpcrolene2_3,
+                  polymer1: this.input.polymer1,
+                  polymer2: this.input.polymer2,
+                  polymer3: this.input.polymer3,
+                  ppm1: this.input.ppm1,
+                  ppm2: this.input.ppm2,
+                  rolled1: this.input.rolled1,
+                  rolled2: this.input.rolled2,
+                  rolled3: this.input.rolled3,
+                  water1: this.input.water1,
+                  water2: this.input.water2,
+                  pumpexcess1: this.input.pumpexcess1,
+                  pumpexcess2: this.input.pumpexcess2,
+                  pumpexcess3: this.input.pumpexcess3,
+                  wastewater1: this.input.wastewater1,
+                  wastewater2: this.input.wastewater2,
+                  meter: this.input.meter,
+                  meterfailed1: this.input.meterfailed1,
+                  aeration1_1: this.input.aeration1_1,
+                  aeration1_2: this.input.aeration1_2,
+                  aeration1_3: this.input.aeration1_3,
+                  meterfailed2: this.input.meterfailed2,
+                  aeration2_1: this.input.aeration2_1,
+                  aeration2_2: this.input.aeration2_2,
+                  aeration2_3: this.input.aeration2_3,
+                  pumping1: this.input.pumping1,
+                  pumpcondition1_1: this.input.pumpcondition1_1,
+                  pumpcondition1_2: this.input.pumpcondition1_2,
+                  pumpcondition1_3: this.input.pumpcondition1_3,
+                  pumping2: this.input.pumping2,
+                  pumpcondition2_1: this.input.pumpcondition2_1,
+                  pumpcondition2_2: this.input.pumpcondition2_2,
+                  pumpcondition2_3: this.input.pumpcondition2_3,
+                  pumping3: this.input.pumping3,
+                  cleantrap1_1: this.input.cleantrap1_1,
+                  cleantrap1_2: this.input.cleantrap1_2,
+                  cleantrap1_3: this.input.cleantrap1_3,
+                  rainning: this.input.rainning,
+                  cleantrap2_1: this.input.cleantrap2_1,
+                  cleantrap2_2: this.input.cleantrap2_2,
+                  cleantrap2_3: this.input.cleantrap2_3,
+                  volume: this.input.volume,
+                  storetrap1_1: this.input.storetrap1_1,
+                  storetrap1_2: this.input.storetrap1_2,
+                  storetrap1_3: this.input.storetrap1_3,
+                  storetrap2_1: this.input.storetrap2_1,
+                  storetrap2_2: this.input.storetrap2_2,
+                  storetrap2_3: this.input.storetrap2_3,
+                  chlorineintank1: this.input.chlorineintank1,
+                  garbage: this.input.garbage,
+                  chlorineintank2: this.input.chlorineintank2,
+                  others: this.input.others,
+                  woker: this.input.woker,
+                },
+              })
+              .then((response) => {
+                this.input.ok = response.data;
+                if (this.input.ok[0].message == 'เพิ่มข้อมูลสำเร็จ') {
+                  // this.$message.success(
+                  //   'สำเร็จ: ' + this.input.ok[0].message,
+                  //   5000
+                  // );
+                  swal({
+                    title: 'แจ้งเตือน!',
+                    text: this.input.ok[0].message,
+                    icon: 'success',
+                    button: 'ปิด',
+                  });
+                } else {
+                  // this.$message.error('เตือน: ' + this.input.ok[0].message, 5000);
+                  swal({
+                    title: 'แจ้งเตือน!',
+                    text: this.input.ok[0].message,
+                    icon: 'error',
+                    button: 'ปิด',
+                  });
+                }
+                this.$router.push('/');
+              });
+          }
+        });
+      } else {
+        swal({
+          title: 'แจ้งเตือน!',
+          text: 'หน้านี้สำหรับเจ้าหน้าที่ผู้ปฏบัติงาน',
+          icon: 'error',
+          button: 'ปิด',
+        });
+      }
     },
+  },
+  mounted() {
+    window.scrollTo(0, 0);
+
+    this.form.token = JSON.parse(localStorage.getItem('token'));
+    this.form.user = this.form.token[0].fullname;
+    this.form.level = this.form.token[0].level;
+
+    if (this.form.level == 'เจ้าหน้าที่') {
+      this.input.woker = this.form.user;
+    }
   },
 };
 </script>

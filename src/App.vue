@@ -1,7 +1,7 @@
 <template>
   <fish-layout class="demo3" sider="l">
     <nav slot="header">
-      <div class="logo ">
+      <div class="logo " v-if="this.$route.path !== '/login'">
         <fish-row>
           <fish-col span="2" offset="0.5">
             <fish-image
@@ -19,7 +19,7 @@
       </div>
     </nav>
 
-    <div slot="sider">
+    <div slot="sider" v-if="this.$route.path !== '/login'">
       <fish-menu mode="inline" style="width: 200px;">
         <fish-option index="0" content="Content">
           <h4>
@@ -27,10 +27,12 @@
             ><router-link to="/">หน้าหลัก</router-link>
           </h4></fish-option
         >
+        <fish-divider></fish-divider>
+
         <fish-option index="2" content="form">
           <h4>
             <i class="material-icons white-text">calendar_today</i
-            ><router-link to="/form">ใบตรวจเช็คบำรุงรักษา</router-link>
+            ><router-link to="/form">แบบตรวจเช็คบำรุงฯ</router-link>
           </h4></fish-option
         >
         <fish-option index="3" content="dayform">
@@ -45,10 +47,11 @@
             <router-link to="/quality">แบบวัดคุณภาพน้ำ</router-link>
           </h4></fish-option
         >
+        <fish-divider></fish-divider>
       </fish-menu>
     </div>
     <div slot="content"><router-view /></div>
-    <div slot="footer">
+    <div slot="footer" v-if="this.$route.path !== '/login'">
       copyright@2020 กลุ่มงานเวชกรรมสังคม โรงพยาบาลหาดใหญ่
     </div>
   </fish-layout>
@@ -56,6 +59,9 @@
 <script>
 export default {
   name: 'pump',
+  data() {
+    return {};
+  },
 };
 </script>
 <style scoped>

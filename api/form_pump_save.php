@@ -132,7 +132,7 @@ $woker_other= $_GET["woker_other"];
        '".$system_1."','".$system_2."','".$system_3."','".$system_4."','".$system_5."','".$system_other."',
        '".$sump_1."','".$sump_2."','".$sump_3."','".$sump_4."','".$sump_5."','".$sump_6."','".$sump_7."','".$sump_8."','".$sump_other."',
        '".$chlorine_1."','".$chlorine_2."','".$chlorine_3."','".$chlorine_4."','".$chlorine_5."','".$chlorine_other."',
-       '".$worker."','".$woker_approve."','".$woker_other."'
+       '".$woker."','".$woker_approve."','".$woker_other."'
        )";
         if ($conn->query($strvisit) === TRUE) {
             // echo "ระบบทำงานเสร็จสมบูรณ์";

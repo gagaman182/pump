@@ -5,6 +5,7 @@
       height="1rem"
       backgroundColor="navy"
     />
+    <Account />
     <fish-row>
       <fish-col span="24">
         <fish-steps size="big">
@@ -45,7 +46,7 @@
         <pre>{{ pump_detail[0].wire_0 }}</pre> -->
 
         <fish-col span="1"
-          ><H2>ID. {{ this.num }}</H2></fish-col
+          ><H3 class="idcolor">ใบที่. {{ this.num }}</H3></fish-col
         >
       </fish-row>
       <fish-form ref="form">
@@ -1390,12 +1391,7 @@
               <fish-row>
                 <fish-col span="8">
                   <h4>ชื่อ-นามสกุล</h4>
-                  <fish-input
-                    size="large"
-                    v-model="woker"
-                    hint="ชื่อ-นามสกุล"
-                    disabled
-                  ></fish-input>
+                  <fish-input size="large" v-model="woker" hint=""></fish-input>
                 </fish-col>
                 <fish-col span="6">
                   <h4>ยืนยันการตรวจเช็ค</h4>
@@ -1424,13 +1420,21 @@
           <fish-col>
             <fish-fields>
               <fish-field>
-                <fish-button type="primary" @click="submitHandler">
+                <fish-button
+                  type="primary"
+                  @click="submitHandler"
+                  v-bind:disabled="btnDisable_user"
+                >
                   <vue-fontawesome icon="save" size="2"></vue-fontawesome
                   >บันทึก</fish-button
                 >
               </fish-field>
               <fish-field>
-                <fish-button type="negative" @click="clear">
+                <fish-button
+                  type="negative"
+                  @click="clear"
+                  v-bind:disabled="btnDisable_user"
+                >
                   <vue-fontawesome icon="eraser" size="2"></vue-fontawesome
                   >ลบ</fish-button
                 >
@@ -1441,129 +1445,137 @@
       </fish-form>
     </fish-card>
     <br />
+
     <fish-row>
       <fish-col span="24">
-        <fish-card color="teal" fluid>
-          <div slot="header"><strong class="headsmall">ผู้ตรวจสอบ</strong></div>
-          <fish-card color="orange" fluid>
-            <div slot="header">
-              <strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong>
-            </div>
-            <fish-row>
-              <fish-col span="6">
-                <h4>ชื่อ-นามสกุล</h4>
-                <fish-input
-                  size="large"
-                  v-model="boss_pump"
-                  hint="ชื่อ-นามสกุล"
-                  disabled
-                ></fish-input>
-              </fish-col>
-              <fish-col span="6">
-                <center>
-                  <h4>ตรวจสอบแล้ว</h4>
-                  <fish-switch
-                    v-model="boss_approve"
-                    :yesOrNo="['1', '0']"
-                  ></fish-switch>
-                </center>
-              </fish-col>
-              <fish-col span="12">
-                <h4>หมายเหตุ</h4>
-                <fish-input
-                  size="large"
-                  type="textarea"
-                  style="height: 80px;  width: 100%; "
-                  v-model="boss_pump_other"
-                  hint="ระบุ"
-                ></fish-input>
-              </fish-col>
-            </fish-row>
-          </fish-card>
-          <br />
-
-          <fish-cards cols="two">
-            <fish-card color="orange">
-              <div slot="header">
-                <strong class="headsmall">ผู้ตรวจสอบ</strong>
-              </div>
-              <fish-row>
-                <fish-col span="6">
-                  <h4>ชื่อ-นามสกุล</h4>
-                  <fish-input
-                    size="large"
-                    v-model="inspector"
-                    hint="ชื่อ-นามสกุล"
-                    disabled
-                  ></fish-input>
-                </fish-col>
-                <fish-col span="6">
-                  <center>
-                    <h4>ตรวจสอบแล้ว</h4>
-                    <fish-switch
-                      v-model="inspector_approve"
-                      :yesOrNo="['1', '0']"
-                    ></fish-switch>
-                  </center>
-                </fish-col>
-                <fish-col span="12">
-                  <h4>หมายเหตุ</h4>
-                  <fish-input
-                    size="large"
-                    type="textarea"
-                    style="height: 80px;  width: 100%; "
-                    v-model="inspector_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </fish-col>
-              </fish-row>
-            </fish-card>
-            <fish-card color="orange">
-              <div slot="header">
-                <strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong>
-              </div>
-              <fish-row>
-                <fish-col span="6">
-                  <h4>ชื่อ-นามสกุล</h4>
-                  <fish-input
-                    size="large"
-                    v-model="manage"
-                    hint="ชื่อ-นามสกุล"
-                    disabled
-                  ></fish-input>
-                </fish-col>
-                <fish-col span="6">
-                  <center>
-                    <h4>ตรวจสอบแล้ว</h4>
-                    <fish-switch
-                      v-model="manage_approve"
-                      :yesOrNo="['1', '0']"
-                    ></fish-switch>
-                  </center>
-                </fish-col>
-                <fish-col span="12">
-                  <h4>หมายเหตุ</h4>
-                  <fish-input
-                    size="large"
-                    type="textarea"
-                    style="height: 80px;  width: 100%; "
-                    v-model="manage_other"
-                    hint="ระบุ"
-                  ></fish-input>
-                </fish-col>
-              </fish-row>
-            </fish-card>
-          </fish-cards>
-          <br />
+        <fish-card color="orange" fluid>
+          <div slot="header">
+            <strong class="headsmall">หัวหน้าประปา สุขาภิบาล</strong>
+          </div>
           <fish-row>
-            <fish-col span="2">
-              <fish-button type="primary" @click="submitHandler">
-                <vue-fontawesome icon="save" size="2"></vue-fontawesome>
-                บันทึก</fish-button
-              >
+            <fish-col span="6">
+              <h4>ชื่อ-นามสกุล</h4>
+              <fish-input
+                size="large"
+                v-model="boss_pump"
+                hint=""
+                v-bind:disabled="disable_boss"
+              ></fish-input>
+            </fish-col>
+            <fish-col span="6">
+              <center>
+                <h4>ตรวจสอบแล้ว</h4>
+                <fish-switch
+                  v-model="boss_approve"
+                  :yesOrNo="['1', '0']"
+                  v-bind:disabled="disable_boss"
+                ></fish-switch>
+              </center>
+            </fish-col>
+            <fish-col span="12">
+              <h4>หมายเหตุ</h4>
+              <fish-input
+                size="large"
+                type="textarea"
+                style="height: 80px;  width: 100%; "
+                v-model="boss_pump_other"
+                v-bind:disabled="disable_boss"
+                hint="ระบุ"
+              ></fish-input>
             </fish-col>
           </fish-row>
         </fish-card>
+        <br />
+
+        <fish-card color="orange" fluid>
+          <div slot="header">
+            <strong class="headsmall">ผู้ตรวจสอบ</strong>
+          </div>
+          <fish-row>
+            <fish-col span="6">
+              <h4>ชื่อ-นามสกุล</h4>
+              <fish-input
+                size="large"
+                v-model="inspector"
+                hint=""
+                v-bind:disabled="disable_inspector"
+              ></fish-input>
+            </fish-col>
+            <fish-col span="6">
+              <center>
+                <h4>ตรวจสอบแล้ว</h4>
+                <fish-switch
+                  v-model="inspector_approve"
+                  :yesOrNo="['1', '0']"
+                  v-bind:disabled="disable_inspector"
+                ></fish-switch>
+              </center>
+            </fish-col>
+            <fish-col span="12">
+              <h4>หมายเหตุ</h4>
+              <fish-input
+                size="large"
+                type="textarea"
+                style="height: 80px;  width: 100%; "
+                v-model="inspector_other"
+                v-bind:disabled="disable_inspector"
+                hint="ระบุ"
+              ></fish-input>
+            </fish-col>
+          </fish-row>
+        </fish-card>
+        <br />
+        <fish-card color="orange" fluid>
+          <div slot="header">
+            <strong class="headsmall">รองผู้อำนวยการฝ่ายบริหาร</strong>
+          </div>
+          <fish-row>
+            <fish-col span="6">
+              <h4>ชื่อ-นามสกุล</h4>
+              <fish-input
+                size="large"
+                v-model="manage"
+                hint=""
+                v-bind:disabled="disable_manage"
+              ></fish-input>
+            </fish-col>
+            <fish-col span="6">
+              <center>
+                <h4>ตรวจสอบแล้ว</h4>
+                <fish-switch
+                  v-model="manage_approve"
+                  :yesOrNo="['1', '0']"
+                  v-bind:disabled="disable_manage"
+                ></fish-switch>
+              </center>
+            </fish-col>
+            <fish-col span="12">
+              <h4>หมายเหตุ</h4>
+              <fish-input
+                size="large"
+                type="textarea"
+                style="height: 80px;  width: 100%; "
+                v-model="manage_other"
+                v-bind:disabled="disable_manage"
+                hint="ระบุ"
+              ></fish-input>
+            </fish-col>
+          </fish-row>
+        </fish-card>
+
+        <br />
+        <fish-row>
+          <fish-col span="2">
+            <fish-button
+              type="primary"
+              @click="manager"
+              v-bind:disabled="btnDisable_manager"
+            >
+              <vue-fontawesome icon="save" size="2"></vue-fontawesome>
+              ตรวจสอบ</fish-button
+            >
+          </fish-col>
+        </fish-row>
       </fish-col>
     </fish-row>
   </div>
@@ -1577,10 +1589,13 @@ import {APIPath} from '../../service/APIPath';
 // popup alert
 import swal from 'sweetalert';
 const apiPath = new APIPath();
+import Account from '@/components/Account.vue';
+
 export default {
   name: 'form',
   components: {
     EnhancedCheck,
+    Account,
   },
   data() {
     return {
@@ -1695,7 +1710,7 @@ export default {
       woker_approve: '',
       woker_other: '',
       boss_pump: '',
-      boss_pump_approve: '',
+      boss_approve: '',
       boss_pump_other: '',
       inspector: '',
       inspector_approve: '',
@@ -1708,11 +1723,24 @@ export default {
       num: this.$route.params.id,
       pumps_edit: [],
       romove_message: '',
+      form: {
+        token: '',
+        level: '',
+        user: '',
+      },
+      btnDisable_user: false,
+      btnDisable_manager: false,
+      disable_boss: false,
+      disable_inspector: false,
+      disable_manage: false,
     };
   },
   methods: {
     //บันทึกฟอร์มเช็ค
     submitHandler() {
+      if (this.form.level == 'เจ้าหน้าที่') {
+        this.woker = this.form.user;
+      }
       this.$refs.form.validate((valid) => {
         // console.log(valid);
         if (valid === false) {
@@ -2122,13 +2150,13 @@ export default {
       this.woker = this.pump_detail[0].woker;
       this.woker_approve = this.pump_detail[0].woker_approve;
       this.woker_other = this.pump_detail[0].woker_other;
-      this.boss_pump = this.pump_detail[0].boss_pump;
+      // this.boss_pump = this.pump_detail[0].boss_pump;
       this.boss_approve = this.pump_detail[0].boss_approve;
       this.boss_pump_other = this.pump_detail[0].boss_pump_other;
-      this.inspector = this.pump_detail[0].inspector;
+      // this.inspector = this.pump_detail[0].inspector;
       this.inspector_approve = this.pump_detail[0].inspector_approve;
       this.inspector_other = this.pump_detail[0].inspector_other;
-      this.manage = this.pump_detail[0].manage;
+      // this.manage = this.pump_detail[0].manage;
       this.manage_approve = this.pump_detail[0].manage_approve;
       this.manage_other = this.pump_detail[0].manage_other;
     },
@@ -2144,7 +2172,7 @@ export default {
           this.removeperson();
           swal('ลบข้อมูลสำเร็จ!', {
             icon: 'success',
-             button: 'ปิด',
+            button: 'ปิด',
           });
           this.$router.push('/');
         } else {
@@ -2168,8 +2196,38 @@ export default {
           this.romove_message = response.data;
         });
     },
+    manager() {
+      alert('dd');
+    },
   },
   mounted() {
+    this.form.token = JSON.parse(localStorage.getItem('token'));
+    this.form.user = this.form.token[0].fullname;
+    this.form.level = this.form.token[0].level;
+
+    if (this.form.level == 'หัวหน้าประปา') {
+      this.boss_pump = this.form.user;
+      this.btnDisable_user = true;
+      this.disable_inspector = true;
+      this.disable_manage = true;
+    } else if (this.form.level == 'ผู้ตรวจสอบ') {
+      this.inspector = this.form.user;
+      this.disable_boss = true;
+      this.disable_manage = true;
+      this.disable_manage = true;
+    } else if (this.form.level == 'รองผู้อำนวยการฝ่ายบริหาร') {
+      this.manage = this.form.user;
+      this.btnDisable_user = true;
+      this.disable_boss = true;
+      this.disable_inspector = true;
+    } else if (this.form.level == 'เจ้าหน้าที่') {
+      this.woker = this.form.user;
+      this.btnDisable_manager = true;
+      this.disable_boss = true;
+      this.disable_inspector = true;
+      this.disable_manage = true;
+    }
+    window.scrollTo(0, 0);
     //ดูรายละเอียดใบเช็ค
 
     this.getpump(this.num);
@@ -2210,5 +2268,8 @@ export default {
 .headsmall {
   font-family: 'Sriracha';
   text-shadow: 2px 2px 2px #aaa;
+}
+.idcolor {
+  color: orange;
 }
 </style>

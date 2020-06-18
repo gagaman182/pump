@@ -96,6 +96,7 @@ $dateservice = date('Y-m-d',$time);//แปลง format
  $garbage = $_GET["garbage"];
  $chlorineintank2 = $_GET["chlorineintank2"];
  $others = $_GET["others"];
+ $woker = $_GET["woker"];
  
 
 
@@ -124,7 +125,7 @@ $dateservice = date('Y-m-d',$time);//แปลง format
         rainning,cleantrap2_1,cleantrap2_2,cleantrap2_3,
         volume,storetrap1_1,storetrap1_2,storetrap1_3,
         storetrap2_1,storetrap2_2,storetrap2_3,
-        chlorineintank1,garbage,chlorineintank2,others) 
+        chlorineintank1,garbage,chlorineintank2,others,woker) 
         VALUES('".$dateservice."','".$trap1."','".$trap2."','".$trap3."','".$pondcolor1."','".$pondcolor2."',
         '".$pumpfailed1_1."','".$pumpfailed1_2."','".$pumpfailed1_3."','".$pumpfailed2_1."','".$pumpfailed2_2."','".$pumpfailed2_3."',
         '".$pumpadjuct1_1."','".$pumpadjuct1_1."','".$pumpadjuct1_2."','".$pumpadjuct2_3."','".$pumpadjuct2_2."','".$pumpadjuct2_3."',
@@ -144,7 +145,7 @@ $dateservice = date('Y-m-d',$time);//แปลง format
         '".$cleantrap2_1."','".$cleantrap2_2."','".$cleantrap2_3."','".$volume."',
         '".$storetrap1_1."', '".$storetrap1_2."', '".$storetrap1_3."',
         '".$storetrap2_1."', '".$storetrap2_2."', '".$storetrap2_3."',
-        '".$chlorineintank1."', '".$garbage."', '".$chlorineintank2."','".$others."'
+        '".$chlorineintank1."', '".$garbage."', '".$chlorineintank2."','".$others."','".$woker."'
         )";
         if ($conn->query($strvisit) === TRUE) {
             // echo "ระบบทำงานเสร็จสมบูรณ์";

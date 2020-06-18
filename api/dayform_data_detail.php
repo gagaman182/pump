@@ -91,7 +91,8 @@ case when storetrap2_3 = 'true' then 'true' else '' end as storetrap2_3,
 chlorineintank1,
 garbage,
 chlorineintank2,
-others
+others,
+woker
 
 
 

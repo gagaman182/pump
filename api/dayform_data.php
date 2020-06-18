@@ -5,7 +5,8 @@
 
  $sql = "SELECT
  num,
- DATE_FORMAT(dateservice, '%d-%m-%Y') as dateservice
+ DATE_FORMAT(dateservice, '%d-%m-%Y') as dateservice,
+ woker
 FROM
  p_day
 

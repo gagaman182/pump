@@ -3,7 +3,7 @@
    
 	 include 'conn.php';
 
-     $num = $_GET["num"];
+	 $num = $_GET["num"];
 	 $month = $_GET["month"];
 	 $place = $_GET["place"];
 	 $pump_brand = $_GET["pump_brand"];
@@ -108,6 +108,7 @@ $manage_other= $_GET["manage_other"];
 
 
 
+
 	 $return_arr = array();
 
 
@@ -141,7 +142,7 @@ WHERE num = '".$num."' ";
 		$row_array['message'] = "แก้ไขข้อมูลบุคคลสำเร็จ";
 		array_push($return_arr,$row_array);
 	 }else {
-	$row_array['message'] =  "แก้ไขข้อมูลบุคคลไม่สำเร็จ " ;
+	$row_array['message'] =  "แก้ไขข้อมูลไม่สำเร็จ " ;
 	array_push($return_arr,$row_array);
 }
 

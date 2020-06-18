@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <Account />
+
     <fish-row>
       <fish-col span="24">
         <fish-card fluid color="teal">
@@ -20,7 +22,7 @@
               </fish-col>
 
               <fish-col span="2">
-                <fish-button type="basic" @click="plus">
+                <fish-button type="negative" @click="plus">
                   <h2>
                     <i class="material-icons white-text">add_box</i>เพิ่ม
                   </h2></fish-button
@@ -57,6 +59,11 @@
                   props.row.manage_approve
                 }}</span>
               </span>
+              <span v-else-if="props.column.field == 'woker'">
+                <span style="font-weight: bold; color: orange;">{{
+                  props.row.woker
+                }}</span>
+              </span>
               <span v-else>
                 {{ props.formattedRow[props.column.field] }}
               </span>
@@ -78,7 +85,7 @@
                     </fish-col>
 
                     <fish-col span="2">
-                      <fish-button type="basic" @click="plusday">
+                      <fish-button type="negative" @click="plusday">
                         <h2>
                           <i class="material-icons white-text">add_box</i>เพิ่ม
                         </h2></fish-button
@@ -100,8 +107,19 @@
                   :row-style-class="rowStyleClassFn"
                   @on-row-click="pdaybtn"
                 >
-                </vue-good-table></div
-            ></fish-col>
+                  <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'woker'">
+                      <span style="font-weight: bold; color: orange;">{{
+                        props.row.woker
+                      }}</span>
+                    </span>
+                    <span v-else>
+                      {{ props.formattedRow[props.column.field] }}
+                    </span>
+                  </template>
+                </vue-good-table>
+              </div></fish-col
+            >
             <fish-col span="12"
               ><div class="demo-col demo-col2">
                 <div>
@@ -114,7 +132,7 @@
                     </fish-col>
 
                     <fish-col span="2">
-                      <fish-button type="basic" @click="pluswater">
+                      <fish-button type="negative" @click="pluswater">
                         <h2>
                           <i class="material-icons white-text">add_box</i>เพิ่ม
                         </h2></fish-button
@@ -136,6 +154,16 @@
                 :row-style-class="rowStyleClassFn"
                 @on-row-click="qualitywaterbtn"
               >
+                <template slot="table-row" slot-scope="props">
+                  <span v-if="props.column.field == 'woker'">
+                    <span style="font-weight: bold; color: orange;">{{
+                      props.row.woker
+                    }}</span>
+                  </span>
+                  <span v-else>
+                    {{ props.formattedRow[props.column.field] }}
+                  </span>
+                </template>
               </vue-good-table>
             </fish-col>
           </fish-row>
@@ -190,6 +218,11 @@
               </fish-field>
               <fish-field label=" วันที่ตรวจเช็ค:" inline>
                 <h3>{{ tableloadpump_detail[0].dateservice }}</h3>
+              </fish-field>
+              <fish-field label=" ผู้ปฏิบัติงาน:" inline>
+                <i>
+                  <h2>{{ tableloadpump_detail[0].woker }}</h2></i
+                >
               </fish-field>
             </fish-form>
           </fish-card>
@@ -299,6 +332,7 @@ import System from '@/components/System.vue';
 import Sump from '@/components/Sump.vue';
 import Chlorine from '@/components/Chlorine.vue';
 import Approve from '@/components/Approve.vue';
+import Account from '@/components/Account.vue';
 
 export default {
   name: 'Home',
@@ -317,6 +351,7 @@ export default {
     Sump,
     Chlorine,
     Approve,
+    Account,
   },
   data() {
     return {
@@ -346,7 +381,7 @@ export default {
       idsendwater: '',
       form_column: [
         {
-          label: 'ลำดับที่ใบตรวจเช็ค',
+          label: 'ใบตรวจที่',
           field: 'num',
         },
         {
@@ -389,6 +424,10 @@ export default {
           label: 'รองผู้อำนวยการฝ่ายบริหาร',
           field: 'manage_approve',
         },
+        {
+          label: 'ผู้ปฎิบัติงาน',
+          field: 'woker',
+        },
       ],
       form_data: '',
       pday_column: [
@@ -399,6 +438,10 @@ export default {
         {
           label: 'วันที่ตรวจสอบและบำรุงรักษา',
           field: 'dateservice',
+        },
+        {
+          label: 'ผู้ดูแล',
+          field: 'woker',
         },
       ],
       pday_data: '',
@@ -411,9 +454,17 @@ export default {
           label: 'วันที่วัดคุณภาพน้ำ',
           field: 'dateservice',
         },
+        {
+          label: 'ผู้ดูแล',
+          field: 'woker',
+        },
       ],
       quality_water_data: '',
       dd: '',
+      form: {
+        token: '',
+        user: '',
+      },
     };
   },
 
